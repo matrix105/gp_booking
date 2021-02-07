@@ -35,4 +35,8 @@ const loginInput = {
     ]
 }
 
+const registerInput = {
+
+}
+
 export default loginInput
