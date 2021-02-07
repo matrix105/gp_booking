@@ -5,11 +5,11 @@ import Home from './components/Home';
 const Routes = () => {
   return (
     <BrowserRouter>
-        <Switch>
-      <Route exact path="/" component={Home} />
-    </Switch>
+      <Switch>
+        <Route exact path="/" component={Home} />
+      </Switch>
     </BrowserRouter>
-    
+
   );
 };
 

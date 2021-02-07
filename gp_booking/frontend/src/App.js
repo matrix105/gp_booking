@@ -1,16 +1,19 @@
-import React from "react"; 
+import React from "react";
 import Layout from "./components/Layout";
 import Routes from "./Routes";
+import Form from './components/Form'
 
 
 
-	export default class App extends React.Component {
+export default class App extends React.Component {
 
-		render() {
-		  return (
+	render() {
+		return (
 			<Layout>
-			  <Routes />
+				<Routes />
+				<Form />
 			</Layout>
-		  );
-		}
-	  }
+
+		);
+	}
+}
