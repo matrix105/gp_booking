@@ -4,7 +4,7 @@ import { Box } from '@material-ui/core';
 const Buttons = (props) => {
     return (
         <Box mb={4} height="100%">
-            <Button variant="contained" fullWidth={true} color={props.color} type={props.submit} size="large">{props.name}</Button>
+            <Button variant="contained" fullWidth={true} color={props.color} type={props.submit}>{props.name}</Button>
         </Box>
     )
 }

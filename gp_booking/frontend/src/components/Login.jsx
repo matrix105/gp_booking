@@ -7,7 +7,9 @@ export default class Login extends React.Component {
   render() {
     return (
       <Container>
-        <Form />
+        <Form
+          url={this.props.match.params.id}
+        />
       </Container>
     );
   }

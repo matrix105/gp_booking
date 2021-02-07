@@ -4,7 +4,7 @@ import { Box } from '@material-ui/core';
 const Input = (props) => {
     return (
         <Box mb={5}>
-            <TextField id={props.id} fullWidth={true} label={props.label} size="normal" type={props.type} variant="filled" />
+            <TextField id={props.id} fullWidth={true} label={props.label} type={props.type} variant="filled" />
         </Box>
     )
 }
