@@ -31,7 +31,7 @@ const loginInput = {
     img: "https://thisisbeyond.co.uk/uploads/images/_1180x1554_crop_center-center_none/nhs-poster.jpg",
     alt: "NHS",
     messages: [
-        "Stay safe", "Stay home", "Stay strong"
+        "Stay Safe", "Stay Home", "Save Lives"
     ]
 }
 

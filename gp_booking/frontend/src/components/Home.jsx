@@ -1,14 +1,16 @@
 import * as React from "react";
+import { Container } from '@material-ui/core';
+
 
 export default class Home extends React.Component {
-    render() { 
-        return (
-            <div>
-                <h1>HI</h1>
-                <p><a href="https://google.com">This is a Link in an anchor</a></p>
-            </div>
-		  );
-        
-        };
+  render() {
+    return (
+      <Container>  
+        <main>  
+        <div id="container">
+        </div>
+        </main>  
+      </Container>
+    );
+  }
 }
-
