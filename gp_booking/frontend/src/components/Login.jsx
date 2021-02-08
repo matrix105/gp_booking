@@ -7,6 +7,7 @@ import Button from './mini Compnents/Buttons'
 import { loginInput } from './mini Compnents/inputs'
 import Messages from './mini Compnents/Messages'
 import { useHistory } from "react-router-dom";
+import { Container } from '@material-ui/core'
 
 function Login() {
 
@@ -68,6 +69,7 @@ function Login() {
     }
 
     return (
+        <Container>
         <div className="containers" style={{ margin: "0px", padding: "0px" }}>
             <div className="imageContainer">
                 {(loginInput.image).map(getImage)}
@@ -86,7 +88,7 @@ function Login() {
                 {(loginInput.buttons).map(getButton)}
             </form>
         </div>
-
+        </Container>
     )
 }
 

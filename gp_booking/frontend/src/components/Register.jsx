@@ -6,6 +6,7 @@ import Input from './mini Compnents/Input'
 import Button from './mini Compnents/Buttons'
 import { registerInput } from './mini Compnents/inputs'
 import Messages from './mini Compnents/Messages'
+import { Container } from '@material-ui/core'
 
 function Register() {
     function getInput(props) {
@@ -42,7 +43,8 @@ function Register() {
     }
 
     return (
-        <div className="containers" style={{ margin: "0px", padding: "0px" }}>
+        <Container>
+            <div className="containers" style={{ margin: "0px", padding: "0px" }}>
             <div className="imageContainer">
                 {(registerInput.image).map(getImage)}
                 <div className="middle">
@@ -60,6 +62,8 @@ function Register() {
                 {(registerInput.buttons).map(getButton)}
             </form>
         </div>
+        </Container>
+        
 
     )
 }

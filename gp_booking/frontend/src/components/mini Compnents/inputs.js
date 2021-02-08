@@ -36,7 +36,7 @@ const loginInput = {
     ]
     ,
     messages: [
-        "Stay safe", "Stay home", "Stay strong"
+        "Stay Home", "Protect The NHS", "Save Lives"
     ]
 }
 
@@ -94,7 +94,7 @@ const registerInput = {
     ]
     ,
     messages: [
-        "Stay safe", "Stay home", "Stay strong"
+        "Stay Home", "Protect The NHS", "Save Lives"
     ]
 }
 export { loginInput, registerInput }
