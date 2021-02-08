@@ -24,7 +24,7 @@ const loginInput = {
         {
             name: "Sign Up",
             color: "default",
-            type: "submit"
+            type: "button"
         }
 
     ],

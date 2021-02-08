@@ -6,15 +6,23 @@ import Buttons from './mini Compnents/Buttons'
 import { loginInput, registerInput } from './mini Compnents/inputs'
 import Messages from './mini Compnents/Messages'
 import { Box } from '@material-ui/core';
+import Home from './Home'
+import { useState } from 'react'
 
 const Form = (props) => {
   var loginOrSignup = {}
+  var action = ""
   const params = props.url
   if (params === "login") {
     loginOrSignup = loginInput
-  } else {
+  } else if (params === "register") {
     loginOrSignup = registerInput
+  } else if (params === "home") {
+    return (
+      <Home />
+    )
   }
+
   function createImage(image) {
     return (
       <Image
@@ -32,7 +40,7 @@ const Form = (props) => {
         type={input.type}
       />)
   }
-  function createButton(button) {
+  function createButton(button, redirectToForm) {
     return (
       <Buttons
         color={button.color}
@@ -49,6 +57,15 @@ const Form = (props) => {
       />
     )
   }
+  function formAction(params) {
+    if (params === "login") {
+      action = "/login"
+    } else {
+      action = "/register"
+    }
+    return action
+  }
+
   return (
     <div className="containers" style={{ margin: "0px", padding: "0px" }}>
       <div className="imageContainer">
@@ -60,7 +77,7 @@ const Form = (props) => {
 
         </div>
       </div>
-      <form autoComplete="off" className="form">
+      <form autoComplete="off" className="form" action={formAction} method="POST">
         <Box mt={5}>
           <h1>{loginOrSignup.title}</h1>
           <Box mb={4} mt={5}>
