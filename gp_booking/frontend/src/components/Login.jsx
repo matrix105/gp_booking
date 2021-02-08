@@ -78,7 +78,7 @@ function Login() {
                 </div>
             </div>
 
-            <form autoComplete="off" className="form" action="/Register" method="POST">
+            <form autoComplete="off" className="form" action="/Login" method="POST">
                 <Title
                     title={loginInput.title}
                 />
