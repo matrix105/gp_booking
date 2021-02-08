@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "./components/Layout";
 import Routes from "./Routes";
-import Form from './components/Form';
 import './components/css/style.css';
 
 
