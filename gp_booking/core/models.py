@@ -16,7 +16,7 @@ class Patient(models.Model):
     #nhs_num = Required(int)
     email = models.EmailField(max_length=254, unique=True)
     #email = Required(str, unique=True)
-    passworsd=models.CharField(max_length=30)
+    password=models.CharField(max_length=30)
     #password = Required(str)
     firstname= models.CharField(max_length=50)
     #name = Optional(str)
@@ -28,6 +28,7 @@ class Patient(models.Model):
     #phone = Optional(str)
     bookings= models.SET('Booking')
     #bookings = Set('Booking')
+    status= models.BooleanField(default=False)
     notes= models.CharField(max_length=9999)
     #notes = Optional(str)
 

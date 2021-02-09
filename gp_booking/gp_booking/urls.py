@@ -24,4 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls), 
     path('', ReactView.as_view(), name="something"), 
     # path('', views.home, name='home'),
+    path('try', login, name='login'),
+    #path('register', register, name='register')
 ]
