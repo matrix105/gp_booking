@@ -1,1 +1,29 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/gp_booking/frontend/node_modules
+/gp_booking/frontend/.pnp
+.pnp.js
+
+# testing
+/gp_booking/frontend/coverage
+
+# production
+/build
+/gp_booking/frontend/build
+# misc
+/gp_booking/frontend/.DS_Store
+/gp_booking/frontend/.env.local
+/gp_booking/frontend/.env.development.local
+/gp_booking/frontend/.env.test.local
+/gp_booking/frontend/.env.production.local
+
+/gp_booking/frontend/npm-debug.log*
+/gp_booking/frontend/yarn-debug.log*
+/gp_booking/frontend/yarn-error.log*
+
+/gp_booking/frontend/yarn.lock
+/gp_booking/frontend/package-lock.json
+
 /.vscode
+/.atom
