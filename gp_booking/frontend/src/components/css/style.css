@@ -10,43 +10,95 @@
   --g-lightblue: #f0f4f5;
   --g-gray: #d8dde0;
 }
-
 /*  MAIN CSS */
-*{
-  font-family: Frutiger W01,Arial,Sans-serif !important;
+* {
+  font-family: Frutiger W01, Arial, Sans-serif !important;
   margin: 0;
   padding: 0;
   font-family: sans-serif;
 }
-main{
+main {
   min-height: 100vh;
 }
+.jumbotron {
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.jhome {
+  margin-top: -16px;
+  height: 350px;
+  /* background-color: coral !important; */
+  background-image: url("https://assets.nhs.uk/nhsuk-cms/images/A_0818_homepage_hero_5_KRK6T6.width-1000.jpg") !important;
+  background-size: 100%;
+  align-content: center;
+  vertical-align: middle;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: cover !important;
+}
+
+@media (max-width: 900px) {
+  .jhome {
+    margin-left: -30px;
+    margin-right: -30px;
+    margin-top: -16px;
+    height: 250px;
+    /* background-color: coral !important; */
+  }
+}
+.fly {
+  bottom: -48px;
+  margin-bottom: 0;
+  max-width: 35em;
+  padding: 32px 40px;
+  position: absolute;
+  top: auto;
+}
+.fly-content{
+  background-color: #005eb8 !important;
+    color: #fff !important;
+    margin-bottom: 24px;
+    padding: 24px;
+    position: relative;
+    top: 70px;
+    margin-top: 50px;
+    width: 50%;
+    margin-left: 15%;
+}
+
+.buts{
+  margin-top: 7%;
+  margin-bottom: 7%;
+}
+
 /* NAVIGATION */
-nav.gp-header.navbar.navbar-expand-md.bg-light{
-  font-family: Frutiger W01,Arial,Sans-serif;
+nav.gp-header.navbar.navbar-expand-md.bg-light {
+  font-family: Frutiger W01, Arial, Sans-serif;
   background-color: var(--g-blue) !important;
 }
-.nav-link{
+.nav-link {
   color: white;
 }
-.nav-link:hover{
+.nav-link:hover {
   color: var(--g-yellow);
 }
-.dropdown{
+.dropdown {
   background-color: var(--g-blue) !important;
 }
-.dropdown:hover{
+.dropdown:hover {
   color: var(--g-yellow) !important;
   background-color: var(--g-blue) !important;
 }
-.dropdown-item:hover, .dropdown-item:focus {
+.dropdown-item:hover,
+.dropdown-item:focus {
   background-color: var(--g-blue) !important;
 }
 
-
 /*  FOOTER */
-footer{
+footer {
   background-color: var(--g-gray);
   margin: auto;
-  border-top: 4px solid  var(--g-blue);
+  border-top: 4px solid var(--g-blue);
 }
