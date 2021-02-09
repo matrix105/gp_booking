@@ -25,14 +25,14 @@ export default class Home extends React.Component {
             </CardContent>
           </Card>
         </Jumbotron>
-        
+
         <Container className="buts">
-        <h3> Good evening. Enter the practice by selecting a room. </h3>
-        <Grid container spacing={2}>
-        <Grid item xs={3}><MediaCard title="Reception and Enquiries" link="/about"/></Grid>
-        <Grid item xs={3}><MediaCard title="Book an Appointment" link="/booking"/></Grid>
-        <Grid item xs={3}><MediaCard title="Covid-19 Support" link="/covid-19"/></Grid>
-        <Grid item xs={3}><MediaCard title="Request Prescriptions" link="/prescription"/></Grid>
+          <h3> Good evening. Enter the practice by selecting a room. </h3>
+          <Grid container spacing={2}>
+            <Grid item xs={3}><MediaCard title="Reception and Enquiries" link="/about" /></Grid>
+            <Grid item xs={3}><MediaCard title="Book an Appointment" link="/booking" /></Grid>
+            <Grid item xs={3}><MediaCard title="Covid-19 Support" link="/covid-19" /></Grid>
+            <Grid item xs={3}><MediaCard title="Request Prescriptions" link="/prescription" /></Grid>
           </Grid>
         </Container>
       </>

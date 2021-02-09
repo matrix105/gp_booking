@@ -28,13 +28,6 @@ function Login() {
             function handleClick() {
                 history.push("/register");
             }
-            /* if (props.name === "Sign Up") {
-                return (
-                    <Box mb={4}>
-                        <Button variant="contained" fullWidth={true} onClick={!clicked ? handleClick : null} type={props.type} color={props.color} >{props.name}</Button>
-                    </Box>
-                )
-            } */
             return (
                 <Button
                     type="button"
@@ -70,24 +63,24 @@ function Login() {
 
     return (
         <Container>
-        <div className="containers" style={{ margin: "0px", padding: "0px" }}>
-            <div className="imageContainer">
-                {(loginInput.image).map(getImage)}
-                <div className="middle">
-                    <div className="text">
-                        {(loginInput.messages).map(getMessage)}
+            <div className="containers" style={{ margin: "0px", padding: "0px" }}>
+                <div className="imageContainer">
+                    {(loginInput.image).map(getImage)}
+                    <div className="middle">
+                        <div className="text">
+                            {(loginInput.messages).map(getMessage)}
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <form autoComplete="off" className="form" action="/Login" method="POST">
-                <Title
-                    title={loginInput.title}
-                />
-                {(loginInput.inputs).map(getInput)}
-                {(loginInput.buttons).map(getButton)}
-            </form>
-        </div>
+                <form autoComplete="off" className="form" action="/Login" method="POST">
+                    <Title
+                        title={loginInput.title}
+                    />
+                    {(loginInput.inputs).map(getInput)}
+                    {(loginInput.buttons).map(getButton)}
+                </form>
+            </div>
         </Container>
     )
 }
