@@ -1,33 +1,31 @@
-import React from 'react'
+import React from "react";
 
-import { func } from 'prop-types';
+import { func } from "prop-types";
 
+const Tables = ({ titles, body }) => {
+  function makeCell(title) {
+    return <th style={{ borderStyle: "dashed" }}>{title}</th>;
+  }
+  // function makeBody(data) {
+  //     console.log(data);
+  // }
 
+  return (
+    <table>
+      <thead>
+        <tr>{titles.map(makeCell)}</tr>
+      </thead>
+      <tbody>
+        {body.map((row) => (
+          <tr key={row.id}>
+            <td>{row.id}</td>
+            <td>{row.name}</td>
+            <td>{row.rank}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
 
-const Tables = (props) => {
-
-    function makeCell(title) {
-
-        return (
-            <th style={{ borderStyle: "dashed" }}>{title}</th>
-        )
-    }
-    function makeBody(data) {
-        console.log(data);
-    }
-
-
-    return (
-
-        <table>
-            <thead>
-                <tr>{props.titles.map(makeCell)}</tr>
-            </thead>
-            <tbody>
-                <tr>{props.body.map(makeCell)}</tr>
-            </tbody>
-        </table>
-    )
-}
-
-export default Tables
+export default Tables;
