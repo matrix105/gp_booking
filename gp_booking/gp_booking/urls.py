@@ -16,14 +16,14 @@ Including another URLconf
 
 from django.contrib import admin 
 from django.urls import path, include 
-from django.conf.urls import url 
-from core.views import *
+from django.conf.urls import url
 from core import views
+from core.views import *
   
 urlpatterns = [ 
     path('admin/', admin.site.urls), 
     path('', ReactView.as_view(), name="something"), 
     # path('', views.home, name='home'),
-    path('try', login, name='login'),
+    #path('try', login, name='login'),
     #path('register', register, name='register')
 ]

@@ -37,9 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',
+    #'core',
     'corsheaders',
     'rest_framework',
+    'core.apps.CoreConfig',
 ]
 
 MIDDLEWARE = [
@@ -68,7 +69,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "frontend/src/components",],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
