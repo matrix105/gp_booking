@@ -14,10 +14,10 @@ class ReactView(APIView):
     
     serializer_class = ReactSerializer 
   
-    # def get(self, request): 
-    #     detail = [ {"name": detail.name,"detail": detail.detail}  
-    #     for detail in Patient.objects.all()] 
-    #     return Response(detail) 
+    def get(self, request): 
+        detail = [ {"nhs_num": detail.nhs_num,"firstname": detail.firstname}  
+        for detail in Patient.objects.all()] 
+        return Response(detail) 
   
     def post(self, request): 
   
