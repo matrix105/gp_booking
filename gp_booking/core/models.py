@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator 
 from datetime import date
 from datetime import time
+from datetime import datetime
 
   
 # Create your models here. 
@@ -76,14 +77,14 @@ from datetime import time
 class Patient(models.Model):
 
     nhs_num=models.IntegerField()
-    email= models.CharField(max_length=100)
+    email= models.CharField(max_length=100, default='test@gmail.com')
     #salt= b'\xd4\xb0e\x1e\xc3]\xaa9K\x15\xbd\x1c\x9c\x0bCo\x92\x87B\x1dyl1\xd2\xc2\xce\xa2\xed_\xf3\x04\x80'
     #pass_keey=models.CharField(max_length=120)
-    password=models.CharField(max_length=120)
+    password=models.CharField(max_length=120,default='password')
     firstname=models.CharField(max_length=254)
-    lastname=models.CharField(max_length=254)
-    dob=models.DateField()
-    phone=models.IntegerField()
+    lastname=models.CharField(max_length=254, default='lastnam3')
+    dob=models.DateField(default=date.today())
+    phone=models.IntegerField(default='0123456789')
     status=models.BooleanField(default=False)
 
     def __str__(self):
