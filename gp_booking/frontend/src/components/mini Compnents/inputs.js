@@ -45,33 +45,38 @@ const registerInput = {
     inputs: [
         {
             label: "First name",
-            id: "filled-size-large",
+            id: "firtName",
             type: "text",
         },
         {
             label: "Last name",
-            id: "filled-size-large",
+            id: "lastName",
             type: "text",
         },
         {
-            label: "Date of birth",
-            id: "filled-size-large",
-            type: "text",
+            label: "",
+            id: "dob",
+            type: "date",
         },
         {
             label: "Email",
-            id: "filled-size-large",
+            id: "email",
             type: "text",
         },
         {
             label: "Password",
-            id: "standard-password-input-size-large",
+            id: "password",
             type: "password",
         },
         {
             label: "Confirm Password",
-            id: "standard-password-input-size-large",
+            id: "cPassword",
             type: "password",
+        },
+        {
+            label: "NHS number",
+            id: "nhsNumber",
+            type: "text",
         },
 
     ]
@@ -82,7 +87,8 @@ const registerInput = {
         {
             name: "Sign Up",
             color: "primary",
-            type: "submit"
+            type: "submit",
+            id: "signUp"
         }
 
     ],
