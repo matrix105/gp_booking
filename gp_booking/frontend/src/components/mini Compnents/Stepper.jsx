@@ -119,7 +119,7 @@ function getStepContent(stepIndex, classes, setTime, setOpen, time, open, matche
                         label="Select a suitable date"
                         defaultValue={getCurrentDate()}
                         className={classes.textField}
-                        style={matches ? { left: 90 } : matches2 ? { left: 300 } : matches3 ? { left: 430 } : { left: 560 }}
+                        style={matches ? { left: 180 } : matches2 ? { left: 250 } : matches3 ? { left: 430 } : { left: 560 }}
                         InputLabelProps={{
                             shrink: true,
                         }}
