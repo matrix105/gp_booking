@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import { FormControl, Select, MenuItem, InputLabel } from '@material-ui/core';
+import { FormControl, Select, MenuItem, InputLabel, useMediaQuery } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,14 +27,16 @@ const useStyles = makeStyles((theme) => ({
     container: {
         display: 'flex',
         flexWrap: 'wrap',
-        
+
     },
     textField: {
-        marginLeft: theme.spacing(65),
-        marginRight: theme.spacing(50),
-        width: 200,
+        /*  marginLeft: theme.spacing(65),
+         marginRight: theme.spacing(50),
+         width: 200, */
+
     },
 }));
+
 
 const availableTimes = [
     {
@@ -85,7 +87,7 @@ function getSteps() {
 
 
 
-function getStepContent(stepIndex, classes, setTime, setOpen, time, open) {
+function getStepContent(stepIndex, classes, setTime, setOpen, time, open, matches, matches2, matches3) {
 
     const handleChange = (event) => {
         setTime(event.target.value);
@@ -117,6 +119,7 @@ function getStepContent(stepIndex, classes, setTime, setOpen, time, open) {
                         label="Select a suitable date"
                         defaultValue={getCurrentDate()}
                         className={classes.textField}
+                        style={matches ? { left: 90 } : matches2 ? { left: 300 } : matches3 ? { left: 430 } : { left: 560 }}
                         InputLabelProps={{
                             shrink: true,
                         }}
@@ -152,6 +155,9 @@ function getStepContent(stepIndex, classes, setTime, setOpen, time, open) {
 
 
 const Steppers = () => {
+    const matches = useMediaQuery('(max-width:600px)');
+    const matches2 = useMediaQuery('(max-width:768px)');
+    const matches3 = useMediaQuery('(max-width:1024px)');
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
@@ -173,12 +179,14 @@ const Steppers = () => {
     return (
 
         <div className={classes.root}>
-            <Stepper activeStep={activeStep} alternativeLabel>
-                {steps.map((label) => (
-                    <Step key={label}>
-                        <StepLabel>{label}</StepLabel>
-                    </Step>
-                ))}
+            <Stepper activeStep={activeStep} alternativeLabel >
+                {
+                    steps.map((label) => (
+                        <Step key={label}>
+                            <StepLabel>{label}</StepLabel>
+                        </Step>
+                    ))
+                }
             </Stepper>
             <div>
                 {activeStep === steps.length ? (
@@ -189,7 +197,7 @@ const Steppers = () => {
                     </div>
                 ) : (
                         <div>
-                            <Typography className={classes.instructions}>{getStepContent(activeStep, classes, setTime, setOpen, time, open)}</Typography>
+                            <Typography className={classes.instructions}>{getStepContent(activeStep, classes, setTime, setOpen, time, open, matches, matches2, matches3)}</Typography>
                             <div>
                                 <Button
                                     disabled={activeStep === 0}
