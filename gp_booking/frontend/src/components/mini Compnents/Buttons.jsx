@@ -6,7 +6,7 @@ const Buttons = (props) => {
 
     return (
         <Box mb={4}>
-            <Button variant="contained" fullWidth={true} type={props.type} color={props.color} onClick={props.onClick}>{props.name}</Button>
+            <Button variant="contained" fullWidth={true} type={props.type} color={props.color} id={props.id} >{props.name}</Button>
         </Box>
     )
 }
