@@ -7,10 +7,12 @@ import Steppers from './mini Compnents/Stepper'
 export default class Booking extends React.Component {
   render() {
     return (
+      <center>
       <Container>
         <Jumbotron></Jumbotron>
         <Steppers />
       </Container>
+      </center>
     );
   }
 }
