@@ -72,3 +72,7 @@
     width: 100%;
   }
 }
+
+.MuiFormControl-root.MuiTextField-root.form-control {
+  margin: 10px 0 16px 0px;
+}

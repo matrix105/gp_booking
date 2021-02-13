@@ -54,8 +54,8 @@ export default class About extends React.Component {
 
     axios
       .post("http://localhost:8000/", {
-        name: this.state.nhs_num,
-        detail: this.state.firstname,
+        nhs_num: this.state.nhs_num,
+        firstname: this.state.firstname,
       })
       .then((res) => {
         this.setState({
@@ -74,7 +74,7 @@ export default class About extends React.Component {
             <div className="input-group-prepend">
               <span className="input-group-text" id="basic-addon1">
                 {" "}
-                Author{" "}
+                NHs Number{" "}
               </span>
             </div>
             <input
@@ -91,7 +91,7 @@ export default class About extends React.Component {
 
           <div className="input-group mb-3">
             <div className="input-group-prepend">
-              <span className="input-group-text">Your Quote</span>
+              <span className="input-group-text">Fistname</span>
             </div>
             <textarea
               className="form-control "

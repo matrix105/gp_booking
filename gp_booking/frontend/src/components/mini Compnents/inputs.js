@@ -39,13 +39,12 @@ const loginInput = {
         "Stay Home", "Protect The NHS", "Save Lives"
     ]
 }
-
 const registerInput = {
     title: "Register",
     inputs: [
         {
             label: "First name",
-            id: "firtName",
+            id: "firstName",
             type: "text",
         },
         {
