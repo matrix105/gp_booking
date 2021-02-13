@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import { FormControl, Select, MenuItem, InputLabel, useMediaQuery } from '@material-ui/core';
+import { FormControl, Select, MenuItem, InputLabel, useMediaQuery, Switch, FormGroup, FormControlLabel } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -159,6 +159,30 @@ const Steppers = () => {
     const matches2 = useMediaQuery('(max-width:768px)');
     const matches3 = useMediaQuery('(max-width:1024px)');
     const classes = useStyles();
+
+
+
+    const [checked, setChecked] = React.useState(false);
+    const [background, setBackground] = React.useState("white")
+    const [font, setFont] = React.useState("black")
+    const [blind, setBlind] = React.useState("Change the color if u are blind")
+
+    const toggleChecked = () => {
+        setChecked((prev) => !prev);
+        if (checked === false) {
+            setBackground("gray")
+            setFont("white")
+            setBlind("HA! You are blind")
+        } else {
+            setBackground("white")
+            setFont("black")
+            setBlind("Change the color if u are blind")
+        }
+
+    };
+
+
+
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
 
@@ -178,7 +202,7 @@ const Steppers = () => {
     };
     return (
 
-        <div className={classes.root}>
+        <div className={classes.root} style={{ backgroundColor: background, color: font }}>
             <Stepper activeStep={activeStep} alternativeLabel >
                 {
                     steps.map((label) => (
@@ -213,6 +237,13 @@ const Steppers = () => {
                         </div>
                     )}
             </div>
+
+            <FormGroup>
+                <FormControlLabel
+                    control={<Switch checked={checked} onChange={toggleChecked} />}
+                    label={blind}
+                />
+            </FormGroup>
 
         </div>
     )

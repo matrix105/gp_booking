@@ -14,37 +14,40 @@ var passwordHash = require('password-hash');
 function Login() {
   let history = useHistory();
 
-  const [nhs, setNHS] = useState("")
-  const [password, setPassword] = useState("")
+  const [loginDetail, setLoginDetail] = useState({
+    nhs: "",
+    password: ""
+  })
+  /* 
+    var clicked = false
+    function handleSignup() {
+      clicked = true
+      if (clicked) {
+        history.push('/register')
+      }
+    } */
 
-  var clicked = false
-  function handleSignup() {
-    clicked = true
-    if (clicked) {
-      history.push('/register')
-    }
+  function handleInput(event) {
+
+    const { value, name } = event.target
+    setLoginDetail((prevValue) => {
+      if (name === "nhs") {
+
+        return {
+          nhs: value,
+          password: prevValue.password
+        }
+      } else if (name === "password") {
+        return {
+          nhs: prevValue.nhs,
+          password: value
+        }
+      }
+    })
   }
 
-  function handleInput(e) {
-    setNHS(e.target.value)
-
-  }
-  function handlePassword(e) {
-    setPassword(e.target.value)
-    console.log(passwordHash.generate(e.target.value));
-  }
   function submit(e) {
     e.preventDefault();
-    /* axios
-      .post("http://localhost:8000/", {
-
-      })
-      .then((res) => {
-        this.setState({
-
-        });
-      })
-      .catch((err) => { }); */
 
   }
 
@@ -76,8 +79,8 @@ function Login() {
               variant="outlined"
               type="number"
               className="form-control"
-              value={nhs}
-              name="nhsNumber"
+              value={loginDetail.nhs}
+              name="nhs"
               required
               onChange={handleInput}
             />
@@ -89,17 +92,17 @@ function Login() {
               variant="outlined"
               type="password"
               className="form-control"
-              value={password}
+              value={loginDetail.password}
               name="password"
               required
-              onChange={handlePassword}
+              onChange={handleInput}
             />
           </Box>
           <Container>
             <Button variant="contained" fullWidth="true" color="primary" type="submit" className="btn btn-primary mb-5">
               Login
             </Button>
-            <Button variant="contained" fullWidth="true" color="secondary" type="button" className="btn btn-primary mb-5" onClick={handleSignup}>
+            <Button variant="contained" fullWidth="true" color="secondary" type="button" className="btn btn-primary mb-5">
               Submit
             </Button>
           </Container>
