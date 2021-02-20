@@ -1,38 +1,58 @@
-import React from "react";
+import { React, useState } from "react";
 import "./css/login.css";
 import Image from "./mini Compnents/Image";
 import Title from "./mini Compnents/Title";
-import Input from "./mini Compnents/Input";
-import Button from "./mini Compnents/Buttons";
 import { loginInput } from "./mini Compnents/inputs";
 import Messages from "./mini Compnents/Messages";
 import { useHistory } from "react-router-dom";
 import { Container } from "@material-ui/core";
+import { Box, Button, TextField } from '@material-ui/core';
+import axios from "axios";
+import { func } from "prop-types";
+var passwordHash = require('password-hash');
 
 function Login() {
   let history = useHistory();
-  console.log(loginInput.messages);
 
-  function getInput(props) {
-    return <Input id={props.id} label={props.label} type={props.type} />;
-  }
-  function getButton(props) {
-    if (props.name === "Sign Up") {
-      function handleClick() {
-        history.push("/register");
+  const [loginDetail, setLoginDetail] = useState({
+    nhs: "",
+    password: ""
+  })
+  /* 
+    var clicked = false
+    function handleSignup() {
+      clicked = true
+      if (clicked) {
+        history.push('/register')
       }
-      return (
-        <Button
-          type="button"
-          color={props.color}
-          name={props.name}
-          onClick={handleClick}
-        />
-      );
-    } else {
-      return <Button type={props.type} color={props.color} name={props.name} />;
-    }
+    } */
+
+  function handleInput(event) {
+
+    const { value, name } = event.target
+    setLoginDetail((prevValue) => {
+      if (name === "nhs") {
+
+        return {
+          nhs: value,
+          password: prevValue.password
+        }
+      } else if (name === "password") {
+        return {
+          nhs: prevValue.nhs,
+          password: value
+        }
+      }
+    })
   }
+
+  function submit(e) {
+    e.preventDefault();
+
+  }
+
+
+
   function getImage(props) {
     return <Image className="img" src={props.src} alt={props.alt} />;
   }
@@ -50,10 +70,43 @@ function Login() {
           </div>
         </div>
 
-        <form autoComplete="off" className="form" action="/Login" method="POST">
+        <form autoComplete="off" className="form" method="POST" onClick={submit}>
           <Title title={loginInput.title} />
-          {loginInput.inputs.map(getInput)}
-          {loginInput.buttons.map(getButton)}
+          <Box mb={5}>
+            <TextField
+              id="outlined-basic"
+              label="NHS number"
+              variant="outlined"
+              type="number"
+              className="form-control"
+              value={loginDetail.nhs}
+              name="nhs"
+              required
+              onChange={handleInput}
+            />
+          </Box>
+          <Box mb={5}>
+            <TextField
+              id="outlined-basic"
+              label="Password"
+              variant="outlined"
+              type="password"
+              className="form-control"
+              value={loginDetail.password}
+              name="password"
+              required
+              onChange={handleInput}
+            />
+          </Box>
+          <Container>
+            <Button variant="contained" fullWidth="true" color="primary" type="submit" className="btn btn-primary mb-5">
+              Login
+            </Button>
+            <Button variant="contained" fullWidth="true" color="secondary" type="button" className="btn btn-primary mb-5">
+              Submit
+            </Button>
+          </Container>
+
         </form>
       </div>
     </Container>
