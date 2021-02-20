@@ -9,7 +9,7 @@ import { Container } from "@material-ui/core";
 import { Box, Button, TextField } from '@material-ui/core';
 import axios from "axios";
 import { func } from "prop-types";
-var passwordHash = require('password-hash');
+// var passwordHash = require('password-hash');
 
 function Login() {
   let history = useHistory();
