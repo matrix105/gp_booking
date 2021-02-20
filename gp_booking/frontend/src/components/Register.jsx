@@ -43,7 +43,7 @@ class Register extends React.Component {
     this.props.history.push('/')
 
     axios
-      .post("http://localhost:8000/", {
+      .post("http://localhost:1337/", {
         nhs_num: this.state.nhs_num,
         firstname: this.state.firstname,
         lastname: this.state.lastname,
