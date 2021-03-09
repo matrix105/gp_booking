@@ -1,4 +1,6 @@
-import React from "react";
+
+import React, { useReducer, useState, useContext } from "react";
+import { SetContext } from './context/Context'
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import About from "./components/About";
 import Booking from "./components/Booking";
@@ -7,6 +9,7 @@ import Login from './components/Login';
 import Register from "./components/Register";
 
 const Routes = () => {
+
   return (
     <BrowserRouter>
       <Switch>

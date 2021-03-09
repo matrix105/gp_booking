@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "patients",
+  "info": {
+    "name": "Patient",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "nhsNumber": {
+      "type": "integer",
+      "required": true,
+      "unique": true
+    },
+    "password": {
+      "type": "password",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true,
+      "unique": true
+    },
+    "fname": {
+      "type": "string",
+      "required": true
+    },
+    "lname": {
+      "type": "string",
+      "required": true
+    },
+    "mname": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "integer"
+    },
+    "dob": {
+      "type": "date"
+    },
+    "location": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

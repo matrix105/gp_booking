@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useReducer } from "react";
 import "./css/login.css";
 import Image from "./mini Compnents/Image";
 import Title from "./mini Compnents/Title";
@@ -8,50 +8,55 @@ import { useHistory } from "react-router-dom";
 import { Container } from "@material-ui/core";
 import { Box, Button, TextField } from '@material-ui/core';
 import axios from "axios";
-import { func } from "prop-types";
-// var passwordHash = require('password-hash');
+
+
+const initialForm = {
+  nhs: '',
+  password: ''
+}
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'handle_input_text':
+      console.log(action.payload);
+      return {
+        ...state,
+        [action.field]: action.payload
+
+      }
+    case 'login':
+      return {
+
+      }
+    case 'register':
+      return {
+
+      }
+    default:
+      return {}
+  }
+}
 
 function Login() {
   let history = useHistory();
 
-  const [loginDetail, setLoginDetail] = useState({
-    nhs: "",
-    password: ""
-  })
-  /* 
-    var clicked = false
-    function handleSignup() {
-      clicked = true
-      if (clicked) {
-        history.push('/register')
-      }
-    } */
+  const [state, dispatch] = useReducer(reducer, initialForm)
 
-  function handleInput(event) {
-
-    const { value, name } = event.target
-    setLoginDetail((prevValue) => {
-      if (name === "nhs") {
-
-        return {
-          nhs: value,
-          password: prevValue.password
-        }
-      } else if (name === "password") {
-        return {
-          nhs: prevValue.nhs,
-          password: value
-        }
-      }
+  const handleTextChange = (e) => {
+    dispatch({
+      type: 'handle_input_text',
+      field: e.target.name,
+      payload: e.target.value
     })
   }
 
-  function submit(e) {
+  const handleButtonClick = (e) => {
     e.preventDefault();
-
+    console.log('heeloo');
+    dispatch({
+      type: 'login'
+    })
   }
-
-
 
   function getImage(props) {
     return <Image className="img" src={props.src} alt={props.alt} />;
@@ -70,7 +75,7 @@ function Login() {
           </div>
         </div>
 
-        <form autoComplete="off" className="form" method="POST" onClick={submit}>
+        <form autoComplete="off" className="form" method="POST" >
           <Title title={loginInput.title} />
           <Box mb={5}>
             <TextField
@@ -79,10 +84,10 @@ function Login() {
               variant="outlined"
               type="number"
               className="form-control"
-              value={loginDetail.nhs}
+              value={state.nhs}
               name="nhs"
               required
-              onChange={handleInput}
+              onChange={(e) => handleTextChange(e)}
             />
           </Box>
           <Box mb={5}>
@@ -92,14 +97,14 @@ function Login() {
               variant="outlined"
               type="password"
               className="form-control"
-              value={loginDetail.password}
+              value={state.password}
               name="password"
               required
-              onChange={handleInput}
+              onChange={(e) => handleTextChange(e)}
             />
           </Box>
           <Container>
-            <Button variant="contained" fullWidth="true" color="primary" type="submit" className="btn btn-primary mb-5">
+            <Button onClick={handleButtonClick} variant="contained" fullWidth="true" color="primary" type="submit" className="btn btn-primary mb-5">
               Login
             </Button>
             <Button variant="contained" fullWidth="true" color="secondary" type="button" className="btn btn-primary mb-5">

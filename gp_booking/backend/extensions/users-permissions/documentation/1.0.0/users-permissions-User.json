@@ -1188,7 +1188,13 @@
         "required": [
           "id",
           "username",
-          "email"
+          "email",
+          "fname",
+          "lname",
+          "nhsNumber",
+          "phone",
+          "address",
+          "dob"
         ],
         "properties": {
           "id": {
@@ -1250,13 +1256,38 @@
                 "type": "string"
               }
             }
+          },
+          "fname": {
+            "type": "string"
+          },
+          "lname": {
+            "type": "string"
+          },
+          "nhsNumber": {
+            "type": "integer"
+          },
+          "phone": {
+            "type": "integer"
+          },
+          "address": {
+            "type": "string"
+          },
+          "dob": {
+            "type": "string",
+            "format": "date"
           }
         }
       },
       "NewUsersPermissionsUser": {
         "required": [
           "username",
-          "email"
+          "email",
+          "fname",
+          "lname",
+          "nhsNumber",
+          "phone",
+          "address",
+          "dob"
         ],
         "properties": {
           "username": {
@@ -1291,6 +1322,25 @@
           },
           "role": {
             "type": "string"
+          },
+          "fname": {
+            "type": "string"
+          },
+          "lname": {
+            "type": "string"
+          },
+          "nhsNumber": {
+            "type": "integer"
+          },
+          "phone": {
+            "type": "integer"
+          },
+          "address": {
+            "type": "string"
+          },
+          "dob": {
+            "type": "string",
+            "format": "date"
           },
           "created_by": {
             "type": "string"
