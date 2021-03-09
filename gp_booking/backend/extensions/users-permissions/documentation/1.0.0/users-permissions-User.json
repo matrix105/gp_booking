@@ -1188,13 +1188,7 @@
         "required": [
           "id",
           "username",
-          "email",
-          "fname",
-          "lname",
-          "nhsNumber",
-          "phone",
-          "address",
-          "dob"
+          "email"
         ],
         "properties": {
           "id": {
@@ -1281,13 +1275,7 @@
       "NewUsersPermissionsUser": {
         "required": [
           "username",
-          "email",
-          "fname",
-          "lname",
-          "nhsNumber",
-          "phone",
-          "address",
-          "dob"
+          "email"
         ],
         "properties": {
           "username": {

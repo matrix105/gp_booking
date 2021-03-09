@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/09/2021 7:10:22 PM"
+    "x-generation-date": "03/09/2021 8:31:52 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -3933,13 +3933,7 @@
               "required": [
                 "id",
                 "username",
-                "email",
-                "fname",
-                "lname",
-                "nhsNumber",
-                "phone",
-                "address",
-                "dob"
+                "email"
               ],
               "properties": {
                 "id": {
@@ -4040,13 +4034,7 @@
         "required": [
           "id",
           "username",
-          "email",
-          "fname",
-          "lname",
-          "nhsNumber",
-          "phone",
-          "address",
-          "dob"
+          "email"
         ],
         "properties": {
           "id": {
@@ -4133,13 +4121,7 @@
       "NewUsersPermissionsUser": {
         "required": [
           "username",
-          "email",
-          "fname",
-          "lname",
-          "nhsNumber",
-          "phone",
-          "address",
-          "dob"
+          "email"
         ],
         "properties": {
           "username": {

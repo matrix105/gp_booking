@@ -41,11 +41,18 @@ const reducer = (state, action) => {
 
 
     case 'handle_form':
-      return {
-        // fetch API
+      axios.post('http://localhost:1337/auth/local/register', {
+        username: state.firstname,
+        email: state.email,
+        password: state.password,
 
-        // store in database
-      }
+      })
+        .then((response) => {
+          return {
+            // redirect to Home
+          }
+        })
+
     default:
       {
         return state
@@ -66,6 +73,7 @@ const Register = () => {
   };
 
   const handleForm = (e) => {
+    e.preventDefault();
     dispatch({
       type: 'handle_form'
     })

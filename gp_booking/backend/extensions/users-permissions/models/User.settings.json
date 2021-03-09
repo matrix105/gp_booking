@@ -61,29 +61,29 @@
     },
     "fname": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "lname": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "nhsNumber": {
       "type": "integer",
-      "required": true,
+      "required": false,
       "unique": true
     },
     "phone": {
       "type": "integer",
-      "required": true,
+      "required": false,
       "unique": true
     },
     "address": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "dob": {
       "type": "date",
-      "required": true
+      "required": false
     }
   }
 }
