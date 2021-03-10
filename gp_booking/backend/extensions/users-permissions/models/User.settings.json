@@ -59,15 +59,15 @@
       "plugin": "users-permissions",
       "configurable": false
     },
-    "fname": {
+    "firstname": {
       "type": "string",
       "required": false
     },
-    "lname": {
+    "lastname": {
       "type": "string",
       "required": false
     },
-    "nhsNumber": {
+    "nhs_num": {
       "type": "integer",
       "required": false,
       "unique": true

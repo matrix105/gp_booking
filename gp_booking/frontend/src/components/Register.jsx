@@ -28,7 +28,8 @@ const initialState = {
   cPassword: "",
   dob: "",
   phone: "",
-  address: ""
+  address: "",
+  username: ""
 };
 
 const reducer = (state, action) => {
@@ -42,10 +43,15 @@ const reducer = (state, action) => {
 
     case 'handle_form':
       axios.post('http://localhost:1337/auth/local/register', {
-        username: state.firstname,
+        username: state.nhs_num,
         email: state.email,
         password: state.password,
-
+        firstName: state.firstName,
+        lastName: state.lastName,
+        dob: state.dob,
+        phone: state.phone,
+        address: state.address,
+        nhs_num: state.nhs_num
       })
         .then((response) => {
           return {

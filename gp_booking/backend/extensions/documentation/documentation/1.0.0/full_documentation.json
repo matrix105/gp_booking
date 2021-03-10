@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/09/2021 8:31:52 PM"
+    "x-generation-date": "03/10/2021 2:03:33 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -3966,13 +3966,13 @@
                 "role": {
                   "type": "string"
                 },
-                "fname": {
+                "firstname": {
                   "type": "string"
                 },
-                "lname": {
+                "lastname": {
                   "type": "string"
                 },
-                "nhsNumber": {
+                "nhs_num": {
                   "type": "integer"
                 },
                 "phone": {
@@ -4097,13 +4097,13 @@
               }
             }
           },
-          "fname": {
+          "firstname": {
             "type": "string"
           },
-          "lname": {
+          "lastname": {
             "type": "string"
           },
-          "nhsNumber": {
+          "nhs_num": {
             "type": "integer"
           },
           "phone": {
@@ -4157,13 +4157,13 @@
           "role": {
             "type": "string"
           },
-          "fname": {
+          "firstname": {
             "type": "string"
           },
-          "lname": {
+          "lastname": {
             "type": "string"
           },
-          "nhsNumber": {
+          "nhs_num": {
             "type": "integer"
           },
           "phone": {

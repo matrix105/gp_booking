@@ -1251,13 +1251,13 @@
               }
             }
           },
-          "fname": {
+          "firstname": {
             "type": "string"
           },
-          "lname": {
+          "lastname": {
             "type": "string"
           },
-          "nhsNumber": {
+          "nhs_num": {
             "type": "integer"
           },
           "phone": {
@@ -1311,13 +1311,13 @@
           "role": {
             "type": "string"
           },
-          "fname": {
+          "firstname": {
             "type": "string"
           },
-          "lname": {
+          "lastname": {
             "type": "string"
           },
-          "nhsNumber": {
+          "nhs_num": {
             "type": "integer"
           },
           "phone": {
