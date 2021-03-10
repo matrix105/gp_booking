@@ -1,6 +1,6 @@
 
-import React, { useReducer, useState, useContext } from "react";
-import { SetContext } from './context/Context'
+import React, { useContext } from "react";
+import { UserProvider } from './context/Context'
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import About from "./components/About";
 import Booking from "./components/Booking";
@@ -11,6 +11,7 @@ import Register from "./components/Register";
 const Routes = () => {
 
   return (
+
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home} />
@@ -20,6 +21,7 @@ const Routes = () => {
         <Route path="/booking" component={Booking} />
       </Switch>
     </BrowserRouter>
+
 
   );
 };

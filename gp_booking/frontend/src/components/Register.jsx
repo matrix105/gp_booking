@@ -1,5 +1,6 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useContext } from "react";
 import "./css/login.css";
+import Context from '../context/Context'
 import Image from "./mini Compnents/Image";
 import Title from "./mini Compnents/Title";
 import { registerInput } from "./mini Compnents/inputs";
@@ -61,8 +62,9 @@ const reducer = (state, action) => {
 }
 
 const Register = () => {
+  /* const { data, handleInputs, handleForms } = useContext(Context) */
 
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [data, dispatch] = useReducer(reducer, initialState)
 
   const handleInput = (e) => {
     dispatch({
@@ -125,6 +127,7 @@ const Register = () => {
           className="form"
           onSubmit={(e) => handleForm(e)}
         >
+
           <Title title={registerInput.title} />
           <TextField
             id="outlined-basic"
@@ -132,9 +135,19 @@ const Register = () => {
             variant="outlined"
             type="number"
             className="form-control"
-            value={state.nhs_num}
+            value={data.nhs_num}
             name="nhs_num"
             required
+            onChange={e => handleInput(e)}
+          />
+          <TextField
+            id="outlined-basic"
+            label="Username"
+            variant="outlined"
+            type="text"
+            className="form-control"
+            value={data.username}
+            name="username"
             onChange={e => handleInput(e)}
           />
           <TextField
@@ -143,7 +156,7 @@ const Register = () => {
             variant="outlined"
             type="email"
             className="form-control"
-            value={state.email}
+            value={data.email}
             name="email"
             required
             onChange={e => handleInput(e)}
@@ -154,7 +167,7 @@ const Register = () => {
             variant="outlined"
             type="text"
             className="form-control"
-            value={state.firstname}
+            value={data.firstname}
             name="firstname"
             required
             onChange={e => handleInput(e)}
@@ -165,7 +178,7 @@ const Register = () => {
             variant="outlined"
             type="text"
             className="form-control"
-            value={state.lastname}
+            value={data.lastname}
             name="lastname"
             required
             onChange={e => handleInput(e)}
@@ -176,7 +189,7 @@ const Register = () => {
             variant="outlined"
             type="password"
             className="form-control"
-            value={state.password}
+            value={data.password}
             name="password"
             required
             onChange={e => handleInput(e)}
@@ -188,7 +201,7 @@ const Register = () => {
             variant="outlined"
             type="date"
             className="form-control"
-            value={state.dob}
+            value={data.dob}
             name="dob"
             required
             InputLabelProps={{
@@ -202,7 +215,7 @@ const Register = () => {
             variant="outlined"
             type="tel"
             className="form-control"
-            value={state.phone}
+            value={data.phone}
             name="phone"
             required
             onChange={e => handleInput(e)}
@@ -213,10 +226,11 @@ const Register = () => {
             variant="outlined"
             type="text"
             className="form-control"
-            value={state.address}
+            value={data.address}
             name="address"
             onChange={e => handleInput(e)}
           />
+
 
           <Button variant="contained" color="primary" type="submit" className="btn btn-primary mt-5">
             Submit
