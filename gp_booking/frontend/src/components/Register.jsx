@@ -33,7 +33,6 @@ const initialState = {
   phone: "",
   address: "",
   setOpen: false,
-  username: ""
 };
 
 const reducer = (state, action) => {
@@ -64,9 +63,9 @@ const reducer = (state, action) => {
         .then((response) => {
 
           console.log(response.data);
-          return {
-            // redirect to Home
-          }
+          /* return {
+            U
+          } */
         })
         .catch(error => {
           handleClick()
