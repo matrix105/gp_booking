@@ -5,7 +5,7 @@ import Image from "./mini Compnents/Image";
 import Title from "./mini Compnents/Title";
 import { registerInput } from "./mini Compnents/inputs";
 import Messages from "./mini Compnents/Messages";
-import { Container } from "@material-ui/core";
+import { Container, makeStyles, IconButton, Snackbar } from "@material-ui/core";
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
@@ -19,17 +19,20 @@ function getMessage(message) {
   return <Messages message={message} />;
 }
 
+var handleClick, handleClose, makeSnackbar
 
 const initialState = {
   nhs_num: "",
   firstname: "",
   lastname: "",
   email: "",
+  username: "",
   password: "",
   cPassword: "",
   dob: "",
   phone: "",
   address: "",
+  setOpen: false,
   username: ""
 };
 
@@ -44,6 +47,9 @@ const reducer = (state, action) => {
 
     case 'handle_form':
       axios.post('http://localhost:1337/auth/local/register', {
+        username: state.username,
+        email: state.email,
+        password: state.password,
         username: state.nhs_num,
         email: state.email,
         password: state.password,
@@ -53,13 +59,54 @@ const reducer = (state, action) => {
         phone: state.phone,
         address: state.address,
         nhs_num: state.nhs_num
+
       })
         .then((response) => {
+
+          console.log(response.data);
           return {
             // redirect to Home
           }
         })
+        .catch(error => {
+          handleClick()
+          if (error.response) {
+            const errorMessage = error.response.data.data[0].messages[0].message
+            return (
+              alert(errorMessage)
+              // <div>
+              //   <Snackbar
+              //     anchorOrigin={{
+              //       vertical: 'bottom',
+              //       horizontal: 'left',
+              //     }}
+              //     open={state.setOpen}
+              //     autoHideDuration={6000}
+              //     onClose={handleClose}
+              //     message="Note archived"
+              //     action={
+              //       <React.Fragment>
+              //         <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+              //           <CloseIcon fontSize="small" />
+              //         </IconButton>
+              //       </React.Fragment>
+              //     }
+              //   />
+              // </div>
+            )
+          }
+        })
 
+    case 'handle_click_snack':
+      return ({
+        ...state,
+        setOpen: true
+      })
+    case 'handle_snack_close':
+      return ({
+        ...state,
+        setOpen: false
+      })
     default:
       {
         return state
@@ -83,38 +130,33 @@ const Register = () => {
   const handleForm = (e) => {
     e.preventDefault();
     dispatch({
-      type: 'handle_form'
+      type: 'handle_form',
     })
   }
 
-  /* handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.history.push('/')
+  handleClick = () => {
+    dispatch({
+      type: 'handle_click_snack'
+    })
+  };
 
-    axios
-      .post("http://localhost:1337/", {
-        nhs_num: this.state.nhs_num,
-        firstname: this.state.firstname,
-        lastname: this.state.lastname,
-        email: this.state.email,
-        password: this.state.password,
-        dob: this.state.dob,
-        phone: this.state.phone,
-      })
-      .then((res) => {
-        this.setState({
-          nhs_num: "",
-          firstname: "",
-          lastname: "",
-          email: "",
-          password: "",
-          dob: "",
-          phone: "",
-        });
-      })
-      .catch((err) => { });
-  }; */
+  handleClose = (event, reason) => {
+    dispatch({
+      type: 'handle_snack_close'
+    })
+    /* if (reason === 'clickaway') {
+      return;
+    }
 
+    setOpen(false); */
+  };
+
+  makeSnackbar = (message) => {
+    return (
+      alert(message)
+    )
+
+  }
 
   return (
     <Container>
