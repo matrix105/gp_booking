@@ -517,17 +517,17 @@
       "Doctor": {
         "required": [
           "id",
-          "firstname",
-          "lastname"
+          "fname",
+          "lname"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "firstname": {
+          "fname": {
             "type": "string"
           },
-          "lastname": {
+          "lname": {
             "type": "string"
           },
           "user": {
@@ -621,6 +621,16 @@
               }
             }
           },
+          "dob": {
+            "type": "string",
+            "format": "date"
+          },
+          "phone": {
+            "type": "integer"
+          },
+          "address": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -629,14 +639,14 @@
       },
       "NewDoctor": {
         "required": [
-          "firstname",
-          "lastname"
+          "fname",
+          "lname"
         ],
         "properties": {
-          "firstname": {
+          "fname": {
             "type": "string"
           },
-          "lastname": {
+          "lname": {
             "type": "string"
           },
           "user": {
@@ -647,6 +657,16 @@
             "items": {
               "type": "string"
             }
+          },
+          "dob": {
+            "type": "string",
+            "format": "date"
+          },
+          "phone": {
+            "type": "integer"
+          },
+          "address": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",

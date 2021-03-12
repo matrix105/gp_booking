@@ -525,8 +525,8 @@
           "patient": {
             "required": [
               "id",
-              "firstname",
-              "lastname",
+              "fname",
+              "lname",
               "phone",
               "address"
             ],
@@ -534,10 +534,10 @@
               "id": {
                 "type": "string"
               },
-              "firstname": {
+              "fname": {
                 "type": "string"
               },
-              "lastname": {
+              "lname": {
                 "type": "string"
               },
               "mname": {

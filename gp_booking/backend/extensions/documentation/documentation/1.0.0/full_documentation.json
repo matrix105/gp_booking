@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/12/2021 11:32:54 PM"
+    "x-generation-date": "03/12/2021 11:18:47 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -4756,17 +4756,17 @@
           "doctor": {
             "required": [
               "id",
-              "firstname",
-              "lastname"
+              "fname",
+              "lname"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "firstname": {
+              "fname": {
                 "type": "string"
               },
-              "lastname": {
+              "lname": {
                 "type": "string"
               },
               "user": {
@@ -4777,6 +4777,15 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "dob": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "integer"
+              },
+              "address": {
+                "type": "string"
               },
               "published_at": {
                 "type": "string"
@@ -4846,8 +4855,8 @@
           "patient": {
             "required": [
               "id",
-              "firstname",
-              "lastname",
+              "fname",
+              "lname",
               "phone",
               "address"
             ],
@@ -4855,10 +4864,10 @@
               "id": {
                 "type": "string"
               },
-              "firstname": {
+              "fname": {
                 "type": "string"
               },
-              "lastname": {
+              "lname": {
                 "type": "string"
               },
               "mname": {
@@ -4956,17 +4965,17 @@
       "Doctor": {
         "required": [
           "id",
-          "firstname",
-          "lastname"
+          "fname",
+          "lname"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "firstname": {
+          "fname": {
             "type": "string"
           },
-          "lastname": {
+          "lname": {
             "type": "string"
           },
           "user": {
@@ -5060,6 +5069,16 @@
               }
             }
           },
+          "dob": {
+            "type": "string",
+            "format": "date"
+          },
+          "phone": {
+            "type": "integer"
+          },
+          "address": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -5068,14 +5087,14 @@
       },
       "NewDoctor": {
         "required": [
-          "firstname",
-          "lastname"
+          "fname",
+          "lname"
         ],
         "properties": {
-          "firstname": {
+          "fname": {
             "type": "string"
           },
-          "lastname": {
+          "lname": {
             "type": "string"
           },
           "user": {
@@ -5086,6 +5105,16 @@
             "items": {
               "type": "string"
             }
+          },
+          "dob": {
+            "type": "string",
+            "format": "date"
+          },
+          "phone": {
+            "type": "integer"
+          },
+          "address": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",
@@ -5102,8 +5131,8 @@
       "Patient": {
         "required": [
           "id",
-          "firstname",
-          "lastname",
+          "fname",
+          "lname",
           "phone",
           "address"
         ],
@@ -5111,10 +5140,10 @@
           "id": {
             "type": "string"
           },
-          "firstname": {
+          "fname": {
             "type": "string"
           },
-          "lastname": {
+          "lname": {
             "type": "string"
           },
           "mname": {
@@ -5166,16 +5195,16 @@
       },
       "NewPatient": {
         "required": [
-          "firstname",
-          "lastname",
+          "fname",
+          "lname",
           "phone",
           "address"
         ],
         "properties": {
-          "firstname": {
+          "fname": {
             "type": "string"
           },
-          "lastname": {
+          "lname": {
             "type": "string"
           },
           "mname": {
@@ -5476,17 +5505,17 @@
           "doctor": {
             "required": [
               "id",
-              "firstname",
-              "lastname"
+              "fname",
+              "lname"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "firstname": {
+              "fname": {
                 "type": "string"
               },
-              "lastname": {
+              "lname": {
                 "type": "string"
               },
               "user": {
@@ -5497,6 +5526,15 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "dob": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "integer"
+              },
+              "address": {
+                "type": "string"
               },
               "published_at": {
                 "type": "string"
@@ -5512,8 +5550,8 @@
           "patient": {
             "required": [
               "id",
-              "firstname",
-              "lastname",
+              "fname",
+              "lname",
               "phone",
               "address"
             ],
@@ -5521,10 +5559,10 @@
               "id": {
                 "type": "string"
               },
-              "firstname": {
+              "fname": {
                 "type": "string"
               },
-              "lastname": {
+              "lname": {
                 "type": "string"
               },
               "mname": {

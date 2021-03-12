@@ -569,17 +569,17 @@
           "doctor": {
             "required": [
               "id",
-              "firstname",
-              "lastname"
+              "fname",
+              "lname"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "firstname": {
+              "fname": {
                 "type": "string"
               },
-              "lastname": {
+              "lname": {
                 "type": "string"
               },
               "user": {
@@ -590,6 +590,15 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "dob": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "integer"
+              },
+              "address": {
+                "type": "string"
               },
               "published_at": {
                 "type": "string"

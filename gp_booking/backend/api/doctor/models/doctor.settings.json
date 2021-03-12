@@ -11,11 +11,11 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "firstname": {
+    "fname": {
       "type": "string",
       "required": true
     },
-    "lastname": {
+    "lname": {
       "type": "string",
       "required": true
     },
@@ -27,6 +27,15 @@
     "available_bookings": {
       "collection": "available-booking",
       "via": "doctor"
+    },
+    "dob": {
+      "type": "date"
+    },
+    "phone": {
+      "type": "integer"
+    },
+    "address": {
+      "type": "string"
     }
   }
 }
