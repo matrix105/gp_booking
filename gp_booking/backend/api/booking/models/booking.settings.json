@@ -12,8 +12,8 @@
   },
   "attributes": {
     "patient": {
-      "model": "patient",
-      "via": "bookings"
+      "via": "bookings",
+      "model": "patient"
     },
     "available_booking": {
       "via": "booking",

@@ -525,7 +525,6 @@
           "patient": {
             "required": [
               "id",
-              "nhsNumber",
               "fname",
               "lname",
               "phone",
@@ -534,9 +533,6 @@
             "properties": {
               "id": {
                 "type": "string"
-              },
-              "nhsNumber": {
-                "type": "integer"
               },
               "fname": {
                 "type": "string"

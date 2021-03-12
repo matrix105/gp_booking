@@ -59,35 +59,9 @@
       "plugin": "users-permissions",
       "configurable": false
     },
-    "firstname": {
-      "type": "string",
-      "required": false
-    },
-    "lastname": {
-      "type": "string",
-      "required": false
-    },
-    "nhs_num": {
-      "type": "integer",
-      "required": false,
-      "unique": true
-    },
-    "phone": {
-      "type": "integer",
-      "required": false,
-      "unique": true
-    },
-    "address": {
-      "type": "string",
-      "required": false
-    },
-    "dob": {
-      "type": "date",
-      "required": false
-    },
     "doctor": {
-      "model": "doctor",
-      "via": "user"
+      "via": "user",
+      "model": "doctor"
     },
     "patient": {
       "model": "patient"

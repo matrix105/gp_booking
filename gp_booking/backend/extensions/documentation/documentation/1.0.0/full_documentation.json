@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/12/2021 2:40:03 PM"
+    "x-generation-date": "03/12/2021 9:22:48 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -4846,7 +4846,6 @@
           "patient": {
             "required": [
               "id",
-              "nhsNumber",
               "fname",
               "lname",
               "phone",
@@ -4855,9 +4854,6 @@
             "properties": {
               "id": {
                 "type": "string"
-              },
-              "nhsNumber": {
-                "type": "integer"
               },
               "fname": {
                 "type": "string"
@@ -5010,24 +5006,6 @@
               "role": {
                 "type": "string"
               },
-              "firstname": {
-                "type": "string"
-              },
-              "lastname": {
-                "type": "string"
-              },
-              "nhs_num": {
-                "type": "integer"
-              },
-              "phone": {
-                "type": "integer"
-              },
-              "address": {
-                "type": "string"
-              },
-              "dob": {
-                "type": "string"
-              },
               "doctor": {
                 "type": "string"
               },
@@ -5124,7 +5102,6 @@
       "Patient": {
         "required": [
           "id",
-          "nhsNumber",
           "fname",
           "lname",
           "phone",
@@ -5133,9 +5110,6 @@
         "properties": {
           "id": {
             "type": "string"
-          },
-          "nhsNumber": {
-            "type": "integer"
           },
           "fname": {
             "type": "string"
@@ -5192,16 +5166,12 @@
       },
       "NewPatient": {
         "required": [
-          "nhsNumber",
           "fname",
           "lname",
           "phone",
           "address"
         ],
         "properties": {
-          "nhsNumber": {
-            "type": "integer"
-          },
           "fname": {
             "type": "string"
           },
@@ -5384,24 +5354,6 @@
                 "role": {
                   "type": "string"
                 },
-                "firstname": {
-                  "type": "string"
-                },
-                "lastname": {
-                  "type": "string"
-                },
-                "nhs_num": {
-                  "type": "integer"
-                },
-                "phone": {
-                  "type": "integer"
-                },
-                "address": {
-                  "type": "string"
-                },
-                "dob": {
-                  "type": "string"
-                },
                 "doctor": {
                   "type": "string"
                 },
@@ -5521,25 +5473,6 @@
               }
             }
           },
-          "firstname": {
-            "type": "string"
-          },
-          "lastname": {
-            "type": "string"
-          },
-          "nhs_num": {
-            "type": "integer"
-          },
-          "phone": {
-            "type": "integer"
-          },
-          "address": {
-            "type": "string"
-          },
-          "dob": {
-            "type": "string",
-            "format": "date"
-          },
           "doctor": {
             "required": [
               "id",
@@ -5579,7 +5512,6 @@
           "patient": {
             "required": [
               "id",
-              "nhsNumber",
               "fname",
               "lname",
               "phone",
@@ -5588,9 +5520,6 @@
             "properties": {
               "id": {
                 "type": "string"
-              },
-              "nhsNumber": {
-                "type": "integer"
               },
               "fname": {
                 "type": "string"
@@ -5667,25 +5596,6 @@
           },
           "role": {
             "type": "string"
-          },
-          "firstname": {
-            "type": "string"
-          },
-          "lastname": {
-            "type": "string"
-          },
-          "nhs_num": {
-            "type": "integer"
-          },
-          "phone": {
-            "type": "integer"
-          },
-          "address": {
-            "type": "string"
-          },
-          "dob": {
-            "type": "string",
-            "format": "date"
           },
           "doctor": {
             "type": "string"

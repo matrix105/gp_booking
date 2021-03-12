@@ -22,8 +22,8 @@
       "via": "available_booking"
     },
     "doctor": {
-      "model": "doctor",
-      "via": "available_bookings"
+      "via": "available_bookings",
+      "model": "doctor"
     },
     "date": {
       "type": "date"

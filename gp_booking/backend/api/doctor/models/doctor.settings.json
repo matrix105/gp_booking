@@ -11,22 +11,22 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "fName": {
+    "fname": {
       "type": "string",
       "required": true
     },
-    "lName": {
+    "lname": {
       "type": "string",
       "required": true
     },
     "user": {
-      "via": "doctor",
       "plugin": "users-permissions",
-      "model": "user"
+      "model": "user",
+      "via": "doctor"
     },
     "available_bookings": {
-      "via": "doctor",
-      "collection": "available-booking"
+      "collection": "available-booking",
+      "via": "doctor"
     }
   }
 }

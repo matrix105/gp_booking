@@ -33,9 +33,9 @@ const reducer = (state, action) => {
         password: state.password
       })
         .then(response => {
-          // console.log(response.data.user.email);
+          console.log(response.data.user.email);
           action.redirect.push({
-            pathname: '/booking',
+            pathname: '/',
             state: { data: response.data.user.id }
           })
         })
@@ -106,7 +106,7 @@ function Login() {
           <Box mb={5}>
             <TextField
               id="outlined-basic"
-              label="Email"
+              label="Email or Nhs number if you are logging as a patient"
               variant="outlined"
               type="text"
               className="form-control"

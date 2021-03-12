@@ -517,7 +517,6 @@
       "Patient": {
         "required": [
           "id",
-          "nhsNumber",
           "fname",
           "lname",
           "phone",
@@ -526,9 +525,6 @@
         "properties": {
           "id": {
             "type": "string"
-          },
-          "nhsNumber": {
-            "type": "integer"
           },
           "fname": {
             "type": "string"
@@ -585,16 +581,12 @@
       },
       "NewPatient": {
         "required": [
-          "nhsNumber",
           "fname",
           "lname",
           "phone",
           "address"
         ],
         "properties": {
-          "nhsNumber": {
-            "type": "integer"
-          },
           "fname": {
             "type": "string"
           },

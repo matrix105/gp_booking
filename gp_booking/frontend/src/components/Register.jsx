@@ -1,11 +1,10 @@
-import React, { useReducer, useState } from "react";
+import React, { useState } from "react";
 import "./css/login.css";
-import Context from '../context/Context'
 import Image from "./mini Compnents/Image";
 import Title from "./mini Compnents/Title";
 import { registerInput } from "./mini Compnents/inputs";
 import Messages from "./mini Compnents/Messages";
-import { Container, makeStyles, IconButton, Snackbar, FormControlLabel, Switch } from "@material-ui/core";
+import { Container, makeStyles, Snackbar, Checkbox } from "@material-ui/core";
 import MuiAlert from '@material-ui/lab/Alert';
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
@@ -13,109 +12,10 @@ import Button from '@material-ui/core/Button';
 
 function getImage(props) {
 
-
   return <Image className="img" src={props.src} alt={props.alt} />;
 }
 function getMessage(message) {
   return <Messages message={message} />;
-}
-
-var handleClick, handleClose, makeSnackbar
-
-const initialState = {
-  nhs_num: "",
-  firstname: "",
-  lastname: "",
-  email: "",
-  username: "",
-  password: "",
-  cPassword: "",
-  dob: "",
-  phone: "",
-  address: "",
-  setOpen: false,
-  checkedB: false
-};
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'handle_input':
-      return {
-        ...state,
-        [action.field]: action.payload
-      }
-
-
-    case 'handle_form':
-      console.log(state.username);
-      axios.post('http://localhost:1337/auth/local/register', {
-
-        username: state.username,
-        email: state.email,
-        password: state.password,
-
-        firstName: state.firstname,
-        lastName: state.lastname,
-        dob: state.dob,
-        phone: state.phone,
-        address: state.address,
-        nhs_num: state.nhs_num,
-      })
-        .then((response) => {
-
-          /* return {
-            U
-          } */
-        })
-        .catch(error => {
-          handleClick()
-          if (error.response) {
-            const errorMessage = error.response.data.data[0].messages[0].message
-            return (
-              alert(errorMessage)
-              // <div>
-              //   <Snackbar
-              //     anchorOrigin={{
-              //       vertical: 'bottom',
-              //       horizontal: 'left',
-              //     }}
-              //     open={state.setOpen}
-              //     autoHideDuration={6000}
-              //     onClose={handleClose}
-              //     message="Note archived"
-              //     action={
-              //       <React.Fragment>
-              //         <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-              //           <CloseIcon fontSize="small" />
-              //         </IconButton>
-              //       </React.Fragment>
-              //     }
-              //   />
-              // </div>
-            )
-          }
-        })
-
-    case 'handle_click_snack':
-      return ({
-        ...state,
-        setOpen: true
-      })
-    case 'handle_snack_close':
-      return ({
-        ...state,
-        setOpen: false
-      })
-    case 'toggle':
-      return {
-        ...state,
-        [action.field]: action.payload
-      }
-    default:
-      {
-        return state
-      }
-  }
 }
 
 function Alert(props) {
@@ -134,7 +34,6 @@ const Register = () => {
     firstname: "",
     lastname: "",
     email: "",
-    username: "",
     password: "",
     cPassword: "",
     dob: "",
@@ -144,59 +43,73 @@ const Register = () => {
 
   const [open, setOpen] = React.useState(false);
 
-  const [login, setlogin] = useState(initialState)
+  const [message, setmessage] = useState('')
+  const [snackColour, setsnackColour] = useState('')
+  // check box
+  const [checked, setChecked] = React.useState(false);
 
+  const [username, setusername] = useState('NHS Number')
+  //const [login, setlogin] = useState(initialState)
 
-  const [data, dispatch] = useReducer(reducer, initialState)
+  // set path
+  const [path, setpath] = useState('patients')
 
   const handleInput = (e) => {
     setInput({
       ...input, [e.target.name]: e.target.value
     })
-    /* dispatch({
-      type: 'handle_input',
-      field: e.target.name,
-      payload: e.target.value
-    }) */
   };
 
   const handleForm = (e) => {
     e.preventDefault();
-    /*  dispatch({
-       type: 'handle_form',
-     }) */
-    axios.post('http://localhost:1337/auth/local/register', {
 
-      username: input.username,
+    axios.post('http://localhost:1337/auth/local/register', {
+      username: input.nhs_num,
       email: input.email,
       password: input.password,
-      firstName: input.firstname,
-      lastName: input.lastname,
-      dob: input.dob,
-      phone: input.phone,
-      address: input.address,
-      nhs_num: input.nhs_num,
+      //checkedA: true,
     })
       .then((response) => {
-        console.log('user registered');
+        axios.post(`http://localhost:1337/${path}`, {
+
+          data: {
+            fname: input.firstname,
+            lname: input.lastname,
+            dob: input.dob,
+            phone: input.phone,
+            address: input.address,
+          },
+          headers: {
+            Authorization: `Bearer ${response.data.jwt}`
+          },
+
+        })
+          .then(response => {
+            console.log(response.data);
+            setmessage('Successfully registered!')
+            setsnackColour('success')
+            handleClick()
+          }).catch(err => {
+            console.log(err.response.data);
+            setmessage('Something went wrong')
+            setsnackColour('warning')
+            handleClick()
+          })
       })
       .catch(error => {
-        console.log(error.response);
+        console.log(error.response.data);
+        setmessage('Something went wrong')
+        setsnackColour('warning')
         handleClick()
       })
   }
 
-  handleClick = () => {
-    /* dispatch({
-      type: 'handle_click_snack'
-    }) */
+  const handleClick = (message) => {
     setOpen(true);
+    return message
   };
 
-  handleClose = (event, reason) => {
-    // dispatch({
-    //   type: 'handle_snack_close'
-    // })
+  const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
@@ -204,13 +117,20 @@ const Register = () => {
     setOpen(false);
   };
 
-  const handleToggleChange = e => {
-    dispatch({
-      type: 'toggle',
-      field: e.target.name,
-      payload: e.target.checked
-    })
-  }
+  // handle checkbox
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+    if (checked === true) {
+      setusername('Username')
+      setpath('doctors')
+      console.log(path);
+    } else {
+      setusername('NHS number')
+      setpath('patients')
+      console.log(path);
+    }
+
+  };
 
   return (
     <Container>
@@ -229,46 +149,27 @@ const Register = () => {
           className="form"
           onSubmit={(e) => handleForm(e)}
         >
-
-          <FormControlLabel
-            control={
-              <Switch
-                checked={initialState.checkedB}
-                onChange={handleToggleChange}
-                name="checkedB"
-                color="primary"
-              />
-            }
+          <Checkbox
+            checked={checked}
+            onChange={handleChange}
             label="Are you a doctor"
+            inputProps={{ 'aria-label': 'primary checkbox' }}
           />
-
+          <span>Are you a doctor?</span>
           <Title title={registerInput.title} />
           <TextField
-            id="outlined-basic"
-            label="NHS Number"
+            id="nhs"
+            label={username}
             variant="outlined"
             type="number"
             className="form-control"
-            value={data.nhs_num}
             value={input.nhs_num}
             name="nhs_num"
             required
             onChange={e => handleInput(e)}
           />
           <TextField
-            id="outlined-basic"
-            label="Username"
-            variant="outlined"
-            type="text"
-            className="form-control"
-            //value={data.username}
-            value={input.username}
-            name="username"
-            required
-            onChange={e => handleInput(e)}
-          />
-          <TextField
-            id="outlined-basic"
+            id="email"
             label="Email"
             variant="outlined"
             type="email"
@@ -280,7 +181,7 @@ const Register = () => {
             onChange={e => handleInput(e)}
           />
           <TextField
-            id="outlined-basic"
+            id="fname"
             label="Firstname"
             variant="outlined"
             type="text"
@@ -292,7 +193,7 @@ const Register = () => {
             onChange={e => handleInput(e)}
           />
           <TextField
-            id="outlined-basic"
+            id="lname"
             label="Lastname"
             variant="outlined"
             type="text"
@@ -304,7 +205,7 @@ const Register = () => {
             onChange={e => handleInput(e)}
           />
           <TextField
-            id="outlined-basic"
+            id="password"
             label="Password"
             variant="outlined"
             type="password"
@@ -332,7 +233,7 @@ const Register = () => {
             onChange={e => handleInput(e)}
           />
           <TextField
-            id="outlined-basic"
+            id="phone"
             label="Phone"
             variant="outlined"
             type="tel"
@@ -344,7 +245,7 @@ const Register = () => {
             onChange={e => handleInput(e)}
           />
           <TextField
-            id="outlined-basic"
+            id="address"
             label="Address"
             variant="outlined"
             type="text"
@@ -361,9 +262,9 @@ const Register = () => {
             </Button>
         </form>
         <Snackbar open={open} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} autoHideDuration={6000} onClose={handleClose} style={useStyles.snackBar}>
-          <Alert onClose={handleClose} severity="error">
-            This is a success message!
-        </Alert>
+          <Alert onClose={handleClose} severity={snackColour}>
+            {message}
+          </Alert>
         </Snackbar>
       </div>
     </Container>
