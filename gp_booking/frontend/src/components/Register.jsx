@@ -52,7 +52,7 @@ const Register = () => {
   //const [login, setlogin] = useState(initialState)
 
   // set path
-  const [path, setpath] = useState('patients')
+  const [path, setpath] = useState('')
   // set username type
   const [usernameType, setusernameType] = useState('')
 
@@ -124,12 +124,12 @@ const Register = () => {
     setChecked(event.target.checked);
     if (checked === false) {
       setusername('Username')
-      setpath('doctors')
+      setpath('patients')
       setusernameType('text')
       console.log(path);
     } else {
       setusername('NHS number')
-      setpath('patients')
+      setpath('doctors')
       setusernameType('number')
       console.log(path);
     }
