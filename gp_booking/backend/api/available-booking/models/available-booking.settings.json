@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "available_bookings",
+  "info": {
+    "name": "AvailableBooking"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "doctorName": {
+      "type": "string"
+    },
+    "dateAndTime": {
+      "type": "datetime"
+    },
+    "available": {
+      "type": "boolean"
+    }
+  }
+}

@@ -1,11 +1,12 @@
-import React, { useReducer, useContext } from "react";
+import React, { useReducer, useState } from "react";
 import "./css/login.css";
 import Context from '../context/Context'
 import Image from "./mini Compnents/Image";
 import Title from "./mini Compnents/Title";
 import { registerInput } from "./mini Compnents/inputs";
 import Messages from "./mini Compnents/Messages";
-import { Container, makeStyles, IconButton, Snackbar } from "@material-ui/core";
+import { Container, makeStyles, IconButton, Snackbar, FormControlLabel, Switch } from "@material-ui/core";
+import MuiAlert from '@material-ui/lab/Alert';
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
@@ -33,6 +34,7 @@ const initialState = {
   phone: "",
   address: "",
   setOpen: false,
+  checkedB: false
 };
 
 const reducer = (state, action) => {
@@ -45,24 +47,22 @@ const reducer = (state, action) => {
 
 
     case 'handle_form':
+      console.log(state.username);
       axios.post('http://localhost:1337/auth/local/register', {
+
         username: state.username,
         email: state.email,
         password: state.password,
-        username: state.nhs_num,
-        email: state.email,
-        password: state.password,
-        firstName: state.firstName,
-        lastName: state.lastName,
+
+        firstName: state.firstname,
+        lastName: state.lastname,
         dob: state.dob,
         phone: state.phone,
         address: state.address,
-        nhs_num: state.nhs_num
-
+        nhs_num: state.nhs_num,
       })
         .then((response) => {
 
-          console.log(response.data);
           /* return {
             U
           } */
@@ -106,6 +106,11 @@ const reducer = (state, action) => {
         ...state,
         setOpen: false
       })
+    case 'toggle':
+      return {
+        ...state,
+        [action.field]: action.payload
+      }
     default:
       {
         return state
@@ -113,48 +118,98 @@ const reducer = (state, action) => {
   }
 }
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+const useStyles = makeStyles({
+  snackBar: {
+    width: '100%'
+  }
+})
+
 const Register = () => {
-  /* const { data, handleInputs, handleForms } = useContext(Context) */
+  const [input, setInput] = useState({
+    nhs_num: "",
+    firstname: "",
+    lastname: "",
+    email: "",
+    username: "",
+    password: "",
+    cPassword: "",
+    dob: "",
+    phone: "",
+    address: "",
+  })
+
+  const [open, setOpen] = React.useState(false);
+
+  const [login, setlogin] = useState(initialState)
+
 
   const [data, dispatch] = useReducer(reducer, initialState)
 
   const handleInput = (e) => {
-    dispatch({
+    setInput({
+      ...input, [e.target.name]: e.target.value
+    })
+    /* dispatch({
       type: 'handle_input',
       field: e.target.name,
       payload: e.target.value
-    })
+    }) */
   };
 
   const handleForm = (e) => {
     e.preventDefault();
-    dispatch({
-      type: 'handle_form',
+    /*  dispatch({
+       type: 'handle_form',
+     }) */
+    axios.post('http://localhost:1337/auth/local/register', {
+
+      username: input.username,
+      email: input.email,
+      password: input.password,
+      firstName: input.firstname,
+      lastName: input.lastname,
+      dob: input.dob,
+      phone: input.phone,
+      address: input.address,
+      nhs_num: input.nhs_num,
     })
+      .then((response) => {
+        console.log('user registered');
+      })
+      .catch(error => {
+        console.log(error.response);
+        handleClick()
+      })
   }
 
   handleClick = () => {
-    dispatch({
+    /* dispatch({
       type: 'handle_click_snack'
-    })
+    }) */
+    setOpen(true);
   };
 
   handleClose = (event, reason) => {
-    dispatch({
-      type: 'handle_snack_close'
-    })
-    /* if (reason === 'clickaway') {
+    // dispatch({
+    //   type: 'handle_snack_close'
+    // })
+    if (reason === 'clickaway') {
       return;
     }
 
-    setOpen(false); */
+    setOpen(false);
   };
 
-  makeSnackbar = (message) => {
-    return (
-      alert(message)
-    )
-
+  const handleToggleChange = e => {
+    dispatch({
+      type: 'toggle',
+      field: e.target.name,
+      payload: e.target.checked
+    })
   }
 
   return (
@@ -175,6 +230,18 @@ const Register = () => {
           onSubmit={(e) => handleForm(e)}
         >
 
+          <FormControlLabel
+            control={
+              <Switch
+                checked={initialState.checkedB}
+                onChange={handleToggleChange}
+                name="checkedB"
+                color="primary"
+              />
+            }
+            label="Are you a doctor"
+          />
+
           <Title title={registerInput.title} />
           <TextField
             id="outlined-basic"
@@ -183,6 +250,7 @@ const Register = () => {
             type="number"
             className="form-control"
             value={data.nhs_num}
+            value={input.nhs_num}
             name="nhs_num"
             required
             onChange={e => handleInput(e)}
@@ -193,8 +261,10 @@ const Register = () => {
             variant="outlined"
             type="text"
             className="form-control"
-            value={data.username}
+            //value={data.username}
+            value={input.username}
             name="username"
+            required
             onChange={e => handleInput(e)}
           />
           <TextField
@@ -203,7 +273,8 @@ const Register = () => {
             variant="outlined"
             type="email"
             className="form-control"
-            value={data.email}
+            //value={data.email}
+            value={input.email}
             name="email"
             required
             onChange={e => handleInput(e)}
@@ -214,7 +285,8 @@ const Register = () => {
             variant="outlined"
             type="text"
             className="form-control"
-            value={data.firstname}
+            // value={data.firstname}
+            value={input.firstname}
             name="firstname"
             required
             onChange={e => handleInput(e)}
@@ -225,7 +297,8 @@ const Register = () => {
             variant="outlined"
             type="text"
             className="form-control"
-            value={data.lastname}
+            //value={data.lastname}
+            value={input.lastname}
             name="lastname"
             required
             onChange={e => handleInput(e)}
@@ -236,7 +309,8 @@ const Register = () => {
             variant="outlined"
             type="password"
             className="form-control"
-            value={data.password}
+            //value={data.password}
+            value={input.password}
             name="password"
             required
             onChange={e => handleInput(e)}
@@ -248,7 +322,8 @@ const Register = () => {
             variant="outlined"
             type="date"
             className="form-control"
-            value={data.dob}
+            //value={data.dob}
+            value={input.dob}
             name="dob"
             required
             InputLabelProps={{
@@ -262,7 +337,8 @@ const Register = () => {
             variant="outlined"
             type="tel"
             className="form-control"
-            value={data.phone}
+            //value={data.phone}
+            value={input.phone}
             name="phone"
             required
             onChange={e => handleInput(e)}
@@ -273,7 +349,8 @@ const Register = () => {
             variant="outlined"
             type="text"
             className="form-control"
-            value={data.address}
+            //value={data.address}
+            value={input.address}
             name="address"
             onChange={e => handleInput(e)}
           />
@@ -283,6 +360,11 @@ const Register = () => {
             Submit
             </Button>
         </form>
+        <Snackbar open={open} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} autoHideDuration={6000} onClose={handleClose} style={useStyles.snackBar}>
+          <Alert onClose={handleClose} severity="error">
+            This is a success message!
+        </Alert>
+        </Snackbar>
       </div>
     </Container>
   );

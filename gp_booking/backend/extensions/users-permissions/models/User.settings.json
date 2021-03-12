@@ -61,15 +61,15 @@
     },
     "firstname": {
       "type": "string",
-      "required": false
+      "required": true
     },
     "lastname": {
       "type": "string",
-      "required": false
+      "required": true
     },
     "nhs_num": {
       "type": "integer",
-      "required": false,
+      "required": true,
       "unique": true
     },
     "phone": {
@@ -83,7 +83,7 @@
     },
     "dob": {
       "type": "date",
-      "required": false
+      "required": true
     }
   }
 }

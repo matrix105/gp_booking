@@ -528,7 +528,11 @@
               "required": [
                 "id",
                 "username",
-                "email"
+                "email",
+                "firstname",
+                "lastname",
+                "nhs_num",
+                "dob"
               ],
               "properties": {
                 "id": {

@@ -9,31 +9,47 @@ import { Container } from "@material-ui/core";
 import { Box, Button, TextField } from '@material-ui/core';
 import axios from "axios";
 
-const jtwKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjE1NDIzMjUyLCJleHAiOjE2MTgwMTUyNTJ9.ugLCeSX9yeh6i6yjLD605zoYNqR5lFc3s05KKsCfV3s"
+
 
 
 const initialForm = {
-  nhs: '',
-  password: ''
+  email: '',
+  password: '',
+  isClicked: false
 }
 
 const reducer = (state, action) => {
   switch (action.type) {
     case 'handle_input_text':
-      console.log(action.payload);
       return {
         ...state,
         [action.field]: action.payload
 
       }
     case 'login':
-      return {
 
+      axios.post('http://localhost:1337/auth/local', {
+        identifier: state.email,
+        password: state.password
+      })
+        .then(response => {
+          // console.log(response.data.user.email);
+          action.redirect.push({
+            pathname: '/',
+            state: { data: response.data.user.email }
+          })
+        })
+        .catch(err => {
+          console.log(err.response.data[0]);
+          // console.log(err.message[0].messages[0].message);
+        })
+      return {
+        ...state,
+        [state.isClicked]: true
       }
     case 'register':
-      return {
-
-      }
+      action.redirect.push('/')
+      return
     default:
       return {}
   }
@@ -54,9 +70,17 @@ function Login() {
 
   const handleButtonClick = (e) => {
     e.preventDefault();
-    console.log('heeloo');
     dispatch({
-      type: 'login'
+      type: 'login',
+      payload: e.target.value,
+      redirect: history
+    })
+  }
+
+  const redirectRegister = (e) => {
+    dispatch({
+      type: 'register',
+      redirect: history
     })
   }
 
@@ -77,17 +101,17 @@ function Login() {
           </div>
         </div>
 
-        <form autoComplete="off" className="form" method="POST" >
+        <form autoComplete="off" className="form" onSubmit={handleButtonClick}>
           <Title title={loginInput.title} />
           <Box mb={5}>
             <TextField
               id="outlined-basic"
-              label="NHS number"
+              label="Email"
               variant="outlined"
-              type="number"
+              type="text"
               className="form-control"
-              value={state.nhs}
-              name="nhs"
+              value={state.email}
+              name="email"
               required
               onChange={(e) => handleTextChange(e)}
             />
@@ -106,11 +130,11 @@ function Login() {
             />
           </Box>
           <Container>
-            <Button onClick={handleButtonClick} variant="contained" fullWidth="true" color="primary" type="submit" className="btn btn-primary mb-5">
+            <Button value={state.isClicked} type="submit" variant="contained" fullWidth="true" color="primary" className="btn btn-primary mb-5">
               Login
             </Button>
-            <Button variant="contained" fullWidth="true" color="secondary" type="button" className="btn btn-primary mb-5">
-              Submit
+            <Button onClick={e => redirectRegister(e)} variant="contained" fullWidth="true" color="secondary" type="button" className="btn btn-primary mb-5">
+              Sign up
             </Button>
           </Container>
 
