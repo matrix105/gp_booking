@@ -53,6 +53,8 @@ const Register = () => {
 
   // set path
   const [path, setpath] = useState('patients')
+  // set username type
+  const [usernameType, setusernameType] = useState('')
 
   const handleInput = (e) => {
     setInput({
@@ -120,13 +122,15 @@ const Register = () => {
   // handle checkbox
   const handleChange = (event) => {
     setChecked(event.target.checked);
-    if (checked === true) {
+    if (checked === false) {
       setusername('Username')
       setpath('doctors')
+      setusernameType('text')
       console.log(path);
     } else {
       setusername('NHS number')
       setpath('patients')
+      setusernameType('number')
       console.log(path);
     }
 
@@ -161,7 +165,7 @@ const Register = () => {
             id="nhs"
             label={username}
             variant="outlined"
-            type="number"
+            type={usernameType}
             className="form-control"
             value={input.nhs_num}
             name="nhs_num"
