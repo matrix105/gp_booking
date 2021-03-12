@@ -11,11 +11,11 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "fname": {
+    "firstname": {
       "type": "string",
       "required": true
     },
-    "lname": {
+    "lastname": {
       "type": "string",
       "required": true
     },

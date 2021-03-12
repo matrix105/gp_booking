@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/12/2021 9:22:48 PM"
+    "x-generation-date": "03/12/2021 11:32:54 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -4756,17 +4756,17 @@
           "doctor": {
             "required": [
               "id",
-              "fName",
-              "lName"
+              "firstname",
+              "lastname"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "fName": {
+              "firstname": {
                 "type": "string"
               },
-              "lName": {
+              "lastname": {
                 "type": "string"
               },
               "user": {
@@ -4846,8 +4846,8 @@
           "patient": {
             "required": [
               "id",
-              "fname",
-              "lname",
+              "firstname",
+              "lastname",
               "phone",
               "address"
             ],
@@ -4855,10 +4855,10 @@
               "id": {
                 "type": "string"
               },
-              "fname": {
+              "firstname": {
                 "type": "string"
               },
-              "lname": {
+              "lastname": {
                 "type": "string"
               },
               "mname": {
@@ -4956,17 +4956,17 @@
       "Doctor": {
         "required": [
           "id",
-          "fName",
-          "lName"
+          "firstname",
+          "lastname"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "fName": {
+          "firstname": {
             "type": "string"
           },
-          "lName": {
+          "lastname": {
             "type": "string"
           },
           "user": {
@@ -5068,14 +5068,14 @@
       },
       "NewDoctor": {
         "required": [
-          "fName",
-          "lName"
+          "firstname",
+          "lastname"
         ],
         "properties": {
-          "fName": {
+          "firstname": {
             "type": "string"
           },
-          "lName": {
+          "lastname": {
             "type": "string"
           },
           "user": {
@@ -5102,8 +5102,8 @@
       "Patient": {
         "required": [
           "id",
-          "fname",
-          "lname",
+          "firstname",
+          "lastname",
           "phone",
           "address"
         ],
@@ -5111,10 +5111,10 @@
           "id": {
             "type": "string"
           },
-          "fname": {
+          "firstname": {
             "type": "string"
           },
-          "lname": {
+          "lastname": {
             "type": "string"
           },
           "mname": {
@@ -5166,16 +5166,16 @@
       },
       "NewPatient": {
         "required": [
-          "fname",
-          "lname",
+          "firstname",
+          "lastname",
           "phone",
           "address"
         ],
         "properties": {
-          "fname": {
+          "firstname": {
             "type": "string"
           },
-          "lname": {
+          "lastname": {
             "type": "string"
           },
           "mname": {
@@ -5476,17 +5476,17 @@
           "doctor": {
             "required": [
               "id",
-              "fName",
-              "lName"
+              "firstname",
+              "lastname"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "fName": {
+              "firstname": {
                 "type": "string"
               },
-              "lName": {
+              "lastname": {
                 "type": "string"
               },
               "user": {
@@ -5512,8 +5512,8 @@
           "patient": {
             "required": [
               "id",
-              "fname",
-              "lname",
+              "firstname",
+              "lastname",
               "phone",
               "address"
             ],
@@ -5521,10 +5521,10 @@
               "id": {
                 "type": "string"
               },
-              "fname": {
+              "firstname": {
                 "type": "string"
               },
-              "lname": {
+              "lastname": {
                 "type": "string"
               },
               "mname": {

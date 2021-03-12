@@ -1254,17 +1254,17 @@
           "doctor": {
             "required": [
               "id",
-              "fName",
-              "lName"
+              "firstname",
+              "lastname"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "fName": {
+              "firstname": {
                 "type": "string"
               },
-              "lName": {
+              "lastname": {
                 "type": "string"
               },
               "user": {
@@ -1290,8 +1290,8 @@
           "patient": {
             "required": [
               "id",
-              "fname",
-              "lname",
+              "firstname",
+              "lastname",
               "phone",
               "address"
             ],
@@ -1299,10 +1299,10 @@
               "id": {
                 "type": "string"
               },
-              "fname": {
+              "firstname": {
                 "type": "string"
               },
-              "lname": {
+              "lastname": {
                 "type": "string"
               },
               "mname": {

@@ -517,17 +517,17 @@
       "Doctor": {
         "required": [
           "id",
-          "fName",
-          "lName"
+          "firstname",
+          "lastname"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "fName": {
+          "firstname": {
             "type": "string"
           },
-          "lName": {
+          "lastname": {
             "type": "string"
           },
           "user": {
@@ -629,14 +629,14 @@
       },
       "NewDoctor": {
         "required": [
-          "fName",
-          "lName"
+          "firstname",
+          "lastname"
         ],
         "properties": {
-          "fName": {
+          "firstname": {
             "type": "string"
           },
-          "lName": {
+          "lastname": {
             "type": "string"
           },
           "user": {

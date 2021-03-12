@@ -569,17 +569,17 @@
           "doctor": {
             "required": [
               "id",
-              "fName",
-              "lName"
+              "firstname",
+              "lastname"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "fName": {
+              "firstname": {
                 "type": "string"
               },
-              "lName": {
+              "lastname": {
                 "type": "string"
               },
               "user": {
