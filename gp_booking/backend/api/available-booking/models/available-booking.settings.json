@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "available_bookings",
   "info": {
-    "name": "AvailableBooking"
+    "name": "AvailableBooking",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -13,11 +14,22 @@
     "doctorName": {
       "type": "string"
     },
-    "dateAndTime": {
-      "type": "datetime"
-    },
     "available": {
       "type": "boolean"
+    },
+    "booking": {
+      "model": "booking",
+      "via": "available_booking"
+    },
+    "doctor": {
+      "model": "doctor",
+      "via": "available_bookings"
+    },
+    "date": {
+      "type": "date"
+    },
+    "time": {
+      "type": "time"
     }
   }
 }

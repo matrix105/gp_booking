@@ -538,12 +538,76 @@
           "doctorName": {
             "type": "string"
           },
-          "dateAndTime": {
-            "type": "string",
-            "format": "date-time"
-          },
           "available": {
             "type": "boolean"
+          },
+          "booking": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "patient": {
+                "type": "string"
+              },
+              "available_booking": {
+                "type": "string"
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "doctor": {
+            "required": [
+              "id",
+              "fName",
+              "lName"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "fName": {
+                "type": "string"
+              },
+              "lName": {
+                "type": "string"
+              },
+              "user": {
+                "type": "string"
+              },
+              "available_bookings": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "time": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",
@@ -556,12 +620,21 @@
           "doctorName": {
             "type": "string"
           },
-          "dateAndTime": {
-            "type": "string",
-            "format": "date-time"
-          },
           "available": {
             "type": "boolean"
+          },
+          "booking": {
+            "type": "string"
+          },
+          "doctor": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "time": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",

@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "bookings",
   "info": {
-    "name": "Booking"
+    "name": "Booking",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -10,11 +11,13 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "date": {
-      "type": "date"
+    "patient": {
+      "model": "patient",
+      "via": "bookings"
     },
-    "time": {
-      "type": "time"
+    "available_booking": {
+      "via": "booking",
+      "model": "available-booking"
     }
   }
 }

@@ -1188,11 +1188,7 @@
         "required": [
           "id",
           "username",
-          "email",
-          "firstname",
-          "lastname",
-          "nhs_num",
-          "dob"
+          "email"
         ],
         "properties": {
           "id": {
@@ -1273,17 +1269,100 @@
           "dob": {
             "type": "string",
             "format": "date"
+          },
+          "doctor": {
+            "required": [
+              "id",
+              "fName",
+              "lName"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "fName": {
+                "type": "string"
+              },
+              "lName": {
+                "type": "string"
+              },
+              "user": {
+                "type": "string"
+              },
+              "available_bookings": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "patient": {
+            "required": [
+              "id",
+              "nhsNumber",
+              "fname",
+              "lname",
+              "phone",
+              "address"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "nhsNumber": {
+                "type": "integer"
+              },
+              "fname": {
+                "type": "string"
+              },
+              "lname": {
+                "type": "string"
+              },
+              "mname": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "integer"
+              },
+              "dob": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string"
+              },
+              "bookings": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           }
         }
       },
       "NewUsersPermissionsUser": {
         "required": [
           "username",
-          "email",
-          "firstname",
-          "lastname",
-          "nhs_num",
-          "dob"
+          "email"
         ],
         "properties": {
           "username": {
@@ -1337,6 +1416,12 @@
           "dob": {
             "type": "string",
             "format": "date"
+          },
+          "doctor": {
+            "type": "string"
+          },
+          "patient": {
+            "type": "string"
           },
           "created_by": {
             "type": "string"

@@ -35,8 +35,8 @@ const reducer = (state, action) => {
         .then(response => {
           // console.log(response.data.user.email);
           action.redirect.push({
-            pathname: '/',
-            state: { data: response.data.user.email }
+            pathname: '/booking',
+            state: { data: response.data.user.id }
           })
         })
         .catch(err => {
@@ -48,7 +48,7 @@ const reducer = (state, action) => {
         [state.isClicked]: true
       }
     case 'register':
-      action.redirect.push('/')
+      action.redirect.push('/register')
       return
     default:
       return {}

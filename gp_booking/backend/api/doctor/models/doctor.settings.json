@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "doctors",
+  "info": {
+    "name": "Doctor",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "fName": {
+      "type": "string",
+      "required": true
+    },
+    "lName": {
+      "type": "string",
+      "required": true
+    },
+    "user": {
+      "via": "doctor",
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "available_bookings": {
+      "via": "doctor",
+      "collection": "available-booking"
+    }
+  }
+}

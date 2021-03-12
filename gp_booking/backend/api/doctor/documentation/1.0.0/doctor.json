@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/bookings": {
+    "/doctors": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Booking"
+                    "$ref": "#/components/schemas/Doctor"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Booking"
+          "Doctor"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Booking"
+                  "$ref": "#/components/schemas/Doctor"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Booking"
+          "Doctor"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewBooking"
+                "$ref": "#/components/schemas/NewDoctor"
               }
             }
           }
         }
       }
     },
-    "/bookings/count": {
+    "/doctors/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Booking"
+          "Doctor"
         ],
         "parameters": []
       }
     },
-    "/bookings/{id}": {
+    "/doctors/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Booking"
+                  "$ref": "#/components/schemas/Doctor"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Booking"
+          "Doctor"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Booking"
+                  "$ref": "#/components/schemas/Doctor"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Booking"
+          "Doctor"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewBooking"
+                "$ref": "#/components/schemas/NewDoctor"
               }
             }
           }
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Booking"
+          "Doctor"
         ],
         "parameters": [
           {
@@ -514,55 +514,81 @@
   },
   "components": {
     "schemas": {
-      "Booking": {
+      "Doctor": {
         "required": [
-          "id"
+          "id",
+          "fName",
+          "lName"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "patient": {
+          "fName": {
+            "type": "string"
+          },
+          "lName": {
+            "type": "string"
+          },
+          "user": {
             "required": [
               "id",
-              "nhsNumber",
-              "fname",
-              "lname",
-              "phone",
-              "address"
+              "username",
+              "email"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "nhsNumber": {
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "role": {
+                "type": "string"
+              },
+              "firstname": {
+                "type": "string"
+              },
+              "lastname": {
+                "type": "string"
+              },
+              "nhs_num": {
                 "type": "integer"
-              },
-              "fname": {
-                "type": "string"
-              },
-              "lname": {
-                "type": "string"
-              },
-              "mname": {
-                "type": "string"
               },
               "phone": {
                 "type": "integer"
               },
-              "dob": {
-                "type": "string"
-              },
               "address": {
                 "type": "string"
               },
-              "bookings": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
+              "dob": {
+                "type": "string"
               },
-              "published_at": {
+              "doctor": {
+                "type": "string"
+              },
+              "patient": {
                 "type": "string"
               },
               "created_by": {
@@ -573,40 +599,43 @@
               }
             }
           },
-          "available_booking": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "doctorName": {
-                "type": "string"
-              },
-              "available": {
-                "type": "boolean"
-              },
-              "booking": {
-                "type": "string"
-              },
-              "doctor": {
-                "type": "string"
-              },
-              "date": {
-                "type": "string"
-              },
-              "time": {
-                "type": "string"
-              },
-              "published_at": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
+          "available_bookings": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "doctorName": {
+                  "type": "string"
+                },
+                "available": {
+                  "type": "boolean"
+                },
+                "booking": {
+                  "type": "string"
+                },
+                "doctor": {
+                  "type": "string"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "time": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -616,13 +645,26 @@
           }
         }
       },
-      "NewBooking": {
+      "NewDoctor": {
+        "required": [
+          "fName",
+          "lName"
+        ],
         "properties": {
-          "patient": {
+          "fName": {
             "type": "string"
           },
-          "available_booking": {
+          "lName": {
             "type": "string"
+          },
+          "user": {
+            "type": "string"
+          },
+          "available_bookings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "published_at": {
             "type": "string",
@@ -640,7 +682,7 @@
   },
   "tags": [
     {
-      "name": "Booking"
+      "name": "Doctor"
     }
   ]
 }

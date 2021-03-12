@@ -528,11 +528,7 @@
               "required": [
                 "id",
                 "username",
-                "email",
-                "firstname",
-                "lastname",
-                "nhs_num",
-                "dob"
+                "email"
               ],
               "properties": {
                 "id": {
@@ -581,6 +577,12 @@
                   "type": "string"
                 },
                 "dob": {
+                  "type": "string"
+                },
+                "doctor": {
+                  "type": "string"
+                },
+                "patient": {
                   "type": "string"
                 },
                 "created_by": {

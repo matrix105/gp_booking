@@ -61,15 +61,15 @@
     },
     "firstname": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "lastname": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "nhs_num": {
       "type": "integer",
-      "required": true,
+      "required": false,
       "unique": true
     },
     "phone": {
@@ -83,7 +83,14 @@
     },
     "dob": {
       "type": "date",
-      "required": true
+      "required": false
+    },
+    "doctor": {
+      "model": "doctor",
+      "via": "user"
+    },
+    "patient": {
+      "model": "patient"
     }
   }
 }

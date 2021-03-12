@@ -38,6 +38,10 @@
     "address": {
       "type": "string",
       "required": true
+    },
+    "bookings": {
+      "via": "patient",
+      "collection": "booking"
     }
   }
 }
