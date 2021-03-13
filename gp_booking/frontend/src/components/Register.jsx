@@ -72,6 +72,8 @@ const Register = () => {
       //checkedA: true,
     })
       .then((response) => {
+        console.log(response.data);
+
         axios.post(`http://localhost:1337/${path}`, {
 
           data: {
@@ -92,14 +94,14 @@ const Register = () => {
             setsnackColour('success')
             handleClick()
           }).catch(err => {
-            console.log(err.response.data);
+            console.log(err.response);
             setmessage('Something went wrong')
             setsnackColour('warning')
             handleClick()
           })
       })
       .catch(error => {
-        console.log(error.response.data);
+        console.log(error.response);
         setmessage('Something went wrong')
         setsnackColour('warning')
         handleClick()

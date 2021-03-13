@@ -58,13 +58,6 @@
       "via": "users",
       "plugin": "users-permissions",
       "configurable": false
-    },
-    "doctor": {
-      "via": "user",
-      "model": "doctor"
-    },
-    "patient": {
-      "model": "patient"
     }
   }
 }

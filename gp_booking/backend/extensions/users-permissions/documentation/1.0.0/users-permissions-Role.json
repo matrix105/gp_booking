@@ -561,12 +561,6 @@
                 "role": {
                   "type": "string"
                 },
-                "doctor": {
-                  "type": "string"
-                },
-                "patient": {
-                  "type": "string"
-                },
                 "created_by": {
                   "type": "string"
                 },

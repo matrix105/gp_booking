@@ -582,9 +582,6 @@
               "lname": {
                 "type": "string"
               },
-              "user": {
-                "type": "string"
-              },
               "available_bookings": {
                 "type": "array",
                 "items": {

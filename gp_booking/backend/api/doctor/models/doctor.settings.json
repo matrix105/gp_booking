@@ -19,11 +19,6 @@
       "type": "string",
       "required": true
     },
-    "user": {
-      "plugin": "users-permissions",
-      "model": "user",
-      "via": "doctor"
-    },
     "available_bookings": {
       "collection": "available-booking",
       "via": "doctor"

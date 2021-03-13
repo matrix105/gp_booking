@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "03/12/2021 11:18:47 PM"
+    "x-generation-date": "03/13/2021 12:17:33 AM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -4769,9 +4769,6 @@
               "lname": {
                 "type": "string"
               },
-              "user": {
-                "type": "string"
-              },
               "available_bookings": {
                 "type": "array",
                 "items": {
@@ -4978,57 +4975,6 @@
           "lname": {
             "type": "string"
           },
-          "user": {
-            "required": [
-              "id",
-              "username",
-              "email"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "username": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "password": {
-                "type": "string"
-              },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "confirmationToken": {
-                "type": "string"
-              },
-              "confirmed": {
-                "type": "boolean"
-              },
-              "blocked": {
-                "type": "boolean"
-              },
-              "role": {
-                "type": "string"
-              },
-              "doctor": {
-                "type": "string"
-              },
-              "patient": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
           "available_bookings": {
             "type": "array",
             "items": {
@@ -5095,9 +5041,6 @@
             "type": "string"
           },
           "lname": {
-            "type": "string"
-          },
-          "user": {
             "type": "string"
           },
           "available_bookings": {
@@ -5383,12 +5326,6 @@
                 "role": {
                   "type": "string"
                 },
-                "doctor": {
-                  "type": "string"
-                },
-                "patient": {
-                  "type": "string"
-                },
                 "created_by": {
                   "type": "string"
                 },
@@ -5501,98 +5438,6 @@
                 "type": "string"
               }
             }
-          },
-          "doctor": {
-            "required": [
-              "id",
-              "fname",
-              "lname"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fname": {
-                "type": "string"
-              },
-              "lname": {
-                "type": "string"
-              },
-              "user": {
-                "type": "string"
-              },
-              "available_bookings": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "dob": {
-                "type": "string"
-              },
-              "phone": {
-                "type": "integer"
-              },
-              "address": {
-                "type": "string"
-              },
-              "published_at": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
-          "patient": {
-            "required": [
-              "id",
-              "fname",
-              "lname",
-              "phone",
-              "address"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fname": {
-                "type": "string"
-              },
-              "lname": {
-                "type": "string"
-              },
-              "mname": {
-                "type": "string"
-              },
-              "phone": {
-                "type": "integer"
-              },
-              "dob": {
-                "type": "string"
-              },
-              "address": {
-                "type": "string"
-              },
-              "bookings": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "published_at": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
           }
         }
       },
@@ -5633,12 +5478,6 @@
             "default": false
           },
           "role": {
-            "type": "string"
-          },
-          "doctor": {
-            "type": "string"
-          },
-          "patient": {
             "type": "string"
           },
           "created_by": {
