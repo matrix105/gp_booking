@@ -54,7 +54,7 @@ const Register = () => {
   // set path
   const [path, setpath] = useState('')
   // set username type
-  const [usernameType, setusernameType] = useState('')
+  const [usernameType, setusernameType] = useState('number')
 
   const handleInput = (e) => {
     setInput({
@@ -64,6 +64,7 @@ const Register = () => {
 
   const handleForm = (e) => {
     e.preventDefault();
+    console.log(path);
 
     axios.post('http://localhost:1337/auth/local/register', {
       username: input.nhs_num,
@@ -72,32 +73,47 @@ const Register = () => {
       //checkedA: true,
     })
       .then((response) => {
-        console.log(response.data);
-
-        axios.post(`http://localhost:1337/${path}`, {
-
-          data: {
-            fname: input.firstname,
-            lname: input.lastname,
-            dob: input.dob,
-            phone: input.phone,
-            address: input.address,
-          },
-          headers: {
-            Authorization: `Bearer ${response.data.jwt}`
-          },
-
+        axios.post('http://localhost:1337/auth/local', {
+          identifier: input.email,
+          password: input.password
         })
-          .then(response => {
-            console.log(response.data);
-            setmessage('Successfully registered!')
-            setsnackColour('success')
-            handleClick()
-          }).catch(err => {
-            console.log(err.response);
-            setmessage('Something went wrong')
-            setsnackColour('warning')
-            handleClick()
+          .then(res => {
+            console.log(res.data.jwt);
+            if (checked === false) {
+              setusername('NHS number')
+              setpath('patients')
+              setusernameType('number')
+            } else {
+              setusername('Username')
+              setpath('dcotors')
+              setusernameType('text')
+            }
+            console.log(path);
+            axios.post(`http://localhost:1337/${path}`, {
+              headers: {
+                Authorization: `Bearer ${response.data.jwt}`
+              },
+              data: {
+                fname: input.firstname,
+                lname: input.lastname,
+                dob: input.dob,
+                phone: input.phone,
+                address: input.address,
+              },
+
+
+            })
+              .then(response => {
+                console.log(response.data);
+                setmessage('Successfully registered!')
+                setsnackColour('success')
+                handleClick()
+              }).catch(err => {
+                console.log(err.response);
+                setmessage('Something went wrong')
+                setsnackColour('warning')
+                handleClick()
+              })
           })
       })
       .catch(error => {
@@ -124,19 +140,9 @@ const Register = () => {
   // handle checkbox
   const handleChange = (event) => {
     setChecked(event.target.checked);
-    if (checked === false) {
-      setusername('Username')
-      setpath('patients')
-      setusernameType('text')
-      console.log(path);
-    } else {
-      setusername('NHS number')
-      setpath('doctors')
-      setusernameType('number')
-      console.log(path);
-    }
 
   };
+
 
   return (
     <Container>
@@ -273,7 +279,7 @@ const Register = () => {
           </Alert>
         </Snackbar>
       </div>
-    </Container>
+    </Container >
   );
 
 }

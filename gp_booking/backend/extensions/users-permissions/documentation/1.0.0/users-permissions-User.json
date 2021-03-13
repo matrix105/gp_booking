@@ -1250,6 +1250,95 @@
                 "type": "string"
               }
             }
+          },
+          "doctor": {
+            "required": [
+              "id",
+              "fname",
+              "lname"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "fname": {
+                "type": "string"
+              },
+              "lname": {
+                "type": "string"
+              },
+              "available_bookings": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "dob": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "integer"
+              },
+              "address": {
+                "type": "string"
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
+          "patient": {
+            "required": [
+              "id",
+              "fname",
+              "lname",
+              "phone",
+              "address"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "fname": {
+                "type": "string"
+              },
+              "lname": {
+                "type": "string"
+              },
+              "mname": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "integer"
+              },
+              "dob": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string"
+              },
+              "bookings": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           }
         }
       },
@@ -1290,6 +1379,12 @@
             "default": false
           },
           "role": {
+            "type": "string"
+          },
+          "doctor": {
+            "type": "string"
+          },
+          "patient": {
             "type": "string"
           },
           "created_by": {
