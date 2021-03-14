@@ -11,9 +11,6 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "doctorName": {
-      "type": "string"
-    },
     "available": {
       "type": "boolean"
     },
@@ -21,15 +18,16 @@
       "model": "booking",
       "via": "available_booking"
     },
-    "doctor": {
-      "via": "available_bookings",
-      "model": "doctor"
-    },
     "date": {
       "type": "date"
     },
     "time": {
       "type": "time"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "available_bookings"
     }
   }
 }

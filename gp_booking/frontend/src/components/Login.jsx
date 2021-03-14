@@ -1,4 +1,4 @@
-import { React, useState, useReducer } from "react";
+import { React, useState } from "react";
 import "./css/login.css";
 import Image from "./mini Compnents/Image";
 import Title from "./mini Compnents/Title";
@@ -6,83 +6,76 @@ import { loginInput } from "./mini Compnents/inputs";
 import Messages from "./mini Compnents/Messages";
 import { useHistory } from "react-router-dom";
 import { Container } from "@material-ui/core";
-import { Box, Button, TextField } from '@material-ui/core';
+import { Box, Button, TextField, Snackbar } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
 import axios from "axios";
 
 
-
-
-const initialForm = {
-  email: '',
-  password: '',
-  isClicked: false
-}
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'handle_input_text':
-      return {
-        ...state,
-        [action.field]: action.payload
-
-      }
-    case 'login':
-
-      axios.post('http://localhost:1337/auth/local', {
-        identifier: state.email,
-        password: state.password
-      })
-        .then(response => {
-          console.log(response.data.user.email);
-          action.redirect.push({
-            pathname: '/',
-            state: { data: response.data.user.id }
-          })
-        })
-        .catch(err => {
-          console.log(err.response.data[0]);
-          // console.log(err.message[0].messages[0].message);
-        })
-      return {
-        ...state,
-        [state.isClicked]: true
-      }
-    case 'register':
-      action.redirect.push('/register')
-      return
-    default:
-      return {}
-  }
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 function Login() {
   let history = useHistory();
 
-  const [state, dispatch] = useReducer(reducer, initialForm)
+  const [input, setinput] = useState({
+    username: '',
+    password: '',
+  })
+
+  // snackBar
+  const [open, setOpen] = useState(false);
+  const [message, setmessage] = useState('')
+  const [snackColour, setsnackColour] = useState('')
 
   const handleTextChange = (e) => {
-    dispatch({
-      type: 'handle_input_text',
-      field: e.target.name,
-      payload: e.target.value
+    setinput({
+      ...input, [e.target.name]: e.target.value
     })
   }
 
-  const handleButtonClick = (e) => {
+  const handleForm = (e) => {
     e.preventDefault();
-    dispatch({
-      type: 'login',
-      payload: e.target.value,
-      redirect: history
+    axios.post('http://localhost:1337/auth/local', {
+      identifier: input.username,
+      password: input.password
     })
+      .then(response => {
+        console.log(response.data.user.email);
+        setmessage('Successfully registered!')
+        setsnackColour('success')
+        handleClick()
+        history.push({
+          pathname: '/',
+          state: { data: response.data.user.id }
+        })
+      })
+      .catch(err => {
+        setmessage('Invalid nhs number or password')
+        setsnackColour('warning')
+        handleClick()
+        console.log(err.response.data[0]);
+        // console.log(err.message[0].messages[0].message);
+      })
   }
 
   const redirectRegister = (e) => {
-    dispatch({
-      type: 'register',
-      redirect: history
-    })
+    history.push('/register')
   }
+
+  // Snackbar handlers
+  const handleClick = () => {
+    setOpen(true);
+    return message
+  };
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
 
   function getImage(props) {
     return <Image className="img" src={props.src} alt={props.alt} />;
@@ -101,7 +94,7 @@ function Login() {
           </div>
         </div>
 
-        <form autoComplete="off" className="form" onSubmit={handleButtonClick}>
+        <form autoComplete="off" className="form" onSubmit={handleForm}>
           <Title title={loginInput.title} />
           <Box mb={5}>
             <TextField
@@ -110,10 +103,10 @@ function Login() {
               variant="outlined"
               type="text"
               className="form-control"
-              value={state.email}
-              name="email"
+              value={input.username}
+              name="username"
               required
-              onChange={(e) => handleTextChange(e)}
+              onChange={handleTextChange}
             />
           </Box>
           <Box mb={5}>
@@ -123,14 +116,14 @@ function Login() {
               variant="outlined"
               type="password"
               className="form-control"
-              value={state.password}
+              value={input.password}
               name="password"
               required
-              onChange={(e) => handleTextChange(e)}
+              onChange={handleTextChange}
             />
           </Box>
           <Container>
-            <Button value={state.isClicked} type="submit" variant="contained" fullWidth="true" color="primary" className="btn btn-primary mb-5">
+            <Button type="submit" variant="contained" fullWidth="true" color="primary" className="btn btn-primary mb-5">
               Login
             </Button>
             <Button onClick={e => redirectRegister(e)} variant="contained" fullWidth="true" color="secondary" type="button" className="btn btn-primary mb-5">
@@ -139,6 +132,11 @@ function Login() {
           </Container>
 
         </form>
+        <Snackbar open={open} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity={snackColour}>
+            {message}
+          </Alert>
+        </Snackbar>
       </div>
     </Container>
   );

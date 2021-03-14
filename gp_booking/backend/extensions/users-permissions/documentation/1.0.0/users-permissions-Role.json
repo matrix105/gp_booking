@@ -567,6 +567,18 @@
                 "patient": {
                   "type": "string"
                 },
+                "bookings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "available_bookings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },

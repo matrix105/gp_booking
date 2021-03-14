@@ -522,41 +522,28 @@
           "id": {
             "type": "string"
           },
-          "patient": {
+          "available_booking": {
             "required": [
-              "id",
-              "fname",
-              "lname",
-              "phone",
-              "address"
+              "id"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "fname": {
+              "available": {
+                "type": "boolean"
+              },
+              "booking": {
                 "type": "string"
               },
-              "lname": {
+              "date": {
                 "type": "string"
               },
-              "mname": {
+              "time": {
                 "type": "string"
               },
-              "phone": {
-                "type": "integer"
-              },
-              "dob": {
+              "user": {
                 "type": "string"
-              },
-              "address": {
-                "type": "string"
-              },
-              "bookings": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
               },
               "published_at": {
                 "type": "string"
@@ -569,34 +556,60 @@
               }
             }
           },
-          "available_booking": {
+          "user": {
             "required": [
-              "id"
+              "id",
+              "username",
+              "email"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "doctorName": {
+              "username": {
                 "type": "string"
               },
-              "available": {
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "confirmed": {
                 "type": "boolean"
               },
-              "booking": {
+              "blocked": {
+                "type": "boolean"
+              },
+              "role": {
                 "type": "string"
               },
               "doctor": {
                 "type": "string"
               },
-              "date": {
+              "patient": {
                 "type": "string"
               },
-              "time": {
-                "type": "string"
+              "bookings": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
-              "published_at": {
-                "type": "string"
+              "available_bookings": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "created_by": {
                 "type": "string"
@@ -614,10 +627,10 @@
       },
       "NewBooking": {
         "properties": {
-          "patient": {
+          "available_booking": {
             "type": "string"
           },
-          "available_booking": {
+          "user": {
             "type": "string"
           },
           "published_at": {

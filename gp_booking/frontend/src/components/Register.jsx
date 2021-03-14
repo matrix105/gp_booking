@@ -40,9 +40,8 @@ const Register = () => {
     phone: "",
     address: "",
   })
-
+  // snackBar
   const [open, setOpen] = React.useState(false);
-
   const [message, setmessage] = useState('')
   const [snackColour, setsnackColour] = useState('')
   // check box
@@ -63,7 +62,7 @@ const Register = () => {
   };
 
   const handleForm = (e) => {
-    e.preventDefault();
+
     console.log(path);
 
     axios.post('http://localhost:1337/auth/local/register', {
@@ -129,6 +128,7 @@ const Register = () => {
     return message
   };
 
+  // snackbar close
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -279,7 +279,7 @@ const Register = () => {
           </Alert>
         </Snackbar>
       </div>
-    </Container >
+    </Container>
   );
 
 }

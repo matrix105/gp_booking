@@ -519,7 +519,6 @@
           "id",
           "fname",
           "lname",
-          "phone",
           "address"
         ],
         "properties": {
@@ -545,33 +544,71 @@
           "address": {
             "type": "string"
           },
-          "bookings": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "patient": {
-                  "type": "string"
-                },
-                "available_booking": {
-                  "type": "string"
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
+          "user": {
+            "required": [
+              "id",
+              "username",
+              "email"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "role": {
+                "type": "string"
+              },
+              "doctor": {
+                "type": "string"
+              },
+              "patient": {
+                "type": "string"
+              },
+              "bookings": {
+                "type": "array",
+                "items": {
                   "type": "string"
                 }
+              },
+              "available_bookings": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
               }
             }
+          },
+          "username": {
+            "type": "integer"
           },
           "published_at": {
             "type": "string",
@@ -583,7 +620,6 @@
         "required": [
           "fname",
           "lname",
-          "phone",
           "address"
         ],
         "properties": {
@@ -606,11 +642,11 @@
           "address": {
             "type": "string"
           },
-          "bookings": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "user": {
+            "type": "string"
+          },
+          "username": {
+            "type": "integer"
           },
           "published_at": {
             "type": "string",

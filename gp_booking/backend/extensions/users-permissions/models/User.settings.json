@@ -60,10 +60,20 @@
       "configurable": false
     },
     "doctor": {
-      "model": "doctor"
+      "model": "doctor",
+      "via": "user"
     },
     "patient": {
-      "model": "patient"
+      "model": "patient",
+      "via": "user"
+    },
+    "bookings": {
+      "collection": "booking",
+      "via": "user"
+    },
+    "available_bookings": {
+      "via": "user",
+      "collection": "available-booking"
     }
   }
 }

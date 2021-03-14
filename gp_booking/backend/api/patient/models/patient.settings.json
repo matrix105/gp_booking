@@ -24,8 +24,8 @@
     },
     "phone": {
       "type": "integer",
-      "unique": true,
-      "required": true
+      "unique": false,
+      "required": false
     },
     "dob": {
       "type": "date"
@@ -34,9 +34,13 @@
       "type": "string",
       "required": true
     },
-    "bookings": {
-      "collection": "booking",
-      "via": "patient"
+    "user": {
+      "via": "patient",
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "username": {
+      "type": "integer"
     }
   }
 }

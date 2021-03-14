@@ -4,10 +4,10 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
-
+import ListView from './ListView'
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import { FormControl, Select, MenuItem, InputLabel, useMediaQuery, Switch, FormGroup, FormControlLabel } from '@material-ui/core';
+import { FormControl, Select, MenuItem, InputLabel, useMediaQuery, } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -35,6 +35,12 @@ const useStyles = makeStyles((theme) => ({
          width: 200, */
 
     },
+
+    list: {
+        width: '100%',
+        maxWidth: 360,
+        backgroundColor: theme.palette.background.paper,
+    }
 }));
 
 
@@ -82,7 +88,7 @@ function getCurrentDate() {
 
 function getSteps() {
 
-    return ['Pick a booking date', 'Pick a time slot', 'Book'];
+    return ['Pick a booking date', 'Pick a time slot', 'Pick an appointment', 'Book'];
 }
 
 
@@ -106,6 +112,8 @@ function getStepContent(stepIndex, classes, setTime, setOpen, time, open, matche
             <MenuItem value={time.time}>{time.time}</MenuItem>
         )
     }
+
+
 
 
     switch (stepIndex) {
@@ -146,6 +154,11 @@ function getStepContent(stepIndex, classes, setTime, setOpen, time, open, matche
                 </FormControl>
             )
         case 2:
+            return (
+                <ListView />
+            )
+
+        case 3:
             return 'Confirm your appointment booking?';
         default:
             return 'Unknown stepIndex';
@@ -162,25 +175,10 @@ const Steppers = () => {
 
 
 
-    const [checked, setChecked] = React.useState(false);
-    const [background, setBackground] = React.useState("white")
-    const [font, setFont] = React.useState("black")
-    const [blind, setBlind] = React.useState("Change the color if u are blind")
-
-    const toggleChecked = () => {
-        setChecked((prev) => !prev);
-        if (checked === false) {
-            setBackground("gray")
-            setFont("white")
-            setBlind("HA! You are blind")
-        } else {
-            setBackground("white")
-            setFont("black")
-            setBlind("Change the color if u are blind")
-        }
-
-    };
-
+    // const [checked, setChecked] = React.useState(false);
+    // const [background, setBackground] = React.useState("white")
+    // const [font, setFont] = React.useState("black")
+    // const [blind, setBlind] = React.useState("Change the color if u are blind")
 
 
     const [activeStep, setActiveStep] = React.useState(0);
@@ -202,7 +200,7 @@ const Steppers = () => {
     };
     return (
 
-        <div className={classes.root} style={{ backgroundColor: background, color: font }}>
+        <div className={classes.root} >
             <Stepper activeStep={activeStep} alternativeLabel >
                 {
                     steps.map((label) => (
@@ -220,30 +218,23 @@ const Steppers = () => {
                         <Button onClick={handleReset}>Reset</Button>
                     </div>
                 ) : (
+                    <div>
+                        <Typography className={classes.instructions}>{getStepContent(activeStep, classes, setTime, setOpen, time, open, matches, matches2, matches3)}</Typography>
                         <div>
-                            <Typography className={classes.instructions}>{getStepContent(activeStep, classes, setTime, setOpen, time, open, matches, matches2, matches3)}</Typography>
-                            <div>
-                                <Button
-                                    disabled={activeStep === 0}
-                                    onClick={handleBack}
-                                    className={classes.backButton}
-                                >
-                                    Back
+                            <Button
+                                disabled={activeStep === 0}
+                                onClick={handleBack}
+                                className={classes.backButton}
+                            >
+                                Back
               </Button>
-                                <Button variant="contained" color="primary" onClick={handleNext}>
-                                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                                </Button>
-                            </div>
+                            <Button variant="contained" color="primary" onClick={handleNext}>
+                                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                            </Button>
                         </div>
-                    )}
+                    </div>
+                )}
             </div>
-
-            <FormGroup>
-                <FormControlLabel
-                    control={<Switch checked={checked} onChange={toggleChecked} />}
-                    label={blind}
-                />
-            </FormGroup>
 
         </div>
     )
