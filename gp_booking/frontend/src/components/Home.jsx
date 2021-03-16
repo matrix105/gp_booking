@@ -8,7 +8,6 @@ import Typography from "@material-ui/core/Typography";
 import MediaCard from "./mini Compnents/MediaCard";
 
 export default function Home(props) {
-  console.log(props.seAuth);
   return (
     <>
       <Jumbotron className="jhome">

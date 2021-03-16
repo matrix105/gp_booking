@@ -15,7 +15,7 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-function Login(props) {
+function Login() {
   let history = useHistory();
   const [input, setinput] = useState({
     username: '',
@@ -32,6 +32,7 @@ function Login(props) {
       ...input, [e.target.name]: e.target.value
     })
   }
+
   const handleForm = (e) => {
     e.preventDefault();
     axios.post('http://localhost:1337/auth/local', {
@@ -39,12 +40,11 @@ function Login(props) {
       password: input.password
     })
       .then(response => {
-        console.log(response.data.user.email);
+        console.log(response.data.user);
         setmessage('Successfully registered!')
         setsnackColour('success')
         handleClick()
-        props.handleLogin(e);
-        history.push('')
+        history.push('/')
       })
       .catch(err => {
         setmessage('Invalid nhs number or password')

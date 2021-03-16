@@ -10,7 +10,7 @@ function ProtectedRoute({ component: Component, isAuth, ...rest }) {
                 } else {
                     return (
                         <>
-                            { alert('unautozied')}
+                            { alert('unauthorised')}
                             <Redirect to={
                                 {
                                     pathname: '/login',
