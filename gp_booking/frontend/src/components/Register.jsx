@@ -52,6 +52,7 @@ const Register = () => {
 
   // set path
   const [path, setpath] = useState('')
+  console.log(checked);
   // set username type
   const [usernameType, setusernameType] = useState('number')
 
@@ -62,9 +63,7 @@ const Register = () => {
   };
 
   const handleForm = (e) => {
-
-    console.log(path);
-
+    e.preventDefault()
     axios.post('http://localhost:1337/auth/local/register', {
       username: input.nhs_num,
       email: input.email,
@@ -140,7 +139,6 @@ const Register = () => {
   // handle checkbox
   const handleChange = (event) => {
     setChecked(event.target.checked);
-
   };
 
 
@@ -159,7 +157,7 @@ const Register = () => {
         <form
           autoComplete="off"
           className="form"
-          onSubmit={(e) => handleForm(e)}
+          onSubmit={handleForm}
         >
           <Checkbox
             checked={checked}

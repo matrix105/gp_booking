@@ -121,7 +121,7 @@ function Login() {
             <Button type="submit" variant="contained" fullWidth="true" color="primary" className="btn btn-primary mb-5">
               Login
             </Button>
-            <Button onClick={e => redirectRegister(e)} variant="contained" fullWidth="true" color="secondary" type="button" className="btn btn-primary mb-5">
+            <Button onClick={() => history.push('/register')} variant="contained" fullWidth="true" color="secondary" type="button" className="btn btn-primary mb-5">
               Sign up
             </Button>
           </Container>

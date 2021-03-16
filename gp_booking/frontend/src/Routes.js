@@ -18,10 +18,10 @@ const Routes = ({ handleLogin, handleLogout, isAuth }) => {
           handleLogin={handleLogin}
         />} /> */}
         <Route path="/login"><Login /></Route>
-        <Route path="/" component={Home} />
         <Route path="/register" component={Register} />
         <Route path="/about" component={About} />
         <Route path="/booking" component={Booking} />
+        <Route path="/" component={Home} />
         {/* <ProtectedRoute exact path='/booking' isAuth={isAuth} component={Booking} />
         <ProtectedRoute exact path='/' component={Home} handleLogout={handleLogout} /> */}
       </Switch>
