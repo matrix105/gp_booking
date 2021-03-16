@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Checkbox, IconButton, makeStyles } from '@material-ui/core'
+import { array } from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -11,9 +12,7 @@ const useStyles = makeStyles((theme) => ({
 
 function ListView(props) {
     const classes = useStyles();
-    const [checked, setChecked] = useState([0]);
-
-    const [times, setTimes] = useState([])
+    const [checked, setChecked] = useState([]);
 
     const handleToggle = (value) => () => {
         const currentIndex = checked.indexOf(value);
@@ -21,24 +20,11 @@ function ListView(props) {
 
         if (currentIndex === -1) {
             newChecked.push(value);
-
-            // let newArray = [...times, value];
-            // if (times.includes(value)) {
-            //     newArray = newArray.filter(time => time !== value);
-            // }
-            // setTimes({
-            //     newArray
-            // });
         } else {
             newChecked.splice(currentIndex, 1);
         }
-
         setChecked(newChecked);
     };
-
-    const handleCheckboxChange = (e) => {
-
-    }
 
 
     return (

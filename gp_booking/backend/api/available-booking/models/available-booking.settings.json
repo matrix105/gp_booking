@@ -24,10 +24,9 @@
     "time": {
       "type": "time"
     },
-    "user": {
-      "plugin": "users-permissions",
-      "model": "user",
-      "via": "available_bookings"
+    "doctor": {
+      "via": "available_bookings",
+      "model": "doctor"
     }
   }
 }

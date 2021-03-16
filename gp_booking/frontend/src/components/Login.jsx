@@ -4,36 +4,34 @@ import Image from "./mini Compnents/Image";
 import Title from "./mini Compnents/Title";
 import { loginInput } from "./mini Compnents/inputs";
 import Messages from "./mini Compnents/Messages";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { Container } from "@material-ui/core";
 import { Box, Button, TextField, Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
+//import Auth from './protectedRoutes/Auth'
 import axios from "axios";
-
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-function Login() {
+function Login(props) {
   let history = useHistory();
-
   const [input, setinput] = useState({
     username: '',
     password: '',
   })
-
   // snackBar
   const [open, setOpen] = useState(false);
   const [message, setmessage] = useState('')
   const [snackColour, setsnackColour] = useState('')
+
 
   const handleTextChange = (e) => {
     setinput({
       ...input, [e.target.name]: e.target.value
     })
   }
-
   const handleForm = (e) => {
     e.preventDefault();
     axios.post('http://localhost:1337/auth/local', {
@@ -45,16 +43,14 @@ function Login() {
         setmessage('Successfully registered!')
         setsnackColour('success')
         handleClick()
-        history.push({
-          pathname: '/',
-          state: { data: response.data.user.id }
-        })
+        props.handleLogin(e);
+        history.push('')
       })
       .catch(err => {
         setmessage('Invalid nhs number or password')
         setsnackColour('warning')
         handleClick()
-        console.log(err.response.data[0]);
+        console.log(err.response);
         // console.log(err.message[0].messages[0].message);
       })
   }
@@ -83,7 +79,6 @@ function Login() {
   function getMessage(message) {
     return <Messages message={message} />;
   }
-
   return (
     <Container>
       <div className="containers" style={{ margin: "0px", padding: "0px" }}>

@@ -63,22 +63,18 @@ const availableTimes = [
     {
         time: "7:00 PM"
     },
-    {
-        time: "8:00 PM"
-    },
-    {
-        time: "9:00 PM"
-    },
-    {
-        time: "1:00 PM"
-    },
-    {
-        time: "12:00 AM"
-    },
-    {
-        time: "1:00 AM"
-    },
 ]
+
+// const availableBookings = [
+//     { t: ['dr a,dr b, dr c'] },
+//     { '10:00AM': ['dr a,dr b, dr c'] },
+//     { '11:00AM': ['dr a,dr b, dr c'] },
+//     { '12:00PM': ['dr a,dr b, dr c'] },
+//     { '13:00PM': ['dr a,dr b, dr c'] },
+//     { '14:00PM': ['dr a,dr b, dr c'] },
+//     { '16:00PM': ['dr a,dr b, dr c'] },
+//     { '17:00PM': ['dr a,dr b, dr c'] },
+// ]
 
 
 function getCurrentDate() {
@@ -96,6 +92,7 @@ function getSteps() {
 function getStepContent(stepIndex, classes, setTime, setOpen, time, open, matches, matches2, matches3) {
 
     const handleChange = (event) => {
+        console.log(event.target.value);
         setTime(event.target.value);
     };
 
@@ -108,6 +105,7 @@ function getStepContent(stepIndex, classes, setTime, setOpen, time, open, matche
     };
 
     function getTimeListItem(time) {
+        // const times = Object.keys(time)
         return (
             <MenuItem value={time.time}>{time.time}</MenuItem>
         )
@@ -136,7 +134,7 @@ function getStepContent(stepIndex, classes, setTime, setOpen, time, open, matche
             );
         case 1:
             return (
-                <FormControl className={classes.list}>
+                <FormControl className={classes.list} >
                     <InputLabel id="demo-controlled-open-select-label">Time</InputLabel>
                     <Select
                         labelId="demo-controlled-open-select-label"
@@ -149,13 +147,17 @@ function getStepContent(stepIndex, classes, setTime, setOpen, time, open, matche
                         required
                     >
                         {availableTimes.map(getTimeListItem)}
+                        {/* {availableBookings.map(getTimeListItem)} */}
 
                     </Select>
                 </FormControl>
             )
         case 2:
             return (
-                <ListView />
+                // get availabe appointments and send to list
+                <ListView
+
+                />
             )
 
         case 3:

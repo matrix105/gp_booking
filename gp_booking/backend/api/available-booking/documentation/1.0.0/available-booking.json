@@ -549,9 +549,6 @@
               "available_booking": {
                 "type": "string"
               },
-              "user": {
-                "type": "string"
-              },
               "published_at": {
                 "type": "string"
               },
@@ -570,60 +567,42 @@
           "time": {
             "type": "string"
           },
-          "user": {
+          "doctor": {
             "required": [
               "id",
-              "username",
-              "email"
+              "fname",
+              "lname"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "username": {
+              "fname": {
                 "type": "string"
               },
-              "email": {
+              "lname": {
                 "type": "string"
               },
-              "provider": {
+              "dob": {
                 "type": "string"
               },
-              "password": {
+              "phone": {
+                "type": "integer"
+              },
+              "address": {
                 "type": "string"
               },
-              "resetPasswordToken": {
+              "user": {
                 "type": "string"
-              },
-              "confirmationToken": {
-                "type": "string"
-              },
-              "confirmed": {
-                "type": "boolean"
-              },
-              "blocked": {
-                "type": "boolean"
-              },
-              "role": {
-                "type": "string"
-              },
-              "doctor": {
-                "type": "string"
-              },
-              "patient": {
-                "type": "string"
-              },
-              "bookings": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
               },
               "available_bookings": {
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
+              },
+              "published_at": {
+                "type": "string"
               },
               "created_by": {
                 "type": "string"
@@ -654,7 +633,7 @@
           "time": {
             "type": "string"
           },
-          "user": {
+          "doctor": {
             "type": "string"
           },
           "published_at": {
