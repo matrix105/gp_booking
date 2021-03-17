@@ -54,7 +54,7 @@ const Register = () => {
   //const [login, setlogin] = useState(initialState)
 
   // set path
-  const [path, setpath] = useState('/patients')
+  const [path, setpath] = useState('patients')
   console.log(checked);
   // set username type
   const [usernameType, setusernameType] = useState('number')
