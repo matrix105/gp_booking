@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import { Container, Paper, Grid } from "@material-ui/core";
 import { Jumbotron, Title } from "reactstrap";
 import { makeStyles } from "@material-ui/core/styles";
@@ -6,8 +6,13 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import MediaCard from "./mini Compnents/MediaCard";
+import { UserContext } from '../context/Context'
+import { withRouter } from 'react-router-dom'
 
-export default function Home(props) {
+function Home(props) {
+  const { jwt, setjwt, isAuth } = useContext(UserContext)
+  console.log(jwt);
+  //console.log(props);
   return (
     <>
       <Jumbotron className="jhome">
@@ -38,3 +43,5 @@ export default function Home(props) {
   );
 
 }
+
+export default withRouter(Home)

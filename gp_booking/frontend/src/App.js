@@ -5,28 +5,31 @@ import Routes from "./Routes";
 import "./components/css/style.css";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer"
+import { UserContext } from './context/Context'
 
 function App() {
-  // const [isAuth, setisAuth] = useState(false)
-  // console.log(isAuth);
-  // const handleLogin = e => {
-  //   e.preventDefault();
-  //   setisAuth(true);
-  // }
-  // const handleLogout = e => {
-  //   e.preventDefault();
-  //   setisAuth(false);
-  // }
+  const [jwt, setjwt] = useState('')
+  const [isAuth, setisAuth] = useState(false)
+
+  const handleLogin = e => {
+    e.preventDefault();
+    setisAuth(true);
+  }
+  const handleLogout = e => {
+    e.preventDefault();
+    setisAuth(false);
+  }
 
   return (
-    <Layout>
-
-      <Navigation />
-      <main>
-        <Routes />
-      </main>
-      <Footer />
-    </Layout>
+    <UserContext.Provider value={{ jwt, setjwt, handleLogin, handleLogout, isAuth }}>
+      <Layout>
+        <Navigation />
+        <main>
+          <Routes />
+        </main>
+        <Footer />
+      </Layout>
+    </UserContext.Provider>
   )
 }
 

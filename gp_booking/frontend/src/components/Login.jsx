@@ -1,4 +1,5 @@
-import { React, useState } from "react";
+import { React, useState, useContext } from "react";
+import { UserContext } from '../context/Context'
 import "./css/login.css";
 import Image from "./mini Compnents/Image";
 import Title from "./mini Compnents/Title";
@@ -16,6 +17,7 @@ function Alert(props) {
 }
 
 function Login() {
+  const { jwt, setjwt, handleLogin } = useContext(UserContext)
   let history = useHistory();
   const [input, setinput] = useState({
     username: '',
@@ -33,6 +35,11 @@ function Login() {
     })
   }
 
+  // const testLogin = e => {
+  //   handleLogin(e)
+  //   history.push('/booking')
+  // }
+
   const handleForm = (e) => {
     e.preventDefault();
     axios.post('http://localhost:1337/auth/local', {
@@ -40,11 +47,13 @@ function Login() {
       password: input.password
     })
       .then(response => {
-        console.log(response.data.user);
         setmessage('Successfully registered!')
         setsnackColour('success')
         handleClick()
-        history.push('/')
+        setjwt(response.data.jwt)
+        console.log(`${jwt} from login`);
+        handleLogin(e)
+        history.push('/booking')
       })
       .catch(err => {
         setmessage('Invalid nhs number or password')
@@ -81,6 +90,7 @@ function Login() {
   }
   return (
     <Container>
+      <p>{jwt}</p>
       <div className="containers" style={{ margin: "0px", padding: "0px" }}>
         <div className="imageContainer">
           {loginInput.image.map(getImage)}

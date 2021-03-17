@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./css/login.css";
 import Image from "./mini Compnents/Image";
 import Title from "./mini Compnents/Title";
@@ -9,6 +9,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
+import { UserContext } from '../context/Context'
 
 function getImage(props) {
 
@@ -29,6 +30,8 @@ const useStyles = makeStyles({
 })
 
 const Register = () => {
+  const { jwt, setjwt } = useContext(UserContext)
+
   const [input, setInput] = useState({
     nhs_num: "",
     firstname: "",
@@ -51,7 +54,7 @@ const Register = () => {
   //const [login, setlogin] = useState(initialState)
 
   // set path
-  const [path, setpath] = useState('')
+  const [path, setpath] = useState('/patients')
   console.log(checked);
   // set username type
   const [usernameType, setusernameType] = useState('number')
@@ -62,57 +65,33 @@ const Register = () => {
     })
   };
 
+  const createPatient = (fname, lname, dob, phone, address, path) => {
+    axios.post(`http://localhost:1337/${path}`, {
+      fname: fname,
+      lname: lname,
+      dob: dob,
+      phone: phone,
+      address: address,
+    }).then(res => {
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
   const handleForm = (e) => {
     e.preventDefault()
+    console.log(path);
+    console.log(username);
+    console.log(usernameType);
     axios.post('http://localhost:1337/auth/local/register', {
       username: input.nhs_num,
       email: input.email,
       password: input.password,
       //checkedA: true,
     })
-      .then((response) => {
-        axios.post('http://localhost:1337/auth/local', {
-          identifier: input.email,
-          password: input.password
-        })
-          .then(res => {
-            console.log(res.data.jwt);
-            if (checked === false) {
-              setusername('NHS number')
-              setpath('patients')
-              setusernameType('number')
-            } else {
-              setusername('Username')
-              setpath('dcotors')
-              setusernameType('text')
-            }
-            console.log(path);
-            axios.post(`http://localhost:1337/${path}`, {
-              headers: {
-                Authorization: `Bearer ${response.data.jwt}`
-              },
-              data: {
-                fname: input.firstname,
-                lname: input.lastname,
-                dob: input.dob,
-                phone: input.phone,
-                address: input.address,
-              },
-
-
-            })
-              .then(response => {
-                console.log(response.data);
-                setmessage('Successfully registered!')
-                setsnackColour('success')
-                handleClick()
-              }).catch(err => {
-                console.log(err.response);
-                setmessage('Something went wrong')
-                setsnackColour('warning')
-                handleClick()
-              })
-          })
+      .then(() => {
+        createPatient(input.firstname, input.lastname, input.dob, input.phone, input.address, path)
       })
       .catch(error => {
         console.log(error.response);
@@ -139,11 +118,21 @@ const Register = () => {
   // handle checkbox
   const handleChange = (event) => {
     setChecked(event.target.checked);
+    if (checked === true) {
+      setpath('patients')
+      setusername('NHS number')
+      setusernameType('number')
+    } else if (checked === false) {
+      setpath('doctors')
+      setusername('Username')
+      setusernameType('text')
+    }
   };
 
 
   return (
     <Container>
+      <p>{jwt}</p>
       <div className="containers" style={{ margin: "0px", padding: "0px" }}>
         <div className="imageContainer">
           {registerInput.image.map(getImage)}

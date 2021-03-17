@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -8,7 +8,8 @@ import ListView from './ListView'
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { FormControl, Select, MenuItem, InputLabel, useMediaQuery, } from '@material-ui/core';
-
+import { UserContext } from '../../context/Context'
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -64,18 +65,6 @@ const availableTimes = [
         time: "7:00 PM"
     },
 ]
-
-// const availableBookings = [
-//     { t: ['dr a,dr b, dr c'] },
-//     { '10:00AM': ['dr a,dr b, dr c'] },
-//     { '11:00AM': ['dr a,dr b, dr c'] },
-//     { '12:00PM': ['dr a,dr b, dr c'] },
-//     { '13:00PM': ['dr a,dr b, dr c'] },
-//     { '14:00PM': ['dr a,dr b, dr c'] },
-//     { '16:00PM': ['dr a,dr b, dr c'] },
-//     { '17:00PM': ['dr a,dr b, dr c'] },
-// ]
-
 
 function getCurrentDate() {
     var currentTime = new Date().toISOString().slice(0, 10);
@@ -170,11 +159,12 @@ function getStepContent(stepIndex, classes, setTime, setOpen, time, open, matche
 
 
 const Steppers = () => {
+    const { jwt } = useContext(UserContext)
     const matches = useMediaQuery('(max-width:600px)');
     const matches2 = useMediaQuery('(max-width:768px)');
     const matches3 = useMediaQuery('(max-width:1024px)');
     const classes = useStyles();
-
+    console.log(`${jwt} from booking`);
 
 
     // const [checked, setChecked] = React.useState(false);
@@ -188,6 +178,13 @@ const Steppers = () => {
 
     const [time, setTime] = React.useState('');
     const [open, setOpen] = React.useState(false);
+
+    // get available booking from server
+    const [availableBookings, setavailableBookings] = useState(initialState)
+
+    const getAvailableBookings = (jwt) => {
+        axios.get
+    }
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
