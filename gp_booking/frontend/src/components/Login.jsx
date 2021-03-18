@@ -17,7 +17,7 @@ function Alert(props) {
 }
 
 function Login() {
-  const { jwt, setjwt, handleLogin } = useContext(UserContext)
+  const { jwt, setjwt, handleLogin, setUserInformation } = useContext(UserContext)
   let history = useHistory();
   const [input, setinput] = useState({
     username: '',
@@ -51,7 +51,7 @@ function Login() {
         setsnackColour('success')
         handleClick()
         setjwt(response.data.jwt)
-        console.log(`${jwt} from login`);
+        setUserInformation(response.data)
         handleLogin(e)
         history.push('/booking')
       })
@@ -64,9 +64,6 @@ function Login() {
       })
   }
 
-  const redirectRegister = (e) => {
-    history.push('/register')
-  }
 
   // Snackbar handlers
   const handleClick = () => {

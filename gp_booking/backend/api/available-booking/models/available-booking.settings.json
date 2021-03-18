@@ -14,10 +14,6 @@
     "available": {
       "type": "boolean"
     },
-    "booking": {
-      "model": "booking",
-      "via": "available_booking"
-    },
     "date": {
       "type": "date"
     },
@@ -27,6 +23,10 @@
     "doctor": {
       "via": "available_bookings",
       "model": "doctor"
+    },
+    "booking": {
+      "via": "available_bookings",
+      "model": "bookings"
     }
   }
 }

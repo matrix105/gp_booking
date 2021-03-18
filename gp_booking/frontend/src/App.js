@@ -9,6 +9,8 @@ import { UserContext } from './context/Context'
 
 function App() {
   const [jwt, setjwt] = useState('')
+  const [userInformation, setUserInformation] = useState(null)
+  const [bookingList, setbookingList] = useState([])
   const [isAuth, setisAuth] = useState(false)
 
   const handleLogin = e => {
@@ -21,7 +23,7 @@ function App() {
   }
 
   return (
-    <UserContext.Provider value={{ jwt, setjwt, handleLogin, handleLogout, isAuth }}>
+    <UserContext.Provider value={{ jwt, setjwt, handleLogin, handleLogout, isAuth, setUserInformation, userInformation, setbookingList, bookingList }}>
       <Layout>
         <Navigation />
         <main>

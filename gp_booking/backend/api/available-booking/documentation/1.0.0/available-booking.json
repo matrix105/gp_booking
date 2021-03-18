@@ -538,28 +538,6 @@
           "available": {
             "type": "boolean"
           },
-          "booking": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "available_booking": {
-                "type": "string"
-              },
-              "published_at": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
           "date": {
             "type": "string",
             "format": "date"
@@ -612,6 +590,34 @@
               }
             }
           },
+          "booking": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "available_bookings": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "users_permissions_user": {
+                "type": "string"
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -623,9 +629,6 @@
           "available": {
             "type": "boolean"
           },
-          "booking": {
-            "type": "string"
-          },
           "date": {
             "type": "string",
             "format": "date"
@@ -634,6 +637,9 @@
             "type": "string"
           },
           "doctor": {
+            "type": "string"
+          },
+          "booking": {
             "type": "string"
           },
           "published_at": {

@@ -3,16 +3,16 @@
     "/bookings": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Find all the bookings's records",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve bookings document(s)",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Booking"
+                    "$ref": "#/components/schemas/Bookings"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Booking"
+          "Bookings"
         ],
         "parameters": [
           {
@@ -194,14 +194,14 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new record",
+        "description": "Create a new bookings record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve bookings document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Booking"
+                  "$ref": "#/components/schemas/Bookings"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Booking"
+          "Bookings"
         ],
         "requestBody": {
           "description": "",
@@ -247,7 +247,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewBooking"
+                "$ref": "#/components/schemas/NewBookings"
               }
             }
           }
@@ -257,10 +257,10 @@
     "/bookings/count": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Retrieve the numver of bookings documents",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve bookings document(s)",
             "content": {
               "application/json": {
                 "schema": {
@@ -306,7 +306,7 @@
         },
         "summary": "",
         "tags": [
-          "Booking"
+          "Bookings"
         ],
         "parameters": []
       }
@@ -314,14 +314,14 @@
     "/bookings/{id}": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Find one bookings record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve bookings document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Booking"
+                  "$ref": "#/components/schemas/Bookings"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Booking"
+          "Bookings"
         ],
         "parameters": [
           {
@@ -376,14 +376,14 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a record",
+        "description": "Update a single bookings record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve bookings document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Booking"
+                  "$ref": "#/components/schemas/Bookings"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Booking"
+          "Bookings"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewBooking"
+                "$ref": "#/components/schemas/NewBookings"
               }
             }
           }
@@ -449,10 +449,10 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a record",
+        "description": "Delete a single bookings record",
         "responses": {
           "200": {
-            "description": "deletes a single record based on the ID supplied",
+            "description": "deletes a single bookings based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Booking"
+          "Bookings"
         ],
         "parameters": [
           {
@@ -514,7 +514,7 @@
   },
   "components": {
     "schemas": {
-      "Booking": {
+      "Bookings": {
         "required": [
           "id"
         ],
@@ -522,31 +522,91 @@
           "id": {
             "type": "string"
           },
-          "available_booking": {
+          "available_bookings": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "available": {
+                  "type": "boolean"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "time": {
+                  "type": "string"
+                },
+                "doctor": {
+                  "type": "string"
+                },
+                "booking": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "users_permissions_user": {
             "required": [
-              "id"
+              "id",
+              "username",
+              "email"
             ],
             "properties": {
               "id": {
                 "type": "string"
               },
-              "available": {
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmationToken": {
+                "type": "string"
+              },
+              "confirmed": {
                 "type": "boolean"
               },
-              "booking": {
-                "type": "string"
+              "blocked": {
+                "type": "boolean"
               },
-              "date": {
-                "type": "string"
-              },
-              "time": {
+              "role": {
                 "type": "string"
               },
               "doctor": {
                 "type": "string"
               },
-              "published_at": {
+              "patient": {
                 "type": "string"
+              },
+              "bookings": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               },
               "created_by": {
                 "type": "string"
@@ -562,9 +622,15 @@
           }
         }
       },
-      "NewBooking": {
+      "NewBookings": {
         "properties": {
-          "available_booking": {
+          "available_bookings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "users_permissions_user": {
             "type": "string"
           },
           "published_at": {
@@ -583,7 +649,7 @@
   },
   "tags": [
     {
-      "name": "Booking"
+      "name": "Bookings"
     }
   ]
 }

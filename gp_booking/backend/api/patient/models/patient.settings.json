@@ -35,9 +35,9 @@
       "required": true
     },
     "user": {
-      "via": "patient",
       "plugin": "users-permissions",
-      "model": "user"
+      "model": "user",
+      "via": "patient"
     },
     "username": {
       "type": "integer"

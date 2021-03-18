@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Checkbox, IconButton, makeStyles } from '@material-ui/core'
-import { array } from 'prop-types';
+import axios from 'axios'
+import { UserContext } from '../../context/Context'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -10,9 +11,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
+
 function ListView({ availableBookings }) {
     const classes = useStyles();
     const [checked, setChecked] = useState([]);
+
+    const { jwt, userInformation, setbookingList, bookingList } = useContext(UserContext)
     //console.log(availableBookings.doctor);
     const handleToggle = (value) => () => {
         const currentIndex = checked.indexOf(value);
@@ -20,17 +25,19 @@ function ListView({ availableBookings }) {
 
         if (currentIndex === -1) {
             newChecked.push(value);
+            //console.log(value);
         } else {
             newChecked.splice(currentIndex, 1);
         }
         setChecked(newChecked);
+        setbookingList(newChecked)
     };
 
 
     return (
         <List className={classes.root}>
             {availableBookings.map((value) => {
-                console.log(value)
+                //console.log(value)
                 const labelId = `checkbox-list-label-${value.id}`;
                 return (
                     <ListItem key={value.id} role={undefined} dense button onClick={handleToggle(value)}>

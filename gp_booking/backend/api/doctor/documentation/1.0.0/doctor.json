@@ -583,6 +583,12 @@
               "patient": {
                 "type": "string"
               },
+              "bookings": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "created_by": {
                 "type": "string"
               },
@@ -604,9 +610,6 @@
                 "available": {
                   "type": "boolean"
                 },
-                "booking": {
-                  "type": "string"
-                },
                 "date": {
                   "type": "string"
                 },
@@ -614,6 +617,9 @@
                   "type": "string"
                 },
                 "doctor": {
+                  "type": "string"
+                },
+                "booking": {
                   "type": "string"
                 },
                 "published_at": {

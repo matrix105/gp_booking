@@ -160,7 +160,7 @@ function getStepContent(stepIndex, classes, setTime, setOpen, time, open, matche
 
 
 const Steppers = () => {
-    const { jwt } = useContext(UserContext)
+    const { jwt, userInformation, bookingList } = useContext(UserContext)
     const matches = useMediaQuery('(max-width:600px)');
     const matches2 = useMediaQuery('(max-width:768px)');
     const matches3 = useMediaQuery('(max-width:1024px)');
@@ -201,7 +201,27 @@ const Steppers = () => {
         getAvailableBookings()
     }, [])
 
-    const handleNext = () => {
+    const setBooking = (slotId, patientNhs) => {
+        axios.post(`http://localhost:1337/bookings`, {
+            available_booking: slotId,
+            users_permissions_user: patientNhs
+        })
+            .then(res => {
+                console.log(res);
+            }).catch(err => console.log(err.response))
+    }
+
+    const handleNext = (e) => {
+        // add bookings
+
+        if (e.currentTarget.value === 'Finish') {
+            console.log(userInformation.user.username);
+            bookingList.map(list => {
+                setBooking(userInformation.user.username, list.id)
+            })
+        }
+        // console.log(bookingList);
+        // console.log(userInformation);
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
 
@@ -233,7 +253,7 @@ const Steppers = () => {
                     </div>
                 ) : (
                     <div>
-                        <Typography className={classes.instructions}>{getStepContent(activeStep, classes, setTime, setOpen, time, open, matches, matches2, matches3, availableBookings, jwt)}</Typography>
+                        <Typography className={classes.instructions}>{getStepContent(activeStep, classes, setTime, setOpen, time, open, matches, matches2, matches3, availableBookings, jwt, bookingList)}</Typography>
                         <div>
                             <Button
                                 disabled={activeStep === 0}
@@ -242,7 +262,9 @@ const Steppers = () => {
                             >
                                 Back
               </Button>
-                            <Button variant="contained" color="primary" onClick={handleNext}>
+                            <Button variant="contained" color="primary" onClick={(e) => handleNext(e)} value={
+                                activeStep === steps.length - 1 ? 'Finish' : 'Next'
+                            }>
                                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                             </Button>
                         </div>

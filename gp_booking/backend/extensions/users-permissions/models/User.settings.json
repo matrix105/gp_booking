@@ -64,8 +64,12 @@
       "model": "doctor"
     },
     "patient": {
-      "model": "patient",
-      "via": "user"
+      "via": "user",
+      "model": "patient"
+    },
+    "bookings": {
+      "via": "users_permissions_user",
+      "collection": "bookings"
     }
   }
 }
