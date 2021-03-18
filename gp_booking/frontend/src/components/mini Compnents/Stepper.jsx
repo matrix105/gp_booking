@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useContext, useState, useEffect } from "react";
+import { makeStyles, responsiveFontSizes } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -78,7 +78,7 @@ function getSteps() {
 
 
 
-function getStepContent(stepIndex, classes, setTime, setOpen, time, open, matches, matches2, matches3) {
+function getStepContent(stepIndex, classes, setTime, setOpen, time, open, matches, matches2, matches3, availableBookings, jwt) {
 
     const handleChange = (event) => {
         console.log(event.target.value);
@@ -122,6 +122,7 @@ function getStepContent(stepIndex, classes, setTime, setOpen, time, open, matche
                 </form>
             );
         case 1:
+            //console.log(`${availableBookings} from stepper`);
             return (
                 <FormControl className={classes.list} >
                     <InputLabel id="demo-controlled-open-select-label">Time</InputLabel>
@@ -143,9 +144,9 @@ function getStepContent(stepIndex, classes, setTime, setOpen, time, open, matche
             )
         case 2:
             return (
-                // get availabe appointments and send to list
+                //get availabe appointments and send to list
                 <ListView
-
+                    availableBookings={availableBookings}
                 />
             )
 
@@ -164,7 +165,6 @@ const Steppers = () => {
     const matches2 = useMediaQuery('(max-width:768px)');
     const matches3 = useMediaQuery('(max-width:1024px)');
     const classes = useStyles();
-    console.log(`${jwt} from booking`);
 
 
     // const [checked, setChecked] = React.useState(false);
@@ -180,11 +180,26 @@ const Steppers = () => {
     const [open, setOpen] = React.useState(false);
 
     // get available booking from server
-    const [availableBookings, setavailableBookings] = useState(initialState)
+    const [availableBookings, setavailableBookings] = useState(null)
 
-    const getAvailableBookings = (jwt) => {
-        axios.get
+    const getAvailableBookings = () => {
+        axios.get('http://localhost:1337/available-bookings')
+            .then(response => {
+                const data = response.data
+                let tempArray = []
+                for (let index = 0; index < data.length; index++) {
+                    tempArray.push(data[index])
+                }
+                setavailableBookings(tempArray)
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
+
+    useEffect(() => {
+        getAvailableBookings()
+    }, [])
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -218,7 +233,7 @@ const Steppers = () => {
                     </div>
                 ) : (
                     <div>
-                        <Typography className={classes.instructions}>{getStepContent(activeStep, classes, setTime, setOpen, time, open, matches, matches2, matches3)}</Typography>
+                        <Typography className={classes.instructions}>{getStepContent(activeStep, classes, setTime, setOpen, time, open, matches, matches2, matches3, availableBookings, jwt)}</Typography>
                         <div>
                             <Button
                                 disabled={activeStep === 0}

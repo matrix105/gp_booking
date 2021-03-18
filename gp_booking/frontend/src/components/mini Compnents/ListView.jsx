@@ -10,10 +10,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function ListView(props) {
+function ListView({ availableBookings }) {
     const classes = useStyles();
     const [checked, setChecked] = useState([]);
-
+    //console.log(availableBookings.doctor);
     const handleToggle = (value) => () => {
         const currentIndex = checked.indexOf(value);
         const newChecked = [...checked];
@@ -29,11 +29,11 @@ function ListView(props) {
 
     return (
         <List className={classes.root}>
-            {[0, 1, 2, 3].map((value) => {
-                const labelId = `checkbox-list-label-${value}`;
-
+            {availableBookings.map((value) => {
+                console.log(value)
+                const labelId = `checkbox-list-label-${value.id}`;
                 return (
-                    <ListItem key={value} role={undefined} dense button onClick={handleToggle(value)}>
+                    <ListItem key={value.id} role={undefined} dense button onClick={handleToggle(value)}>
                         <ListItemIcon>
                             <Checkbox
                                 edge="start"
@@ -42,8 +42,9 @@ function ListView(props) {
                                 disableRipple
                                 inputProps={{ "aria-labelledby": labelId }}
                             />
+
                         </ListItemIcon>
-                        <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+                        <ListItemText id={labelId} primary={value.id + " " + value.date + " " + value.time.slice(0, 5)} />
                     </ListItem>
                 );
             })}
