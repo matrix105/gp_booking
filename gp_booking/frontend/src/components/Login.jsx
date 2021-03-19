@@ -17,7 +17,7 @@ function Alert(props) {
 }
 
 function Login() {
-  const { jwt, setjwt, handleLogin, setUserInformation } = useContext(UserContext)
+  const { setjwt, setisAuth, handleLogin, setUserInformation, setCookie } = useContext(UserContext)
   let history = useHistory();
   const [input, setinput] = useState({
     username: '',
@@ -47,6 +47,8 @@ function Login() {
       password: input.password
     })
       .then(response => {
+        setisAuth(true)
+        setCookie(response.data.jwt)
         setmessage('Successfully registered!')
         setsnackColour('success')
         handleClick()
@@ -87,7 +89,6 @@ function Login() {
   }
   return (
     <Container>
-      <p>{jwt}</p>
       <div className="containers" style={{ margin: "0px", padding: "0px" }}>
         <div className="imageContainer">
           {loginInput.image.map(getImage)}

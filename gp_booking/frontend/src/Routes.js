@@ -1,5 +1,5 @@
 
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { BrowserRouter, Switch, Route, Redirect, useHistory, useLocation } from "react-router-dom";
 import About from "./components/About";
 import Booking from "./components/Booking";
@@ -9,8 +9,12 @@ import Register from "./components/Register";
 import { UserContext } from './context/Context'
 import ProtectedRoute from './components/protectedRoutes/ProtectedRoute'
 const Routes = () => {
-  const { isAuth } = useContext(UserContext)
-  console.log(isAuth);
+  const { isAuth, readCookie } = useContext(UserContext)
+
+  useEffect(() => {
+    readCookie()
+  }, [])
+
   return (
     <BrowserRouter>
       <Switch>
