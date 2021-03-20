@@ -117,7 +117,7 @@ const Steppers = () => {
 
     // get all the available bookings 
     const getAvailableBookings = () => {
-        axios.get('http://localhost:1337/available-bookings'/* , {
+        axios.get('http://localhost:1337/available-bookings?available=true'/* , {
             headers: {
                 Authorization: `Bearer ${userInformation.jwt}`,
             },
@@ -153,8 +153,24 @@ const Steppers = () => {
         })
             .then(res => {
                 console.log(res);
+                //update()
             }).catch(err => console.log(err.response))
     }
+
+
+    // const update = () => {
+    //     bookingList.map(booking => {
+    //         axios({
+    //             "method": "PUT",
+    //             "path": `/available-bookings/?available=${booking.id}`,
+    //             "handler": "available-booking.update",
+    //             "config": {
+    //                 "policies": []
+    //             }
+    //         })
+    //     })
+
+    // }
 
     const handleNext = (e) => {
         // add bookings

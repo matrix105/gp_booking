@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { List, ListItem, ListItemIcon, ListItemSecondaryAction, ListItemText, Checkbox, IconButton, makeStyles } from '@material-ui/core'
-import axios from 'axios'
+import { List, ListItem, ListItemIcon, ListItemText, Checkbox, makeStyles } from '@material-ui/core'
 import { UserContext } from '../../context/Context'
 
 const useStyles = makeStyles((theme) => ({
@@ -37,7 +36,7 @@ function ListView({ availableBookings }) {
     return (
         <List className={classes.root}>
             {availableBookings.map((value) => {
-                //console.log(value)
+                console.log(value.doctor.fname);
                 const labelId = `checkbox-list-label-${value.id}`;
                 return (
                     <ListItem key={value.id} role={undefined} dense button onClick={handleToggle(value)}>
@@ -51,7 +50,7 @@ function ListView({ availableBookings }) {
                             />
 
                         </ListItemIcon>
-                        <ListItemText id={labelId} primary={value.id + " " + value.date + " " + value.time.slice(0, 5)} />
+                        <ListItemText id={labelId} primary={value.id + " " + value.time.slice(0, 5) + " " + value.doctor.fname} />
                     </ListItem>
                 );
             })}

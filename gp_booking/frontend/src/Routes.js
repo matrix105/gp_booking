@@ -11,9 +11,7 @@ import ProtectedRoute from './components/protectedRoutes/ProtectedRoute'
 const Routes = () => {
   const { isAuth, readCookie } = useContext(UserContext)
 
-  useEffect(() => {
-    readCookie()
-  }, [])
+
 
   return (
     <BrowserRouter>

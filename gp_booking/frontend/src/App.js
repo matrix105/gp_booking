@@ -14,7 +14,7 @@ function App() {
   const [bookingList, setbookingList] = useState([])
   const [isAuth, setisAuth] = useState(false)
 
-
+  console.log(Cookies.get("token"));
   const handleLogin = e => {
     e.preventDefault();
     setisAuth(true);
@@ -30,15 +30,24 @@ function App() {
 
   const readCookie = () => {
     const token = Cookies.get("token")
-    if (token) {
+    if (!token) {
       console.log(token);
+      setisAuth(false);
+
+    } else {
       setisAuth(true);
-      console.log(`is auth from appJS ${isAuth}`);
+      console.log('ddd');
     }
+    console.log(`is auth from appJS ${isAuth}`);
   }
+
+  useEffect(() => {
+    readCookie()
+  }, [])
 
 
   return (
+
     <UserContext.Provider value={{
       jwt, setjwt, handleLogin, handleLogout, isAuth, setisAuth, setUserInformation, userInformation, setbookingList, bookingList, setCookie, readCookie,
 
