@@ -129,7 +129,7 @@ const Steppers = () => {
                     tempArray.push(data[index])
                 }
                 setavailableBookings(tempArray)
-                console.log(availableBookings);
+                //console.log(availableBookings);
             })
             .catch(err => {
                 console.log(err);
@@ -157,20 +157,6 @@ const Steppers = () => {
             }).catch(err => console.log(err.response))
     }
 
-
-    // const update = () => {
-    //     bookingList.map(booking => {
-    //         axios({
-    //             "method": "PUT",
-    //             "path": `/available-bookings/?available=${booking.id}`,
-    //             "handler": "available-booking.update",
-    //             "config": {
-    //                 "policies": []
-    //             }
-    //         })
-    //     })
-
-    // }
 
     const handleNext = (e) => {
         // add bookings

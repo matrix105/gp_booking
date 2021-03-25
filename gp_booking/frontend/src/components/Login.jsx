@@ -5,11 +5,10 @@ import Image from "./mini Compnents/Image";
 import Title from "./mini Compnents/Title";
 import { loginInput } from "./mini Compnents/inputs";
 import Messages from "./mini Compnents/Messages";
-import { useHistory, Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Container } from "@material-ui/core";
 import { Box, Button, TextField, Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
-//import Auth from './protectedRoutes/Auth'
 import axios from "axios";
 
 function Alert(props) {
@@ -42,9 +41,11 @@ function Login() {
 
   const handleForm = (e) => {
     e.preventDefault();
+    console.log(input.username);
+    console.log(input.password);
     axios.post('http://localhost:1337/auth/local', {
-      identifier: input.username,
-      password: input.password
+      identifier: "1818356",
+      password: "Jubeen123"
     })
       .then(response => {
         setisAuth(true)
@@ -52,7 +53,6 @@ function Login() {
         setmessage('Successfully registered!')
         setsnackColour('success')
         handleClick()
-        setjwt(response.data.jwt)
         setUserInformation(response.data)
         handleLogin(e)
         history.push('/booking')
@@ -61,7 +61,7 @@ function Login() {
         setmessage('Invalid nhs number or password')
         setsnackColour('warning')
         handleClick()
-        console.log(err.response);
+        console.log(err.message);
         // console.log(err.message[0].messages[0].message);
       })
   }

@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom'
+import { log } from 'three';
 import { UserContext } from '../../context/Context'
 
-function ProtectedRoute({ component: Component, ...rest }) {
+function ProtectedBooking({ component: Component, ...rest }) {
 
     const { isAuth } = useContext(UserContext)
     console.log(isAuth);
@@ -10,12 +11,13 @@ function ProtectedRoute({ component: Component, ...rest }) {
         {...rest}
         render={(props) => {
             if (isAuth) {
+                console.log(isAuth)
                 return <Component />
             } else {
-                return <Redirect to={{ pathname: '/', state: { from: props.location } }} />
+                return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
             }
         }}
     />
 }
 
-export default ProtectedRoute;
+export default ProtectedBooking;
