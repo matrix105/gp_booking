@@ -25,11 +25,12 @@ function App() {
   }
 
   const setCookie = (jwt) => {
-    Cookies.set("token", jwt)
+    Cookies.set("token", jwt);
+    localStorage.setItem(jwt);
   }
 
   const readCookie = () => {
-    const token = Cookies.get("token")
+    const token = localStorage.getItem("token")
     if (!token) {
       console.log(token);
       setisAuth(false);
