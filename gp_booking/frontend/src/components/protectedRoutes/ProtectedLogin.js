@@ -7,13 +7,13 @@ function ProtectedLogin({ component: Component, ...rest }) {
     return (
         <Route
             {...rest}
-            render={() => {
-                if (!isAuth) {
-                    return <Component />
-                } else {
-                    return <Redirect to='/booking' />
-                }
-            }}
+            render={(props) => !isAuth ? (
+                <Component />
+            ) :
+                (
+                    <Redirect to={{ pathname: '/', state: { from: props.location } }} />
+                )
+            }
         />
     );
 }

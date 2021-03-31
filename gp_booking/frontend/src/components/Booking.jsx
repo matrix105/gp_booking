@@ -7,14 +7,11 @@ import { UserContext } from '../context/Context'
 
 function Booking(props) {
 
-  const { handleLogout } = useContext(UserContext)
-
   return (
     <center>
       <Container>
         <Jumbotron></Jumbotron>
         <Steppers />
-        <button onClick={handleLogout}>Log Out</button>
       </Container>
     </center>
   )

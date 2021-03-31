@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Container, Paper, Grid } from "@material-ui/core";
 import { Jumbotron, Title } from "reactstrap";
 import { makeStyles } from "@material-ui/core/styles";
@@ -10,9 +10,8 @@ import { UserContext } from '../context/Context'
 import { withRouter } from 'react-router-dom'
 
 function Home(props) {
-  const { jwt, setjwt, isAuth } = useContext(UserContext)
-  console.log(jwt);
-  //console.log(props);
+  const { isAuth, readCookie } = useContext(UserContext)
+  console.log(isAuth);
   return (
     <>
       <Jumbotron className="jhome">

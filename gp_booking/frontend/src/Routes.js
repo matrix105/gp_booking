@@ -1,45 +1,32 @@
 
-import React, { useContext, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { BrowserRouter, Switch, Route, } from "react-router-dom";
+import { UserContext } from './context/Context'
 import About from "./components/About";
 import Booking from "./components/Booking";
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from "./components/Register";
-import { UserContext } from './context/Context'
 import ProtectedRoute from './components/protectedRoutes/ProtectedRoute'
 import ProtectedLogin from './components/protectedRoutes/ProtectedLogin'
-import ProtectedBooking from './components/protectedRoutes/ProtectedBooking'
+
 const Routes = () => {
-  const { isAuth, setisAuth } = useContext(UserContext)
-
-  const readCookie = () => {
-    const token = localStorage.getItem("token")
-    //const token = cookies.get('token')
-    if (token) {
-      setisAuth(true);
-    } else {
-      setisAuth(false);
-    }
-  }
-
+  const { readCookie, isAuth, handleLogin } = useContext(UserContext)
   useEffect(() => {
+    console.log(isAuth);
     readCookie()
   }, [])
 
   return (
     <BrowserRouter>
       <Switch>
-        {/* <Route exact path='/login' component={Login} /> */}
         <Route path="/register" component={Register} />
-        <Route path="/about" component={About} />
         <ProtectedLogin path='/login' component={Login} />
-        <ProtectedBooking path='/booking' component={Booking} />
-        <ProtectedRoute path='/' component={Home} />
+        <ProtectedRoute path='/booking' component={Booking} />
+        <ProtectedRoute path='/about' component={About} />
+        <Route path="/" exact><Home /></Route>
       </Switch>
     </BrowserRouter>
-
-
   );
 };
 

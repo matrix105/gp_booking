@@ -16,7 +16,7 @@ function Alert(props) {
 }
 
 function Login() {
-  const { setjwt, setisAuth, handleLogin, setUserInformation, setCookie } = useContext(UserContext)
+  const { handleLogin, setCookie, setUserInformation, isAuth } = useContext(UserContext)
   let history = useHistory();
   const [input, setinput] = useState({
     username: '',
@@ -34,35 +34,43 @@ function Login() {
     })
   }
 
-  // const testLogin = e => {
-  //   handleLogin(e)
-  //   history.push('/booking')
-  // }
+  function login(response) {
+    handleLogin()
+    setCookie(response.data.jwt)
+    setUserInformation(response.data)
+    console.log(isAuth);
+    history.push('/booking')
+
+  }
+
+  const setSnackBar = (message, colour) => {
+    setmessage(message)
+    setsnackColour(colour)
+  }
 
   const handleForm = (e) => {
     e.preventDefault();
     console.log(input.username);
     console.log(input.password);
     axios.post('http://localhost:1337/auth/local', {
-      identifier: "1818356",
-      password: "Jubeen123"
+      identifier: input.username,
+      password: input.password
     })
       .then(response => {
-        setisAuth(true)
-        setCookie(response.data.jwt)
-        setmessage('Successfully registered!')
+        console.log(response.data.jwt);
+        setmessage('Invalid nhs number or password')
         setsnackColour('success')
         handleClick()
+        login(response)
+        //setSnackBar('Successfully loged in', 'success')
+
         setUserInformation(response.data)
-        handleLogin(e)
-        history.push('/booking')
       })
       .catch(err => {
         setmessage('Invalid nhs number or password')
         setsnackColour('warning')
         handleClick()
         console.log(err.message);
-        // console.log(err.message[0].messages[0].message);
       })
   }
 
@@ -88,7 +96,7 @@ function Login() {
     return <Messages message={message} />;
   }
   return (
-    <Container>
+    <Container key='loginContainer'>
       <div className="containers" style={{ margin: "0px", padding: "0px" }}>
         <div className="imageContainer">
           {loginInput.image.map(getImage)}

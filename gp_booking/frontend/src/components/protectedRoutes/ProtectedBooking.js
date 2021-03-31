@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom'
-import { log } from 'three';
 import { UserContext } from '../../context/Context'
 
 function ProtectedBooking({ component: Component, ...rest }) {
@@ -14,7 +13,7 @@ function ProtectedBooking({ component: Component, ...rest }) {
                 console.log(isAuth)
                 return <Component />
             } else {
-                return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+                return <Redirect to="/login" />
             }
         }}
     />

@@ -16,7 +16,7 @@ function ListView({ availableBookings }) {
     const classes = useStyles();
     const [checked, setChecked] = useState([]);
 
-    const { setbookingList, bookingList } = useContext(UserContext)
+    const { setbookingList, } = useContext(UserContext)
     //console.log(availableBookings.doctor);
     const handleToggle = (value) => () => {
         const currentIndex = checked.indexOf(value);

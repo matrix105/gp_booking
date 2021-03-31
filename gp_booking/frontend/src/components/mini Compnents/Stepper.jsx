@@ -114,14 +114,14 @@ const Steppers = () => {
 
     // get available booking from server
     const [availableBookings, setavailableBookings] = useState(null)
-
+    console.log(userInformation);
     // get all the available bookings 
     const getAvailableBookings = () => {
-        axios.get('http://localhost:1337/available-bookings?available=true'/* , {
+        axios.get('http://localhost:1337/available-bookings?available=true', {
             headers: {
                 Authorization: `Bearer ${userInformation.jwt}`,
             },
-        } */)
+        })
             .then(response => {
                 const data = response.data
                 let tempArray = []
