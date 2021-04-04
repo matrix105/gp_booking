@@ -114,12 +114,12 @@ const Steppers = () => {
 
     // get available booking from server
     const [availableBookings, setavailableBookings] = useState(null)
-    console.log(userInformation);
+    const token = localStorage.getItem('token')
     // get all the available bookings 
     const getAvailableBookings = () => {
         axios.get('http://localhost:1337/available-bookings?available=true', {
             headers: {
-                Authorization: `Bearer ${userInformation.jwt}`,
+                Authorization: `Bearer ${token}`,
             },
         })
             .then(response => {

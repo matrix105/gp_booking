@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom'
 import { UserContext } from '../../context/Context'
 
 function ProtectedLogin({ component: Component, ...rest }) {
-    const { isAuth } = useContext(UserContext)
+    const { isAuth, readCookie } = useContext(UserContext)
     return (
         <Route
             {...rest}

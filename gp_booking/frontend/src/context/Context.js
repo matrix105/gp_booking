@@ -1,5 +1,5 @@
 
-import { createContext, useState } from 'react'
+import { createContext, useState, useEffect } from 'react'
 
 export const UserContext = createContext()
 
@@ -10,6 +10,7 @@ const UserContextProvider = (props) => {
     const [userInformation, setUserInformation] = useState(null)
     const [bookingList, setbookingList] = useState([])
     const [isAuth, setisAuth] = useState(false)
+
 
     const handleLogin = () => {
         setisAuth(true);
@@ -31,7 +32,9 @@ const UserContextProvider = (props) => {
             setisAuth(false);
         }
     }
-
+    useEffect(() => {
+        readCookie()
+    }, [])
 
     return (
         <UserContext.Provider value={{ handleLogin, handleLogout, setCookie, readCookie, userInformation, setUserInformation, setisAuth, isAuth, setbookingList }}>

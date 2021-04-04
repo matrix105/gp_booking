@@ -37,8 +37,7 @@ function Login() {
   function login(response) {
     handleLogin()
     setCookie(response.data.jwt)
-    setUserInformation(response.data)
-    console.log(isAuth);
+    setUserInformation(response.user)
     history.push('/booking')
 
   }
@@ -61,6 +60,7 @@ function Login() {
         setmessage('Invalid nhs number or password')
         setsnackColour('success')
         handleClick()
+        console.log(response);
         login(response)
         //setSnackBar('Successfully loged in', 'success')
 

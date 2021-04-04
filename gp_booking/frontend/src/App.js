@@ -1,12 +1,14 @@
 
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import Layout from "./components/Layout";
 import Routes from "./Routes";
 import "./components/css/style.css";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer"
 import UserContextProvider from './context/Context'
+
 function App() {
+
   return (
     <UserContextProvider>
       <Layout>

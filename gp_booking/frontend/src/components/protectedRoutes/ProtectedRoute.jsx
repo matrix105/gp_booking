@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom'
 import { UserContext } from '../../context/Context'
 
 function ProtectedRoute({ component: Component, ...rest }) {
-    const { isAuth } = useContext(UserContext)
+    var { isAuth, readCookie } = useContext(UserContext)
+
     return <Route
         {...rest}
         render={(props) => {
-            console.log(isAuth)
-            if (isAuth) {
+            if (localStorage.getItem('token') != null) {
                 return <Component {...rest} {...props} />
             } else {
                 return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
