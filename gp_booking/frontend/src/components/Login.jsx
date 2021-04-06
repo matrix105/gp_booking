@@ -7,25 +7,26 @@ import { loginInput } from "./mini Compnents/inputs";
 import Messages from "./mini Compnents/Messages";
 import { useHistory } from "react-router-dom";
 import { Container } from "@material-ui/core";
-import { Box, Button, TextField, Snackbar } from '@material-ui/core';
+import { Box, Button, TextField } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
+import SnackBar from './mini Compnents/SnackBar'
 import axios from "axios";
 
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
+// function Alert(props) {
+//   return <MuiAlert elevation={6} variant="filled" {...props} />;
+// }
 
 function Login() {
-  const { handleLogin, setCookie, setUserInformation, isAuth } = useContext(UserContext)
+  const { handleLogin, setCookie, setUserInformation, isAuth, handleClick } = useContext(UserContext)
   let history = useHistory();
   const [input, setinput] = useState({
     username: '',
     password: '',
   })
   // snackBar
-  const [open, setOpen] = useState(false);
-  const [message, setmessage] = useState('')
-  const [snackColour, setsnackColour] = useState('')
+  // const [open, setOpen] = useState(false);
+  // const [message, setmessage] = useState('')
+  //const [snackColour, setsnackColour] = useState('')
 
 
   const handleTextChange = (e) => {
@@ -42,10 +43,10 @@ function Login() {
 
   }
 
-  const setSnackBar = (message, colour) => {
-    setmessage(message)
-    setsnackColour(colour)
-  }
+  // const setSnackBar = (message, colour) => {
+  //   setmessage(message)
+  //   setsnackColour(colour)
+  // }
 
   const handleForm = (e) => {
     e.preventDefault();
@@ -57,8 +58,9 @@ function Login() {
     })
       .then(response => {
         console.log(response.data.jwt);
-        setmessage('Invalid nhs number or password')
-        setsnackColour('success')
+        // setmessage('Invalid nhs number or password')
+        // setsnackColour('success')
+
         handleClick()
         console.log(response);
         login(response)
@@ -67,8 +69,8 @@ function Login() {
         setUserInformation(response.data)
       })
       .catch(err => {
-        setmessage('Invalid nhs number or password')
-        setsnackColour('warning')
+        // setmessage('Invalid nhs number or password')
+        // setsnackColour('warning')
         handleClick()
         console.log(err.message);
       })
@@ -76,17 +78,17 @@ function Login() {
 
 
   // Snackbar handlers
-  const handleClick = () => {
-    setOpen(true);
-    return message
-  };
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
+  // const handleClick = () => {
+  //   setOpen(true);
+  //   return message
+  // };
+  // const handleClose = (event, reason) => {
+  //   if (reason === 'clickaway') {
+  //     return;
+  //   }
 
-    setOpen(false);
-  };
+  //   setOpen(false);
+  // };
 
 
   function getImage(props) {
@@ -143,11 +145,15 @@ function Login() {
           </Container>
 
         </form>
-        <Snackbar open={open} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} autoHideDuration={6000} onClose={handleClose}>
+        {/* <Snackbar open={open} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={handleClose} severity={snackColour}>
             {message}
           </Alert>
-        </Snackbar>
+        </Snackbar> */}
+        <SnackBar
+          type="success"
+          message="Successfully loged in"
+        />
       </div>
     </Container>
   );

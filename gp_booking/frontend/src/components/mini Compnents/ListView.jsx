@@ -36,7 +36,6 @@ function ListView({ availableBookings }) {
     return (
         <List className={classes.root}>
             {availableBookings.map((value) => {
-                console.log(value.doctor.fname);
                 const labelId = `checkbox-list-label-${value.id}`;
                 return (
                     <ListItem key={value.id} role={undefined} dense button onClick={handleToggle(value)}>

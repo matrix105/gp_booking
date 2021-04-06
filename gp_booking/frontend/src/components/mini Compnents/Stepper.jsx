@@ -56,7 +56,7 @@ function getSteps() {
 
 
 
-function getStepContent(stepIndex, classes, setDate, setOpen, open, matches, matches2, matches3, availableBookings, jwt) {
+function getStepContent(stepIndex, classes, setDate, setOpen, open, matches, matches2, matches3, availableBookings) {
 
     const handleChange = (e) => {
         setDate(e.target.value)
@@ -111,13 +111,16 @@ const Steppers = () => {
     const [date, setDate] = React.useState('');
 
     const [open, setOpen] = React.useState(false);
+    //console.log(date);
+    console.log(Date.parse('2021/04/05').toString("DD/MM/YYYY"))
 
     // get available booking from server
     const [availableBookings, setavailableBookings] = useState(null)
+
     const token = localStorage.getItem('token')
     // get all the available bookings 
     const getAvailableBookings = () => {
-        axios.get('http://localhost:1337/available-bookings?available=true', {
+        axios.get(`http://localhost:1337/available-bookings?available=true`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -129,7 +132,7 @@ const Steppers = () => {
                     tempArray.push(data[index])
                 }
                 setavailableBookings(tempArray)
-                //console.log(availableBookings);
+
             })
             .catch(err => {
                 console.log(err);

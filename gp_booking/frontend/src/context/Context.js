@@ -11,6 +11,12 @@ const UserContextProvider = (props) => {
     const [bookingList, setbookingList] = useState([])
     const [isAuth, setisAuth] = useState(false)
 
+    // For snackbar
+    const [open, setOpen] = useState(false);
+    const handleClick = () => {
+        setOpen(true);
+    };
+
 
     const handleLogin = () => {
         setisAuth(true);
@@ -37,7 +43,7 @@ const UserContextProvider = (props) => {
     }, [])
 
     return (
-        <UserContext.Provider value={{ handleLogin, handleLogout, setCookie, readCookie, userInformation, setUserInformation, setisAuth, isAuth, setbookingList }}>
+        <UserContext.Provider value={{ handleLogin, handleLogout, setCookie, readCookie, userInformation, setUserInformation, setisAuth, isAuth, setbookingList, bookingList, handleClick, setOpen, open }}>
             {props.children}
         </UserContext.Provider>
     )
