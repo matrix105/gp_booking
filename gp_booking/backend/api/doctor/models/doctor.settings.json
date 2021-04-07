@@ -33,9 +33,17 @@
       "model": "user",
       "via": "doctor"
     },
-    "available_bookings": {
-      "collection": "available-booking",
+    "bookings": {
+      "collection": "bookings",
       "via": "doctor"
+    },
+    "shift": {
+      "type": "component",
+      "repeatable": true,
+      "component": "time.shift"
+    },
+    "mname": {
+      "type": "string"
     }
   }
 }

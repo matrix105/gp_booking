@@ -21,11 +21,11 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/" exact><Home /></Route>
         <Route path="/register" component={Register} />
         <ProtectedLogin path='/login' component={Login} />
         <ProtectedRoute path='/booking' component={Booking} />
         <ProtectedRoute path='/about' component={About} />
-        <Route path="/" exact><Home /></Route>
       </Switch>
     </BrowserRouter>
   );

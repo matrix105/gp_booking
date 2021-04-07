@@ -11,14 +11,16 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "available_bookings": {
-      "collection": "available-booking",
-      "via": "booking"
+    "doctor": {
+      "via": "bookings",
+      "model": "doctor"
     },
-    "users_permissions_user": {
-      "plugin": "users-permissions",
-      "model": "user",
-      "via": "bookings"
+    "patient": {
+      "via": "bookings",
+      "model": "patient"
+    },
+    "Time": {
+      "type": "time"
     }
   }
 }

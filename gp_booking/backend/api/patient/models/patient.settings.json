@@ -41,6 +41,10 @@
     },
     "username": {
       "type": "integer"
+    },
+    "bookings": {
+      "collection": "bookings",
+      "via": "patient"
     }
   }
 }

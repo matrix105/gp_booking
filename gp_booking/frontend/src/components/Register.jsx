@@ -7,6 +7,7 @@ import Messages from "./mini Compnents/Messages";
 import { Container, makeStyles, Snackbar, Checkbox } from "@material-ui/core";
 import MuiAlert from '@material-ui/lab/Alert';
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
 import { UserContext } from '../context/Context'
@@ -30,7 +31,8 @@ const useStyles = makeStyles({
 })
 
 const Register = () => {
-  const { jwt, setjwt } = useContext(UserContext)
+  const { jwt, setCookie } = useContext(UserContext)
+  let history = useHistory();
 
   const [input, setInput] = useState({
     nhs_num: "",
@@ -65,25 +67,42 @@ const Register = () => {
     })
   };
 
-  const createPatient = (fname, lname, dob, phone, address, path) => {
+  const createDetail = (jwt, fname, username, lname, dob, phone, address, path) => {
+    console.log(`
+    ${jwt}, ${fname}, ${username}, ${lname}, ${dob}, ${phone}, ${address}, ${path}
+    `);
     axios.post(`http://localhost:1337/${path}`, {
+      headers: {
+        Authorization:
+          `Bearer ${jwt}`,
+      },
+
       fname: fname,
       lname: lname,
       dob: dob,
       phone: phone,
       address: address,
+      user: username
+
     }).then(res => {
-      console.log(res);
+      if (localStorage.getItem('token')) {
+        console.log(localStorage.getItem('token'));
+        history.push('/booking')
+      }
     }).catch(err => {
       console.log(err);
     })
   }
 
+  const setSnackBar = () => {
+    setmessage('Something went wrong')
+    setsnackColour('warning')
+    handleClick()
+  }
+
   const handleForm = (e) => {
     e.preventDefault()
     console.log(path);
-    console.log(username);
-    console.log(usernameType);
     axios.post('http://localhost:1337/auth/local/register', {
       username: input.nhs_num,
       email: input.email,
@@ -91,11 +110,23 @@ const Register = () => {
       //checkedA: true,
     })
       .then(() => {
-        createPatient(input.firstname, input.lastname, input.dob, input.phone, input.address, path)
+        axios.post(`http://localhost:1337/auth/local`, {
+          identifier: input.email,
+          password: input.password
+        })
+          .then((response) => {
+            const jwt = response.data.jwt
+            setCookie(jwt)
+            createDetail(jwt, input.firstname, input.nhs_num, input.lastname, input.dob, input.phone, input.address, path)
+          })
+          .catch(err => {
+            console.log(err.message);
+            setSnackBar()
+          })
       })
       .catch(error => {
-        console.log(error.response);
-        setmessage('Something went wrong')
+        console.log(error.message);
+        setmessage('Email or Username already exist')
         setsnackColour('warning')
         handleClick()
       })

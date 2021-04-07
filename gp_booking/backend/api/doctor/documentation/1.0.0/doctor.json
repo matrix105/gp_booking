@@ -583,12 +583,6 @@
               "patient": {
                 "type": "string"
               },
-              "bookings": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "created_by": {
                 "type": "string"
               },
@@ -597,7 +591,7 @@
               }
             }
           },
-          "available_bookings": {
+          "bookings": {
             "type": "array",
             "items": {
               "required": [
@@ -607,19 +601,13 @@
                 "id": {
                   "type": "string"
                 },
-                "available": {
-                  "type": "boolean"
-                },
-                "date": {
-                  "type": "string"
-                },
-                "time": {
-                  "type": "string"
-                },
                 "doctor": {
                   "type": "string"
                 },
-                "booking": {
+                "patient": {
+                  "type": "string"
+                },
+                "Time": {
                   "type": "string"
                 },
                 "published_at": {
@@ -633,6 +621,31 @@
                 }
               }
             }
+          },
+          "shift": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "start": {
+                  "type": "string",
+                  "default": "08:00:00"
+                },
+                "end": {
+                  "type": "string",
+                  "default": "16:00:00"
+                }
+              }
+            }
+          },
+          "mname": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",
@@ -665,11 +678,36 @@
           "user": {
             "type": "string"
           },
-          "available_bookings": {
+          "bookings": {
             "type": "array",
             "items": {
               "type": "string"
             }
+          },
+          "shift": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "start": {
+                  "type": "string",
+                  "default": "08:00:00"
+                },
+                "end": {
+                  "type": "string",
+                  "default": "16:00:00"
+                }
+              }
+            }
+          },
+          "mname": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",

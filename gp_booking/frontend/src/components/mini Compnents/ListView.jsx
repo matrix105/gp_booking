@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-function ListView({ availableBookings }) {
+function ListView(props) {
     const classes = useStyles();
     const [checked, setChecked] = useState([]);
 

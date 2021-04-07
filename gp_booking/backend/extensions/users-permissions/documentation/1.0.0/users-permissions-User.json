@@ -1279,11 +1279,17 @@
               "user": {
                 "type": "string"
               },
-              "available_bookings": {
+              "bookings": {
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
+              },
+              "shift": {
+                "type": "component"
+              },
+              "mname": {
+                "type": "string"
               },
               "published_at": {
                 "type": "string"
@@ -1331,6 +1337,12 @@
               "username": {
                 "type": "integer"
               },
+              "bookings": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "published_at": {
                 "type": "string"
               },
@@ -1339,37 +1351,6 @@
               },
               "updated_by": {
                 "type": "string"
-              }
-            }
-          },
-          "bookings": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "available_bookings": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "users_permissions_user": {
-                  "type": "string"
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
               }
             }
           }
@@ -1419,12 +1400,6 @@
           },
           "patient": {
             "type": "string"
-          },
-          "bookings": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           },
           "created_by": {
             "type": "string"

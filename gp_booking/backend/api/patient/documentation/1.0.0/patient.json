@@ -587,12 +587,6 @@
               "patient": {
                 "type": "string"
               },
-              "bookings": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "created_by": {
                 "type": "string"
               },
@@ -603,6 +597,37 @@
           },
           "username": {
             "type": "integer"
+          },
+          "bookings": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "doctor": {
+                  "type": "string"
+                },
+                "patient": {
+                  "type": "string"
+                },
+                "Time": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "published_at": {
             "type": "string",
@@ -641,6 +666,12 @@
           },
           "username": {
             "type": "integer"
+          },
+          "bookings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "published_at": {
             "type": "string",

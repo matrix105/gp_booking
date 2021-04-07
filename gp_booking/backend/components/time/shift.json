@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_time_shifts",
+  "info": {
+    "name": "shift",
+    "icon": "ad"
+  },
+  "options": {},
+  "attributes": {
+    "start": {
+      "type": "time",
+      "default": "08:00:00"
+    },
+    "end": {
+      "type": "time",
+      "default": "16:00:00"
+    }
+  }
+}
