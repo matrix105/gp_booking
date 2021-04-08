@@ -610,6 +610,9 @@
                 "Time": {
                   "type": "string"
                 },
+                "Date": {
+                  "type": "string"
+                },
                 "published_at": {
                   "type": "string"
                 },

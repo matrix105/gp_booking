@@ -628,6 +628,10 @@
           "Time": {
             "type": "string"
           },
+          "Date": {
+            "type": "string",
+            "format": "date"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -644,6 +648,10 @@
           },
           "Time": {
             "type": "string"
+          },
+          "Date": {
+            "type": "string",
+            "format": "date"
           },
           "published_at": {
             "type": "string",

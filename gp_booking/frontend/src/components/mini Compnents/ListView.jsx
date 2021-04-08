@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 function ListView(props) {
+
     const classes = useStyles();
     const [checked, setChecked] = useState([]);
 
@@ -35,7 +36,8 @@ function ListView(props) {
 
     return (
         <List className={classes.root}>
-            {availableBookings.map((value) => {
+            {props.doctors.map((value) => {
+                console.log(value)
                 const labelId = `checkbox-list-label-${value.id}`;
                 return (
                     <ListItem key={value.id} role={undefined} dense button onClick={handleToggle(value)}>
@@ -49,7 +51,7 @@ function ListView(props) {
                             />
 
                         </ListItemIcon>
-                        <ListItemText id={labelId} primary={value.id + " " + value.time.slice(0, 5) + " " + value.doctor.fname} />
+                        <ListItemText id={labelId} primary={`${value.fname} ${value.lname}`} />
                     </ListItem>
                 );
             })}

@@ -43,8 +43,8 @@
       "type": "integer"
     },
     "bookings": {
-      "collection": "bookings",
-      "via": "patient"
+      "via": "patient",
+      "collection": "bookings"
     }
   }
 }

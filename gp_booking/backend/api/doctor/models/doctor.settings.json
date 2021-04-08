@@ -34,8 +34,8 @@
       "via": "doctor"
     },
     "bookings": {
-      "collection": "bookings",
-      "via": "doctor"
+      "via": "doctor",
+      "collection": "bookings"
     },
     "shift": {
       "type": "component",

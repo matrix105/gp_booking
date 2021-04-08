@@ -18,15 +18,13 @@ import axios from "axios";
 
 function Login() {
   const { handleLogin, setCookie, setUserInformation, isAuth, handleClick } = useContext(UserContext)
+  const [type, setType] = useState("")
+  const [message, setmessage] = useState("")
   let history = useHistory();
   const [input, setinput] = useState({
     username: '',
     password: '',
   })
-  // snackBar
-  // const [open, setOpen] = useState(false);
-  // const [message, setmessage] = useState('')
-  //const [snackColour, setsnackColour] = useState('')
 
 
   const handleTextChange = (e) => {
@@ -36,17 +34,11 @@ function Login() {
   }
 
   function login(response) {
-    handleLogin()
+    //handleLogin()
     setCookie(response.data.jwt)
     setUserInformation(response.user)
     history.push('/booking')
-
   }
-
-  // const setSnackBar = (message, colour) => {
-  //   setmessage(message)
-  //   setsnackColour(colour)
-  // }
 
   const handleForm = (e) => {
     e.preventDefault();
@@ -60,35 +52,23 @@ function Login() {
         console.log(response.data.jwt);
         // setmessage('Invalid nhs number or password')
         // setsnackColour('success')
-
+        setType('success')
+        setmessage('Successfully logged in')
         handleClick()
         console.log(response);
         login(response)
-        //setSnackBar('Successfully loged in', 'success')
-
+        //setSnackBar('Successfully loged in', 'success'
         setUserInformation(response.data)
       })
       .catch(err => {
         // setmessage('Invalid nhs number or password')
         // setsnackColour('warning')
+        setType('error')
+        setmessage('Invalid email or password')
         handleClick()
         console.log(err.message);
       })
   }
-
-
-  // Snackbar handlers
-  // const handleClick = () => {
-  //   setOpen(true);
-  //   return message
-  // };
-  // const handleClose = (event, reason) => {
-  //   if (reason === 'clickaway') {
-  //     return;
-  //   }
-
-  //   setOpen(false);
-  // };
 
 
   function getImage(props) {
@@ -142,18 +122,18 @@ function Login() {
             <Button onClick={() => history.push('/register')} variant="contained" fullWidth="true" color="secondary" type="button" className="btn btn-primary mb-5">
               Sign up
             </Button>
+            <SnackBar
+              type={type}
+              message={message}
+            />
           </Container>
-
         </form>
         {/* <Snackbar open={open} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={handleClose} severity={snackColour}>
             {message}
           </Alert>
         </Snackbar> */}
-        <SnackBar
-          type="success"
-          message="Successfully loged in"
-        />
+
       </div>
     </Container>
   );

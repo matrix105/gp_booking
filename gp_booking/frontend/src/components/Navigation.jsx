@@ -38,7 +38,7 @@ const Navigation = (props) => {
                 Account
               </DropdownToggle>
               <DropdownMenu right className="dropdown">
-                {isAuth ? <DropdownItem><NavLink onClick={handleLogout} href="/">Logout</NavLink></DropdownItem> :
+                {localStorage.getItem('token') ? <DropdownItem><NavLink onClick={handleLogout} href="/">Logout</NavLink></DropdownItem> :
                   <>
                     <DropdownItem><NavLink href="/login">Login</NavLink></DropdownItem>
                     <DropdownItem><NavLink href="/register">Register</NavLink></DropdownItem>

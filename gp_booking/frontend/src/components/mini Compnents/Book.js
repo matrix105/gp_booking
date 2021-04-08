@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
-import { TextField } from '@material-ui/core'
+import { UserContext } from '../../context/Context'
 import StepLabel from '@material-ui/core/StepLabel';
+import axios from 'axios'
+import SnackBar from './SnackBar'
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-    MuiPickersUtilsProvider,
-    KeyboardDatePicker,
-} from '@material-ui/pickers';
-import { List, ListItem, ListItemText } from '@material-ui/core';
+import { List, ListItem, ListItemText, TextField } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -70,6 +67,8 @@ function getSteps() {
 
 
 function Book(props) {
+    const { handleClick } = useContext(UserContext)
+
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
 
@@ -96,6 +95,67 @@ function Book(props) {
         return currentTime
     }
 
+    // get All doctors name in list
+    const [doctors, setdoctors] = useState([])
+
+    // user selected doctor
+    const [doctor, setdoctor] = useState('')
+    const [selectedDoctorIndex, setselectedDoctorIndex] = useState(1)
+    // handle clicked doctor
+    const handleDoctorListItemClick = (event, index) => {
+        const doctor = doctors[index]
+        setdoctor(doctor.fname)
+        //setselectedDoctorIndex(index)
+        //setdoctor(doctors[index])
+    }
+
+
+    // Get available doctors
+    const getDoctor = (date) => {
+        console.log(localStorage.getItem('token'))
+        axios.get(`http://localhost:1337/doctors`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        })
+            .then(response => {
+                let tempArray = []
+                for (let index = 0; index < response.data.length; index++) {
+                    tempArray.push(response.data[index])
+                }
+                setdoctors(tempArray)
+
+            })
+            .catch(err => {
+                console.log(err.message);
+            })
+    }
+
+    // Check if doctor is available 
+    const checkAvailability = () => {
+        //loop through doctor detail array
+        doctors.map((doctor) => {
+            axios.get(`http://localhost:1337/bookings?Date=${userSelectedDate}`, {
+                // headers: {
+                //     Authorization: `Bearer ${localStorage.getItem('token')}`,
+                // },
+            }).then(res => {
+                console.log(res);
+            }).catch(() => {
+                setType('error')
+                setmessage('The doctor is not available at that time at that date')
+                handleClick()
+            })
+        })
+        // check if doctor A is booked in date dd/mm/yyy at time mm:ss
+        // if not booked then book
+        // else recommend other days 
+    }
+
+    // For Snack Bar
+    const [type, setType] = useState("")
+    const [message, setmessage] = useState("")
+
     // for the stepper
     const steps = getSteps();
 
@@ -111,6 +171,9 @@ function Book(props) {
         setActiveStep(0);
     };
 
+    useEffect(() => {
+        getDoctor()
+    }, [])
 
 
     function getStepContent(stepIndex) {
@@ -152,8 +215,27 @@ function Book(props) {
                     })
                 )
             case 2:
-                return 'This is the bit I really care about!';
+                return (
+                    <form>
+                        {doctors.map(doctor => {
+                            return (
+                                <List component="nav" aria-label="secondary mailbox folder" className={classes.time} style={{ maxHeight: '50%', overflow: 'scroll' }}>
+                                    <ListItem
+                                        button
+                                        selected={selectedIndex === 0}
+                                        onClick={(event) => handleDoctorListItemClick(event, doctors.indexOf(doctor))}
+                                        key={doctor.id}
+                                    >
+                                        <ListItemText primary={doctor.fname} />
+                                    </ListItem>
+                                </List>
+                            )
+                        })}
+
+                    </form>
+                )
             default:
+                { checkAvailability() }
                 return 'Unknown stepIndex';
         }
     }
@@ -166,6 +248,7 @@ function Book(props) {
         <div className={classes.root}>
             <h1>{selectedTime}</h1>
             <h1>{userSelectedDate}</h1>
+            <h1>{doctor}</h1>
             <Stepper activeStep={activeStep} alternativeLabel>
                 {steps.map((label) => (
                     <Step key={label}>
@@ -197,6 +280,10 @@ function Book(props) {
                     </div>
                 )}
             </div>
+            <SnackBar
+                type={type}
+                message={message}
+            />
         </div>
     );
 }

@@ -12,15 +12,18 @@
   },
   "attributes": {
     "doctor": {
-      "via": "bookings",
-      "model": "doctor"
+      "model": "doctor",
+      "via": "bookings"
     },
     "patient": {
-      "via": "bookings",
-      "model": "patient"
+      "model": "patient",
+      "via": "bookings"
     },
     "Time": {
       "type": "time"
+    },
+    "Date": {
+      "type": "date"
     }
   }
 }

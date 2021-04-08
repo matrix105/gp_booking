@@ -19,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
 function SnackBar(props) {
     const { setOpen, open } = useContext(UserContext)
     const classes = useStyles();
-    console.log('hello');
     // const [open, setOpen] = useState(false);
 
     const handleClose = (event, reason) => {
