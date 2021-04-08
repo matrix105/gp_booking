@@ -72,9 +72,11 @@ function Book(props) {
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
 
-    // For the user selected time and date
+    // For the user selected time and date and doctor
     const [selectedTime, setselectedTime] = useState('')
     const [userSelectedDate, setuserSelectedDate] = useState(getCurrentDate())
+    const [doctor, setdoctor] = useState('')
+    const [recentBookings, setrecentBookings] = useState([])
 
 
     //For the date picker
@@ -98,21 +100,15 @@ function Book(props) {
     // get All doctors name in list
     const [doctors, setdoctors] = useState([])
 
-    // user selected doctor
-    const [doctor, setdoctor] = useState('')
-    const [selectedDoctorIndex, setselectedDoctorIndex] = useState(1)
+
     // handle clicked doctor
     const handleDoctorListItemClick = (event, index) => {
         const doctor = doctors[index]
         setdoctor(doctor.fname)
-        //setselectedDoctorIndex(index)
-        //setdoctor(doctors[index])
     }
-
 
     // Get available doctors
     const getDoctor = (date) => {
-        console.log(localStorage.getItem('token'))
         axios.get(`http://localhost:1337/doctors`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -132,24 +128,49 @@ function Book(props) {
     }
 
     // Check if doctor is available 
-    const checkAvailability = () => {
-        //loop through doctor detail array
-        doctors.map((doctor) => {
-            axios.get(`http://localhost:1337/bookings?Date=${userSelectedDate}`, {
-                // headers: {
-                //     Authorization: `Bearer ${localStorage.getItem('token')}`,
-                // },
-            }).then(res => {
-                console.log(res);
-            }).catch(() => {
-                setType('error')
-                setmessage('The doctor is not available at that time at that date')
-                handleClick()
-            })
+    const [allBookings, setallBookings] = useState([])
+
+    // get all bookings to compare 
+    const getBookings = () => {
+        axios.get(`http://localhost:1337/bookings`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        }).then((response) => {
+            var tempArray = []
+            for (let index = 0; index < response.data.length; index++) {
+                tempArray.push(response.data[index])
+            }
+            setallBookings(tempArray)
+        }).catch(err => {
+            console.log(err.message);
         })
-        // check if doctor A is booked in date dd/mm/yyy at time mm:ss
-        // if not booked then book
-        // else recommend other days 
+    }
+
+    const setSnackBar = (type, message) => {
+        setType(type)
+        setmessage(message)
+        handleClick()
+    }
+
+    const showRecentBookings = (array) => {
+        setrecentBookings(array)
+    }
+
+    const checkAvailability = () => {
+        var tempArray = []
+        var newBooking
+        for (let index = 0; index < allBookings.length; index++) {
+            if (doctor === allBookings[index].doctor.fname) {
+                setSnackBar('error', " Sorry, Doctor unavailable at that time")
+                handleReset()
+            } else {
+                const obj = { doctor, selectedTime, userSelectedDate }
+                newBooking = [...recentBookings]
+                newBooking.push(obj)
+            }
+        }
+        setrecentBookings(newBooking)
     }
 
     // For Snack Bar
@@ -169,10 +190,14 @@ function Book(props) {
 
     const handleReset = () => {
         setActiveStep(0);
+        setselectedTime('')
+        setdoctor('')
+        setuserSelectedDate(getCurrentDate())
     };
 
     useEffect(() => {
         getDoctor()
+        getBookings()
     }, [])
 
 
@@ -235,8 +260,13 @@ function Book(props) {
                     </form>
                 )
             default:
-                { checkAvailability() }
-                return 'Unknown stepIndex';
+                if (doctor === '' || selectedTime === '') {
+                    setType('error')
+                    setmessage('Please choose a date, time and doctor')
+                    handleReset()
+                }
+
+                return checkAvailability();
         }
     }
 
