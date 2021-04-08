@@ -165,9 +165,18 @@ function Book(props) {
                 setSnackBar('error', " Sorry, Doctor unavailable at that time")
                 handleReset()
             } else {
-                const obj = { doctor, selectedTime, userSelectedDate }
-                newBooking = [...recentBookings]
-                newBooking.push(obj)
+                axios.post(`http://localhost:1337/bookings?`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },
+                    time: selectedTime,
+                    Date: userSelectedDate,
+                    doctor: doctor,
+                }).then(() => {
+                    setSnackBar('success', "Booking completed")
+                }).catch(err => {
+                    console.log(err);
+                })
             }
         }
         setrecentBookings(newBooking)
