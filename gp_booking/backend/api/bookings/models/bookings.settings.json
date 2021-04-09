@@ -16,8 +16,8 @@
       "via": "bookings"
     },
     "patient": {
-      "model": "patient",
-      "via": "bookings"
+      "via": "bookings",
+      "model": "patient"
     },
     "Time": {
       "type": "time"

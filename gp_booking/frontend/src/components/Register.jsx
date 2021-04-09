@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
 import { UserContext } from '../context/Context'
+import SnackBar from './mini Compnents/SnackBar'
 
 function getImage(props) {
 
@@ -20,10 +21,6 @@ function getMessage(message) {
   return <Messages message={message} />;
 }
 
-function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-}
-
 const useStyles = makeStyles({
   snackBar: {
     width: '100%'
@@ -31,7 +28,7 @@ const useStyles = makeStyles({
 })
 
 const Register = () => {
-  const { jwt, setCookie } = useContext(UserContext)
+  const { handleClick, setCookie, setOpen } = useContext(UserContext)
   let history = useHistory();
 
   const [input, setInput] = useState({
@@ -46,9 +43,8 @@ const Register = () => {
     address: "",
   })
   // snackBar
-  const [open, setOpen] = React.useState(false);
   const [message, setmessage] = useState('')
-  const [snackColour, setsnackColour] = useState('')
+  const [type, settype] = useState('')
   // check box
   const [checked, setChecked] = React.useState(false);
 
@@ -57,7 +53,7 @@ const Register = () => {
 
   // set path
   const [path, setpath] = useState('patients')
-  console.log(checked);
+
   // set username type
   const [usernameType, setusernameType] = useState('number')
 
@@ -67,26 +63,28 @@ const Register = () => {
     })
   };
 
-  const createDetail = (jwt, fname, username, lname, dob, phone, address, path) => {
-    console.log(`
-    ${jwt}, ${fname}, ${username}, ${lname}, ${dob}, ${phone}, ${address}, ${path}
-    `);
+  const setSnackBar = (type, message) => {
+    settype(type)
+    setmessage(message)
+    handleClick()
+  }
+
+  const createDetail = (jwt, userId, fname, username, lname, dob, phone, address, path) => {
     axios.post(`http://localhost:1337/${path}`, {
       headers: {
         Authorization:
           `Bearer ${jwt}`,
       },
-
+      user: userId,
       fname: fname,
       lname: lname,
       dob: dob,
       phone: phone,
       address: address,
-      user: username
 
     }).then(res => {
       if (localStorage.getItem('token')) {
-        console.log(localStorage.getItem('token'));
+        setSnackBar('success', 'Registered Sucessfully')
         history.push('/booking')
       }
     }).catch(err => {
@@ -94,15 +92,8 @@ const Register = () => {
     })
   }
 
-  const setSnackBar = () => {
-    setmessage('Something went wrong')
-    setsnackColour('warning')
-    handleClick()
-  }
-
   const handleForm = (e) => {
     e.preventDefault()
-    console.log(path);
     axios.post('http://localhost:1337/auth/local/register', {
       username: input.nhs_num,
       email: input.email,
@@ -115,27 +106,21 @@ const Register = () => {
           password: input.password
         })
           .then((response) => {
+            const userId = response.data.user.id;
             const jwt = response.data.jwt
             setCookie(jwt)
-            createDetail(jwt, input.firstname, input.nhs_num, input.lastname, input.dob, input.phone, input.address, path)
+            createDetail(jwt, userId, input.firstname, input.nhs_num, input.lastname, input.dob, input.phone, input.address, path)
           })
           .catch(err => {
             console.log(err.message);
-            setSnackBar()
+            setSnackBar('error', 'Something wrong!')
           })
       })
       .catch(error => {
         console.log(error.message);
-        setmessage('Email or Username already exist')
-        setsnackColour('warning')
-        handleClick()
+        setSnackBar('error', 'Username or password already taken!')
       })
   }
-
-  const handleClick = (message) => {
-    setOpen(true);
-    return message
-  };
 
   // snackbar close
   const handleClose = (event, reason) => {
@@ -163,7 +148,6 @@ const Register = () => {
 
   return (
     <Container>
-      <p>{jwt}</p>
       <div className="containers" style={{ margin: "0px", padding: "0px" }}>
         <div className="imageContainer">
           {registerInput.image.map(getImage)}
@@ -291,11 +275,10 @@ const Register = () => {
             Submit
             </Button>
         </form>
-        <Snackbar open={open} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} autoHideDuration={6000} onClose={handleClose} style={useStyles.snackBar}>
-          <Alert onClose={handleClose} severity={snackColour}>
-            {message}
-          </Alert>
-        </Snackbar>
+        <SnackBar
+          type={type}
+          message={message}
+        />
       </div>
     </Container>
   );

@@ -7,7 +7,7 @@ function ProtectedLogin({ component: Component, ...rest }) {
     return (
         <Route
             {...rest}
-            render={(props) => !isAuth ? (
+            render={(props) => localStorage.getItem('token') === null ? (
                 <Component />
             ) :
                 (

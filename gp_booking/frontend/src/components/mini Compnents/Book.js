@@ -122,6 +122,7 @@ function Book(props) {
             })
             .catch(err => {
                 console.log(err.message);
+                setSnackBar('warning', 'Sorry, no doctors at the moment')
             })
     }
 
@@ -192,7 +193,6 @@ function Book(props) {
     };
 
     useEffect(() => {
-        getDoctor()
         getBookings()
     }, [])
 
@@ -251,6 +251,7 @@ function Book(props) {
                     })
                 )
             case 2:
+                getDoctor()
                 return (
                     <form>
                         {doctors.map(doctor => {

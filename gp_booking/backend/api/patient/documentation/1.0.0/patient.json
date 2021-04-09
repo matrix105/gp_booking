@@ -595,9 +595,6 @@
               }
             }
           },
-          "username": {
-            "type": "integer"
-          },
           "bookings": {
             "type": "array",
             "items": {
@@ -666,9 +663,6 @@
           },
           "user": {
             "type": "string"
-          },
-          "username": {
-            "type": "integer"
           },
           "bookings": {
             "type": "array",

@@ -39,12 +39,9 @@
       "model": "user",
       "via": "patient"
     },
-    "username": {
-      "type": "integer"
-    },
     "bookings": {
-      "via": "patient",
-      "collection": "bookings"
+      "collection": "bookings",
+      "via": "patient"
     }
   }
 }

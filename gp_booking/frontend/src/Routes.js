@@ -12,11 +12,15 @@ import { UserContext } from './context/Context'
 
 const Routes = () => {
 
+  if (localStorage.getItem('token') != null) {
+    console.log('logged in');
+  }
+
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact><Home /></Route>
-        <Route path="/register" component={Register} />
+        <ProtectedLogin path="/register" component={Register} />
         <ProtectedLogin path='/login' component={Login} />
         <ProtectedRoute path='/booking' component={Booking} />
         <ProtectedRoute path='/about' component={About} />

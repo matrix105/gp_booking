@@ -36,6 +36,7 @@ function Login() {
   function login(response) {
     //handleLogin()
     setCookie(response.data.jwt)
+    console.log(response.data.user);
     localStorage.setItem('username', response.data.user.id)
     localStorage.setItem('password', input.password)
     history.push('/booking')
