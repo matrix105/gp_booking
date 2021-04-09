@@ -107,6 +107,7 @@ function Book(props) {
 
     // Get available doctors
     const getDoctor = (date) => {
+        console.log(localStorage.getItem('token'));
         axios.get(`http://localhost:1337/doctors`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -114,6 +115,7 @@ function Book(props) {
         })
             .then(response => {
                 let tempArray = []
+                console.log(response);
                 for (let index = 0; index < response.data.length; index++) {
                     tempArray.push(response.data[index])
                 }
@@ -194,6 +196,7 @@ function Book(props) {
 
     useEffect(() => {
         getBookings()
+        getDoctor()
     }, [])
 
     const book = () => {
@@ -251,7 +254,6 @@ function Book(props) {
                     })
                 )
             case 2:
-                getDoctor()
                 return (
                     <form>
                         {doctors.map(doctor => {
