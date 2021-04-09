@@ -67,7 +67,7 @@ function getSteps() {
 
 
 function Book(props) {
-    const { handleClick } = useContext(UserContext)
+    const { handleClick, userInformation } = useContext(UserContext)
 
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
@@ -76,8 +76,6 @@ function Book(props) {
     const [selectedTime, setselectedTime] = useState('')
     const [userSelectedDate, setuserSelectedDate] = useState(getCurrentDate())
     const [doctor, setdoctor] = useState('')
-    const [recentBookings, setrecentBookings] = useState([])
-
 
     //For the date picker
     function handleChange(e) {
@@ -104,7 +102,7 @@ function Book(props) {
     // handle clicked doctor
     const handleDoctorListItemClick = (event, index) => {
         const doctor = doctors[index]
-        setdoctor(doctor.fname)
+        setdoctor(doctor)
     }
 
     // Get available doctors
@@ -147,44 +145,33 @@ function Book(props) {
         })
     }
 
-    const setSnackBar = (type, message) => {
-        setType(type)
-        setmessage(message)
-        handleClick()
-    }
-
-    const showRecentBookings = (array) => {
-        setrecentBookings(array)
-    }
-
     const checkAvailability = () => {
-        var tempArray = []
-        var newBooking
-        for (let index = 0; index < allBookings.length; index++) {
-            if (doctor === allBookings[index].doctor.fname) {
-                setSnackBar('error', " Sorry, Doctor unavailable at that time")
-                handleReset()
-            } else {
-                axios.post(`http://localhost:1337/bookings?`, {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`,
-                    },
-                    time: selectedTime,
-                    Date: userSelectedDate,
-                    doctor: doctor,
-                }).then(() => {
-                    setSnackBar('success', "Booking completed")
-                }).catch(err => {
-                    console.log(err);
-                })
+
+        var availability = false
+        if (allBookings.length < 1) {
+            availability = true
+        } else {
+            for (let index = 0; index < allBookings.length; index++) {
+                if (doctor.id === allBookings[index].doctor.id) {
+                    availability = false
+                } else {
+                    availability = true
+                }
             }
         }
-        setrecentBookings(newBooking)
+
+        return availability
     }
 
     // For Snack Bar
     const [type, setType] = useState("")
     const [message, setmessage] = useState("")
+
+    const setSnackBar = (type, message) => {
+        setType(type)
+        setmessage(message)
+        handleClick()
+    }
 
     // for the stepper
     const steps = getSteps();
@@ -209,6 +196,21 @@ function Book(props) {
         getBookings()
     }, [])
 
+    const book = () => {
+        console.log(localStorage.getItem('username'));
+        axios.post(`http://localhost:1337/bookings`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+            date: userSelectedDate,
+            doctor: doctor.id,
+            patient: localStorage.getItem('username'),
+            time: selectedTime,
+
+        }).then(res => {
+            console.log(res.data);
+        })
+    }
 
     function getStepContent(stepIndex) {
         switch (stepIndex) {
@@ -269,13 +271,24 @@ function Book(props) {
                     </form>
                 )
             default:
-                if (doctor === '' || selectedTime === '') {
-                    setType('error')
-                    setmessage('Please choose a date, time and doctor')
+                if (doctor === "" || selectedTime === "") {
+                    alert('Please select Date, time and doctor')
                     handleReset()
+                    setdoctor("")
+                    setselectedTime("")
+                } else {
+                    if (checkAvailability()) {
+                        //alert('Booking sucessfull')
+                        book()
+                        //setSnackBar('success', 'Doctor available')
+                    } else {
+                        alert('Sorry, The Doctor is not available in that selected time and date')
+                        handleReset()
+                        setdoctor("")
+                        setselectedTime("")
+                    }
                 }
-
-                return checkAvailability();
+                return null
         }
     }
 
@@ -287,7 +300,7 @@ function Book(props) {
         <div className={classes.root}>
             <h1>{selectedTime}</h1>
             <h1>{userSelectedDate}</h1>
-            <h1>{doctor}</h1>
+            <h1>{doctor.fname}</h1>
             <Stepper activeStep={activeStep} alternativeLabel>
                 {steps.map((label) => (
                     <Step key={label}>

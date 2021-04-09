@@ -9,7 +9,7 @@ function ProtectedBooking({ component: Component, ...rest }) {
     return <Route
         {...rest}
         render={(props) => {
-            if (isAuth) {
+            if (localStorage.getItem('token') != "") {
                 console.log(isAuth)
                 return <Component />
             } else {

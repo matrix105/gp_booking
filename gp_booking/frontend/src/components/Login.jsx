@@ -17,7 +17,7 @@ import axios from "axios";
 // }
 
 function Login() {
-  const { handleLogin, setCookie, setUserInformation, isAuth, handleClick } = useContext(UserContext)
+  const { setCookie, setUserInformation, setemail, setpassword, handleClick } = useContext(UserContext)
   const [type, setType] = useState("")
   const [message, setmessage] = useState("")
   let history = useHistory();
@@ -36,29 +36,23 @@ function Login() {
   function login(response) {
     //handleLogin()
     setCookie(response.data.jwt)
-    setUserInformation(response.user)
+    localStorage.setItem('username', response.data.user.id)
+    localStorage.setItem('password', input.password)
     history.push('/booking')
   }
 
   const handleForm = (e) => {
     e.preventDefault();
-    console.log(input.username);
-    console.log(input.password);
     axios.post('http://localhost:1337/auth/local', {
       identifier: input.username,
       password: input.password
     })
       .then(response => {
-        console.log(response.data.jwt);
-        // setmessage('Invalid nhs number or password')
-        // setsnackColour('success')
         setType('success')
         setmessage('Successfully logged in')
-        handleClick()
-        console.log(response);
-        login(response)
-        //setSnackBar('Successfully loged in', 'success'
         setUserInformation(response.data)
+        handleClick()
+        login(response)
       })
       .catch(err => {
         // setmessage('Invalid nhs number or password')

@@ -10,8 +10,6 @@ import { UserContext } from '../context/Context'
 import { withRouter } from 'react-router-dom'
 
 function Home(props) {
-  const { isAuth, readCookie } = useContext(UserContext)
-  console.log(isAuth);
   return (
     <>
       <Jumbotron className="jhome">

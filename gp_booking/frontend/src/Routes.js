@@ -11,12 +11,6 @@ import ProtectedLogin from './components/protectedRoutes/ProtectedLogin'
 import { UserContext } from './context/Context'
 
 const Routes = () => {
-  const { readCookie, isAuth, handleLogin } = useContext(UserContext)
-  useEffect(() => {
-    console.log(isAuth);
-    console.log('hello');
-    readCookie()
-  }, [])
 
   return (
     <BrowserRouter>
