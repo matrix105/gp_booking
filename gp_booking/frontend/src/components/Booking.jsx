@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Container } from "@material-ui/core";
 import { Jumbotron } from "reactstrap";
-import Steppers from './mini Compnents/Stepper'
 import Book from './mini Compnents/Book'
 import { withRouter } from 'react-router-dom'
 import { UserContext } from '../context/Context'

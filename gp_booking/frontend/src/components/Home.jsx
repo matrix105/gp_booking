@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Container, Paper, Grid } from "@material-ui/core";
 import { Jumbotron, Title } from "reactstrap";
 import { makeStyles } from "@material-ui/core/styles";
@@ -10,6 +10,8 @@ import { UserContext } from '../context/Context'
 import { withRouter } from 'react-router-dom'
 
 function Home(props) {
+  if (window.innerHeight < 1024)
+    console.log(window.innerHeight);
   return (
     <>
       <Jumbotron className="jhome">
@@ -39,6 +41,12 @@ function Home(props) {
     </>
   );
 
+}
+
+const styles = {
+  card: {
+
+  }
 }
 
 export default withRouter(Home)
