@@ -8,7 +8,7 @@ import Login from './components/Login';
 import Register from "./components/Register";
 import ProtectedRoute from './components/protectedRoutes/ProtectedRoute'
 import ProtectedLogin from './components/protectedRoutes/ProtectedLogin'
-import { UserContext } from './context/Context'
+import Edit from './components/Edit'
 
 const Routes = () => {
 
@@ -24,6 +24,7 @@ const Routes = () => {
         <ProtectedLogin path='/login' component={Login} />
         <ProtectedRoute path='/booking' component={Booking} />
         <ProtectedRoute path='/about' component={About} />
+        <ProtectedRoute path='/edit' component={Edit} />
       </Switch>
     </BrowserRouter>
   );

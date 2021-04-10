@@ -79,6 +79,8 @@ function Book(props) {
 
     //For the date picker
     function handleChange(e) {
+        // const [year, month, day] = e.target.value.split('-')
+        // const convertedDate = `${month}/${day}/${year}`
         setuserSelectedDate(e.target.value)
     }
 
@@ -86,7 +88,8 @@ function Book(props) {
     const [selectedIndex, setSelectedIndex] = React.useState(1);
     const handleListItemClick = (event, index) => {
         setSelectedIndex(index);
-        setselectedTime(times[index])
+        const time = `${times[index]}:00.000`
+        setselectedTime(time)
     };
 
     // For current Date
@@ -107,7 +110,6 @@ function Book(props) {
 
     // Get available doctors
     const getDoctor = (date) => {
-        console.log(localStorage.getItem('token'));
         axios.get(`http://localhost:1337/doctors`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -115,7 +117,6 @@ function Book(props) {
         })
             .then(response => {
                 let tempArray = []
-                console.log(response);
                 for (let index = 0; index < response.data.length; index++) {
                     tempArray.push(response.data[index])
                 }
@@ -200,18 +201,32 @@ function Book(props) {
     }, [])
 
     const book = () => {
-        console.log(localStorage.getItem('username'));
-        axios.post(`http://localhost:1337/bookings`, {
+        const userId = localStorage.getItem('username')
+        axios.get(`http://localhost:1337/patients?user=${userId}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
-            date: userSelectedDate,
-            doctor: doctor.id,
-            patient: localStorage.getItem('username'),
-            time: selectedTime,
-
         }).then(res => {
-            console.log(res.data);
+            var patientId = res.data[0].id
+            axios.post(`http://localhost:1337/bookings`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+                date: getCurrentDate(),
+                doctor: doctor.id,
+                patient: patientId,
+                time: selectedTime,
+
+            })
+                .then(() => {
+                    console.log('Booking successfull');
+                    return null
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }).catch(err => {
+            console.log(err);
         })
     }
 
@@ -301,8 +316,8 @@ function Book(props) {
 
     return (
         <div className={classes.root}>
-            <h1>{selectedTime}</h1>
             <h1>{userSelectedDate}</h1>
+            <h1>{selectedTime}</h1>
             <h1>{doctor.fname}</h1>
             <Stepper activeStep={activeStep} alternativeLabel>
                 {steps.map((label) => (

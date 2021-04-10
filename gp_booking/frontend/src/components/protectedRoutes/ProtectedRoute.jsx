@@ -3,8 +3,7 @@ import { Route, Redirect } from 'react-router-dom'
 import { UserContext } from '../../context/Context'
 
 function ProtectedRoute({ component: Component, ...rest }) {
-    var { isAuth, readCookie } = useContext(UserContext)
-
+    localStorage.getItem('token')
     return <Route
         {...rest}
         render={(props) => {
