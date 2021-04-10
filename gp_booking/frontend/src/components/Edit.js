@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles, TextField, InputLabel } from '@material-ui/core';
+import Buttons from './mini Compnents/Buttons'
 import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
@@ -16,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
     textField: {
         fontSize: 100
-    }
+    },
 }));
 
 const fontsize = 15
@@ -74,33 +75,38 @@ function Edit(props) {
                 switch (input) {
                     case 'dob':
                         return (
-
-                            <TextField id="outlined-basic" label={input} variant="outlined" value={state.dob} key={input} type='date' className={classes.textField} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} />
+                            !editable ?
+                                <TextField variant="outlined" label="Date" value={state.dob} key={input} type='date' className={classes.textField} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} disabled /> :
+                                <TextField variant="outlined" label="Date" value={state.dob} key={input} type='date' className={classes.textField} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} />
 
                         )
                     case 'phone':
                         return (
-
-                            <TextField id="outlined-basic" label={input} variant="outlined" value={state.phone} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} type='number' />
+                            !editable ?
+                                <TextField id="outlined-basic" label="Phone" variant="outlined" value={state.phone} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} type='number' disabled /> :
+                                <TextField id="outlined-basic" label="Phone" variant="outlined" value={state.phone} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} type='number' />
 
                         )
                     case 'fname':
                         return (
-
-                            <TextField id="outlined-basic" name={input} label={input} variant="outlined" onChange={onTextChange(input)} value={state.fname} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} />
+                            !editable ?
+                                <TextField id="outlined-basic" label="First Name" name={input} variant="outlined" onChange={onTextChange(input)} value={state.fname} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} disabled /> :
+                                <TextField id="outlined-basic" label="First Name" name={input} variant="outlined" onChange={onTextChange(input)} value={state.fname} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} />
 
                         )
                     case 'lname':
                         return (
-
-                            <TextField id="outlined-basic" label={input} variant="outlined" value={state.lname} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} />
+                            !editable ?
+                                <TextField id="outlined-basic" label="Last Name" variant="outlined" value={state.lname} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} disabled /> :
+                                <TextField id="outlined-basic" label="Last Name" variant="outlined" value={state.lname} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} />
 
                         )
 
                     case 'address':
                         return (
-
-                            <TextField id="outlined-basic" label={input} variant="outlined" value={state.address} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} />
+                            !editable ?
+                                <TextField id="outlined-basic" label="Address" variant="outlined" value={state.address} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} disabled /> :
+                                <TextField id="outlined-basic" label="Address" variant="outlined" value={state.address} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} />
 
                         )
 
@@ -111,14 +117,57 @@ function Edit(props) {
         )
     }
 
+    const handleClick = (e) => {
+        seteditable(!editable)
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const userId = localStorage.getItem('username')
+        axios.put(`http://localhost:1337/patients?user=${userId}`, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+            fname: state.fname,
+            lname: state.lname,
+            phone: state.phone,
+            dob: state.dob,
+            address: state.address
+        }).then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
     useEffect(() => {
         initialState()
     }, [])
 
     return (
         <div className={classes.container}>
-            <form className={classes.root} noValidate autoComplete="off">
+            <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
+                <h1>Edit Details</h1>
                 {createInput()}
+                <div style={{ display: 'flex', width: '75%', padding: 0, justifyContent: 'space-between' }}>
+                    <div >
+                        <Buttons
+                            key='Edit Personal info'
+                            name="Edit"
+                            color="primary"
+                            type="button"
+                            onClick={handleClick}
+                        />
+                    </div>
+                    <div style={{ width: '45%' }}>
+                        <Buttons
+                            key='Save Personal Info'
+                            name="Save"
+                            color="secondary"
+                            type="submit"
+                            onClick
+                        />
+                    </div>
+                </div>
             </form>
         </div>
     );
