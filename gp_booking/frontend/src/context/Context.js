@@ -17,6 +17,8 @@ const UserContextProvider = (props) => {
         setOpen(true);
     };
 
+    const [path, setpath] = useState('')
+
     const handleLogout = () => {
         localStorage.clear()
         //setisAuth(false);
@@ -24,10 +26,11 @@ const UserContextProvider = (props) => {
 
     const setCookie = (jwt) => {
         localStorage.setItem('token', jwt);
+
     }
 
     return (
-        <UserContext.Provider value={{ handleLogout, setCookie, userInformation, setUserInformation, setbookingList, bookingList, handleClick, setOpen, open, setemail, email, setpassword, password }}>
+        <UserContext.Provider value={{ handleLogout, setCookie, setpath, path, userInformation, setUserInformation, setbookingList, bookingList, handleClick, setOpen, open, setemail, email, setpassword, password }}>
             {props.children}
         </UserContext.Provider>
     )

@@ -28,7 +28,7 @@ const useStyles = makeStyles({
 })
 
 const Register = () => {
-  const { handleClick, setCookie, setOpen } = useContext(UserContext)
+  const { handleClick, setCookie, path, setpath } = useContext(UserContext)
   let history = useHistory();
 
   const [input, setInput] = useState({
@@ -51,9 +51,6 @@ const Register = () => {
   const [username, setusername] = useState('NHS Number')
   //const [login, setlogin] = useState(initialState)
 
-  // set path
-  const [path, setpath] = useState('patients')
-
   // set username type
   const [usernameType, setusernameType] = useState('number')
 
@@ -69,7 +66,7 @@ const Register = () => {
     handleClick()
   }
 
-  const createDetail = (jwt, userId, fname, username, lname, dob, phone, address, path) => {
+  const createDetail = (jwt, userId, fname, lname, dob, phone, address, path) => {
     axios.post(`http://localhost:1337/${path}`, {
       headers: {
         Authorization:
@@ -122,27 +119,19 @@ const Register = () => {
       })
   }
 
-  // snackbar close
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
-  };
-
   // handle checkbox
   const handleChange = (event) => {
     setChecked(event.target.checked);
-    if (checked === true) {
+    if (checked === false) {
       setpath('patients')
       setusername('NHS number')
       setusernameType('number')
-    } else if (checked === false) {
+    } else if (checked === true) {
       setpath('doctors')
       setusername('Username')
       setusernameType('text')
     }
+
   };
 
 
@@ -169,7 +158,7 @@ const Register = () => {
             label="Are you a doctor"
             inputProps={{ 'aria-label': 'primary checkbox' }}
           />
-          <span>Are you a doctor?</span>
+          <span>Are you a patient?</span>
           <Title title={registerInput.title} />
           <TextField
             id="nhs"

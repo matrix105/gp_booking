@@ -3,7 +3,6 @@ import { Route, Redirect } from 'react-router-dom'
 import { UserContext } from '../../context/Context'
 
 function ProtectedRoute({ component: Component, ...rest }) {
-    localStorage.getItem('token')
     return <Route
         {...rest}
         render={(props) => {

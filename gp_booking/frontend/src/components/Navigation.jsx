@@ -31,6 +31,9 @@ const Navigation = (props) => {
               <NavLink className="nav-link" href="/booking">Book Appointment</NavLink>
             </NavItem>
             <NavItem>
+              <NavLink className="nav-link" href="/appointments">Appointments</NavLink>
+            </NavItem>
+            <NavItem>
               <NavLink href="/about">About</NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>

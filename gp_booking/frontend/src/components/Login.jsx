@@ -12,12 +12,8 @@ import MuiAlert from '@material-ui/lab/Alert';
 import SnackBar from './mini Compnents/SnackBar'
 import axios from "axios";
 
-// function Alert(props) {
-//   return <MuiAlert elevation={6} variant="filled" {...props} />;
-// }
-
 function Login() {
-  const { setCookie, setUserInformation, setemail, setpassword, handleClick } = useContext(UserContext)
+  const { setCookie, setUserInformation, handleClick, setpath } = useContext(UserContext)
   const [type, setType] = useState("")
   const [message, setmessage] = useState("")
   let history = useHistory();
@@ -35,9 +31,11 @@ function Login() {
 
   function login(response) {
     //handleLogin()
+    console.log(response.data.user.id);
     setCookie(response.data.jwt)
-    console.log(response.data.user);
     localStorage.setItem('username', response.data.user.id)
+    localStorage.setItem('identifier', response.data.user.username)
+    localStorage.setItem('role', response.data.user.role.description)
     localStorage.setItem('password', input.password)
     history.push('/booking')
   }
@@ -49,6 +47,11 @@ function Login() {
       password: input.password
     })
       .then(response => {
+        if (response.data.user.role.name = null) {
+          console.log('its null');
+        } else {
+          setpath(response.data.user.role.name)
+        }
         setType('success')
         setmessage('Successfully logged in')
         setUserInformation(response.data)
@@ -123,11 +126,6 @@ function Login() {
             />
           </Container>
         </form>
-        {/* <Snackbar open={open} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} autoHideDuration={6000} onClose={handleClose}>
-          <Alert onClose={handleClose} severity={snackColour}>
-            {message}
-          </Alert>
-        </Snackbar> */}
 
       </div>
     </Container>

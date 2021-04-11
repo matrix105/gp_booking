@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { UserContext } from '../context/Context'
 import { makeStyles, TextField, InputLabel } from '@material-ui/core';
 import Buttons from './mini Compnents/Buttons'
 import axios from 'axios'
@@ -23,13 +24,8 @@ const useStyles = makeStyles((theme) => ({
 const fontsize = 15
 const labelsize = 20
 
-
-
 function Edit(props) {
     const classes = useStyles();
-
-    var userDetailArray
-
     const [state, setstate] = useState(
         {
             fname: '',
@@ -37,18 +33,32 @@ function Edit(props) {
             dob: '',
             phone: '',
             address: '',
+            startTime: '',
+            endTime: ''
         })
 
     const [editable, seteditable] = useState(false)
 
     const initialState = () => {
+        var path
+        const role = localStorage.getItem('role')
+        if (role === 'Patient') {
+            path = 'patients'
+        } else {
+            path = 'doctors'
+        }
         const userId = localStorage.getItem('username')
-        var userDetail
-        axios.get(`http://localhost:1337/patients?user=${userId}`, {
+        axios.get(`http://localhost:1337/${path}?user=${userId}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
         }).then((res) => {
+            var startTime, endTime
+
+            if (localStorage.getItem('role') === 'doctor') {
+                startTime = res.data[0].shift[0].start;
+                endTime = res.data[0].shift[0].end;
+            }
             res.data.map(infos => {
                 setstate({
                     fname: infos.fname,
@@ -56,13 +66,40 @@ function Edit(props) {
                     dob: infos.dob,
                     phone: infos.phone,
                     address: infos.address,
+                    startTime: startTime,
+                    endTime: endTime
                 })
             })
+        }).catch(err => {
+            console.log(err);
         })
     }
 
     const onTextChange = (name) => e => {
         setstate({ ...state, [name]: e.target.value })
+    }
+
+    const shiftTime = (value, input, onchange, label) => {
+        return (!editable ?
+            <TextField
+                id="outlined-basic"
+                label={label} variant="outlined"
+                value={value} key={input}
+                InputLabelProps={{ style: { fontSize: labelsize } }}
+                inputProps={{ style: { fontSize: fontsize } }} disabled
+                type="time"
+            />
+            :
+            <TextField
+                id="outlined-basic"
+                label={label} variant="outlined"
+                value={value} key={input} onchange={onchange}
+                InputLabelProps={{ style: { fontSize: labelsize } }}
+                inputProps={{ style: { fontSize: fontsize } }}
+                type="time"
+            />
+        )
+
     }
 
     const createInput = () => {
@@ -77,20 +114,20 @@ function Edit(props) {
                         return (
                             !editable ?
                                 <TextField variant="outlined" label="Date" value={state.dob} key={input} type='date' className={classes.textField} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} disabled /> :
-                                <TextField variant="outlined" label="Date" value={state.dob} key={input} type='date' className={classes.textField} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} />
+                                <TextField variant="outlined" label="Date" value={state.dob} onChange={onTextChange(input)} key={input} type='date' className={classes.textField} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} />
 
                         )
                     case 'phone':
                         return (
                             !editable ?
                                 <TextField id="outlined-basic" label="Phone" variant="outlined" value={state.phone} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} type='number' disabled /> :
-                                <TextField id="outlined-basic" label="Phone" variant="outlined" value={state.phone} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} type='number' />
+                                <TextField id="outlined-basic" label="Phone" variant="outlined" onChange={onTextChange(input)} value={state.phone} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} type='number' />
 
                         )
                     case 'fname':
                         return (
                             !editable ?
-                                <TextField id="outlined-basic" label="First Name" name={input} variant="outlined" onChange={onTextChange(input)} value={state.fname} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} disabled /> :
+                                <TextField id="outlined-basic" label="First Name" name={input} variant="outlined" value={state.fname} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} disabled /> :
                                 <TextField id="outlined-basic" label="First Name" name={input} variant="outlined" onChange={onTextChange(input)} value={state.fname} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} />
 
                         )
@@ -98,7 +135,7 @@ function Edit(props) {
                         return (
                             !editable ?
                                 <TextField id="outlined-basic" label="Last Name" variant="outlined" value={state.lname} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} disabled /> :
-                                <TextField id="outlined-basic" label="Last Name" variant="outlined" value={state.lname} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} />
+                                <TextField id="outlined-basic" label="Last Name" variant="outlined" onChange={onTextChange(input)} value={state.lname} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} />
 
                         )
 
@@ -106,9 +143,14 @@ function Edit(props) {
                         return (
                             !editable ?
                                 <TextField id="outlined-basic" label="Address" variant="outlined" value={state.address} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} disabled /> :
-                                <TextField id="outlined-basic" label="Address" variant="outlined" value={state.address} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} />
+                                <TextField id="outlined-basic" label="Address" variant="outlined" onChange={onTextChange(input)} value={state.address} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} />
 
                         )
+                    case 'startTime':
+                        return localStorage.getItem('role') === 'doctor' ? shiftTime(state.startTime, input, onTextChange(input), "Start Time") : null
+
+                    case 'endTime':
+                        return localStorage.getItem('role') === 'doctor' ? shiftTime(state.endTime, input, onTextChange(input), "End Time") : null
 
                     default:
                         return
@@ -122,8 +164,15 @@ function Edit(props) {
     }
     const handleSubmit = (e) => {
         e.preventDefault()
+        var path
+        const role = localStorage.getItem('role')
+        if (role === 'Patient') {
+            path = 'patients'
+        } else {
+            path = 'doctors'
+        }
         const userId = localStorage.getItem('username')
-        axios.put(`http://localhost:1337/patients?user=${userId}`, {
+        axios.put(`http://localhost:1337/${path}?user=${userId}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
@@ -135,7 +184,7 @@ function Edit(props) {
         }).then(res => {
             console.log(res);
         }).catch(err => {
-            console.log(err);
+            console.log(err.message);
         })
     }
 

@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Register from "./components/Register";
 import ProtectedRoute from './components/protectedRoutes/ProtectedRoute'
 import ProtectedLogin from './components/protectedRoutes/ProtectedLogin'
+import Appointments from './components/Appointments'
 import Edit from './components/Edit'
 
 const Routes = () => {
@@ -23,6 +24,7 @@ const Routes = () => {
         <ProtectedLogin path="/register" component={Register} />
         <ProtectedLogin path='/login' component={Login} />
         <ProtectedRoute path='/booking' component={Booking} />
+        <ProtectedRoute path='/appointments' component={Appointments} />
         <ProtectedRoute path='/about' component={About} />
         <ProtectedRoute path='/edit' component={Edit} />
       </Switch>
