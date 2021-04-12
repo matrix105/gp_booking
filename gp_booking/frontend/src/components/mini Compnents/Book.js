@@ -196,8 +196,10 @@ function Book(props) {
     };
 
     useEffect(() => {
+
         getBookings()
         getDoctor()
+
     }, [])
 
     const book = () => {
@@ -312,7 +314,7 @@ function Book(props) {
 
 
 
-
+    console.log(localStorage.getItem('role'));
 
     return (
         <div className={classes.root}>
@@ -343,16 +345,18 @@ function Book(props) {
                             >
                                 Back
               </Button>
-                            <Button variant="contained" color="primary" onClick={handleNext}>
+
+                            <Button variant="contained" color="primary" onClick={handleNext} >
                                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                             </Button>
+
                         </div>
                     </div>
                 )}
             </div>
             <SnackBar
-                type={type}
-                message={message}
+                type='warning'
+                message='Not verified or no doctors available'
             />
         </div>
     );

@@ -1,6 +1,8 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { List, ListItem, ListItemText, Divider, makeStyles, useMediaQuery } from '@material-ui/core';
+import { UserContext } from '../context/Context'
+import SnackBar from './mini Compnents/SnackBar';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Appointments(props) {
     const [state, setstate] = useState([])
+    const { handleClick } = useContext(UserContext)
     const classes = useStyles();
     const size = useMediaQuery('(max-width:425px)');
 
@@ -36,25 +39,25 @@ function Appointments(props) {
             },
         }).then(res => {
             console.log(localStorage.getItem('username'));
+
             axios.get(`http://localhost:1337/bookings?${doctorOrPatient}=${res.data[0].id}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
             }).then(res => {
+                console.log(res);
+                if (res.data.length === 0) {
+                    handleClick()
+                    return
+                }
                 const datas = res.data
                 setstate(datas)
             }).catch(err => {
                 console.log(err);
+                handleClick()
             })
         })
     }
-
-    // const generateList = (data) => {
-
-    //     return (
-
-    //     )
-    // }
 
     const createList = () => {
         return state.map(data => {
@@ -72,7 +75,13 @@ function Appointments(props) {
     }
 
     useEffect(() => {
-        getBookings()
+        if (localStorage.getItem('role') === 'doctor' || 'Patient') {
+            getBookings()
+
+        } else {
+            handleClick()
+        }
+
     }, [])
 
 
@@ -84,6 +93,11 @@ function Appointments(props) {
                     {createList()}
                 </List>
             </div>
+
+            <SnackBar
+                type="warning"
+                message="Not verified or no appointments "
+            />
 
         </div>
     );

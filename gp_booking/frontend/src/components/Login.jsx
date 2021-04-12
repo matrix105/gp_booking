@@ -31,7 +31,7 @@ function Login() {
 
   function login(response) {
     //handleLogin()
-    console.log(response.data.user.id);
+    console.log(response.data);
     setCookie(response.data.jwt)
     localStorage.setItem('username', response.data.user.id)
     localStorage.setItem('identifier', response.data.user.username)

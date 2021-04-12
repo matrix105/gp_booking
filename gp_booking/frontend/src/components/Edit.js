@@ -47,17 +47,23 @@ function Edit(props) {
         } else {
             path = 'doctors'
         }
+
         const userId = localStorage.getItem('username')
+        console.log(userId);
+        console.log(path);
+        console.log(localStorage.getItem('token'));
         axios.get(`http://localhost:1337/${path}?user=${userId}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
         }).then((res) => {
             var startTime, endTime
-
+            console.log(res.data);
             if (localStorage.getItem('role') === 'doctor') {
-                startTime = res.data[0].shift[0].start;
-                endTime = res.data[0].shift[0].end;
+                if (res.data[0].shift.length != 0) {
+                    startTime = res.data[0].shift[0].start;
+                    endTime = res.data[0].shift[0].end;
+                }
             }
             res.data.map(infos => {
                 setstate({

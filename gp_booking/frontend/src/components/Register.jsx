@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./css/login.css";
 import Image from "./mini Compnents/Image";
 import Title from "./mini Compnents/Title";
@@ -28,7 +28,7 @@ const useStyles = makeStyles({
 })
 
 const Register = () => {
-  const { handleClick, setCookie, path, setpath } = useContext(UserContext)
+  const { handleClick, setCookie } = useContext(UserContext)
   let history = useHistory();
 
   const [input, setInput] = useState({
@@ -54,6 +54,11 @@ const Register = () => {
   // set username type
   const [usernameType, setusernameType] = useState('number')
 
+  const [path, setpath] = useState(checked ?
+    "" :
+    "patients"
+  )
+
   const handleInput = (e) => {
     setInput({
       ...input, [e.target.name]: e.target.value
@@ -67,6 +72,7 @@ const Register = () => {
   }
 
   const createDetail = (jwt, userId, fname, lname, dob, phone, address, path) => {
+    console.log(jwt);
     axios.post(`http://localhost:1337/${path}`, {
       headers: {
         Authorization:
@@ -82,11 +88,12 @@ const Register = () => {
     }).then(res => {
       if (localStorage.getItem('token')) {
         setSnackBar('success', 'Registered Sucessfully')
-        history.push('/booking')
+        history.push('/home')
       }
     }).catch(err => {
       console.log(err);
     })
+    console.log(path);
   }
 
   const handleForm = (e) => {
@@ -97,16 +104,27 @@ const Register = () => {
       password: input.password,
       //checkedA: true,
     })
-      .then(() => {
+      .then((res) => {
+        console.log(res.data);
         axios.post(`http://localhost:1337/auth/local`, {
           identifier: input.email,
           password: input.password
         })
           .then((response) => {
+            console.log(response.data);
             const userId = response.data.user.id;
             const jwt = response.data.jwt
             setCookie(jwt)
-            createDetail(jwt, userId, input.firstname, input.nhs_num, input.lastname, input.dob, input.phone, input.address, path)
+            localStorage.setItem('username', response.data.user.id)
+            localStorage.setItem('identifier', response.data.user.username)
+            //localStorage.setItem('role', response.data.user.role.description)
+            localStorage.setItem('password', input.password)
+            console.log(path);
+            // localStorage.setItem('username', response.data.user.id)
+            // localStorage.setItem('identifier', response.data.user.username)
+            // //localStorage.setItem('role', response.data.user.role.description)
+            // localStorage.setItem('password', input.password)
+            createDetail(jwt, userId, input.firstname, input.lastname, input.dob, input.phone, input.address, path)
           })
           .catch(err => {
             console.log(err.message);
@@ -123,18 +141,18 @@ const Register = () => {
   const handleChange = (event) => {
     setChecked(event.target.checked);
     if (checked === false) {
-      setpath('patients')
-      setusername('NHS number')
-      setusernameType('number')
-    } else if (checked === true) {
       setpath('doctors')
       setusername('Username')
       setusernameType('text')
+
+    } else {
+      setpath('patients')
+      setusername('NHS number')
+      setusernameType('number')
     }
 
   };
-
-
+  console.log(path);
   return (
     <Container>
       <div className="containers" style={{ margin: "0px", padding: "0px" }}>
@@ -158,7 +176,7 @@ const Register = () => {
             label="Are you a doctor"
             inputProps={{ 'aria-label': 'primary checkbox' }}
           />
-          <span>Are you a patient?</span>
+          <span>Are you a Doctor?</span>
           <Title title={registerInput.title} />
           <TextField
             id="nhs"
@@ -271,10 +289,6 @@ const Register = () => {
       </div>
     </Container>
   );
-
-}
-
-const styles = {
 
 }
 

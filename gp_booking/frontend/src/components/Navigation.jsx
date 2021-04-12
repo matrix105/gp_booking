@@ -19,7 +19,6 @@ const Navigation = (props) => {
   const { isAuth, handleLogout } = useContext(UserContext)
 
   const toggle = () => setIsOpen(!isOpen);
-
   return (
     <div>
       <Navbar className="gp-header" color="light" expand="md">
@@ -28,7 +27,10 @@ const Navigation = (props) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink className="nav-link" href="/booking">Book Appointment</NavLink>
+              {
+                localStorage.getItem('role') === 'doctor' ? null :
+                  <NavLink className="nav-link" href="/booking" >Book Appointment</NavLink>
+              }
             </NavItem>
             <NavItem>
               <NavLink className="nav-link" href="/appointments">Appointments</NavLink>
