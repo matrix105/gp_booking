@@ -10,6 +10,10 @@ import ProtectedRoute from './components/protectedRoutes/ProtectedRoute'
 import ProtectedLogin from './components/protectedRoutes/ProtectedLogin'
 import Appointments from './components/Appointments'
 import Edit from './components/Edit'
+import Prescription from './components/Prescription'
+import Dashboard from './components/Dashboard/Dashboard'
+
+
 
 const Routes = () => {
 
@@ -27,6 +31,8 @@ const Routes = () => {
         <ProtectedRoute path='/appointments' component={Appointments} />
         <ProtectedRoute path='/about' component={About} />
         <ProtectedRoute path='/edit' component={Edit} />
+        <Route path='/prescription' component={Prescription} />
+        <Route path="/dashboard" component={Dashboard} />
       </Switch>
     </BrowserRouter>
   );
