@@ -11,7 +11,6 @@ import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
 import { UserContext } from '../context/Context'
 import SnackBar from './mini Compnents/SnackBar'
-import Webcam from "react-webcam";
 
 function getImage(props) {
 
@@ -99,17 +98,26 @@ const Register = () => {
 
   const handleForm = (e) => {
     e.preventDefault()
-    axios.post('http://localhost:1337/auth/local/register', {
+    var roleId
+    if (path === 'patients') {
+      roleId = 4
+    } else if (path === 'doctors') {
+      roleId = 3
+    }
+    axios.post('http://localhost:1337/users', {
       username: input.nhs_num,
       email: input.email,
       password: input.password,
-      //checkedA: true,
+      // role: {
+      //   id: roleId
+      // }
     })
       .then((res) => {
         console.log(res.data);
+
         axios.post(`http://localhost:1337/auth/local`, {
           identifier: input.email,
-          password: input.password
+          password: input.password,
         })
           .then((response) => {
             console.log(response.data);
@@ -120,7 +128,6 @@ const Register = () => {
             localStorage.setItem('identifier', response.data.user.username)
             //localStorage.setItem('role', response.data.user.role.description)
             localStorage.setItem('password', input.password)
-            console.log(path);
             createDetail(jwt, userId, input.firstname, input.lastname, input.dob, input.phone, input.address, path)
           })
           .catch(err => {
@@ -130,7 +137,7 @@ const Register = () => {
       })
       .catch(error => {
         console.log(error.message);
-        setSnackBar('error', 'Username or password already taken!')
+        setSnackBar('error', 'Username or email already taken!')
       })
   }
 

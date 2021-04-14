@@ -152,6 +152,7 @@ function Book(props) {
     const checkAvailability = () => {
 
         var availability = false
+        console.log(allBookings);
         if (allBookings.length < 1) {
             availability = true
         } else {
@@ -163,7 +164,6 @@ function Book(props) {
                 }
             }
         }
-
         return availability
     }
 
@@ -195,13 +195,6 @@ function Book(props) {
         setuserSelectedDate(getCurrentDate())
     };
 
-    useEffect(() => {
-
-        getBookings()
-
-
-    }, [])
-
     const book = () => {
         const userId = localStorage.getItem('username')
         axios.get(`http://localhost:1337/patients?user=${userId}`, {
@@ -232,6 +225,9 @@ function Book(props) {
             console.log(err);
         })
     }
+    useEffect(() => {
+        getBookings()
+    }, [])
 
     function getStepContent(stepIndex) {
         switch (stepIndex) {
@@ -299,6 +295,7 @@ function Book(props) {
                     setselectedTime("")
                 } else {
                     if (checkAvailability()) {
+                        console.log(checkAvailability());
                         //alert('Booking sucessfull')
                         book()
                         //setSnackBar('success', 'Doctor available')
