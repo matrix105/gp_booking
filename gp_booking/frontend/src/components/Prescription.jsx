@@ -8,14 +8,11 @@ class Prescription extends React.Component {
     errors: null,
   };
 
-getBookings() {
-    axios
-      .get("http://localhost:1337/bookings")
-      .then(response =>  this.setState({ bookings: response.data ,isLoading: false  }))
-      .catch(error => this.setState({ error, isLoading: false }));
-  }
   componentDidMount() {
-    this.getBookings();
+    axios
+    .get("http://localhost:1337/bookings")
+    .then(response =>  this.setState({ bookings: response.data ,isLoading: false  }))
+    .catch(error => this.setState({ error, isLoading: false }));
   }
 
   render() {

@@ -1,47 +1,61 @@
-import React from 'react';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import TodayIcon from '@material-ui/icons/Today';
-import PeopleIcon from '@material-ui/icons/People';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import LayersIcon from '@material-ui/icons/Layers';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import LocalHospitalOutlinedIcon from '@material-ui/icons/LocalHospitalOutlined';
+import React from "react";
+import ListItem, { ListItemProps } from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListSubheader from "@material-ui/core/ListSubheader";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import TodayIcon from "@material-ui/icons/Today";
+import PeopleIcon from "@material-ui/icons/People";
+import BarChartIcon from "@material-ui/icons/BarChart";
+import LayersIcon from "@material-ui/icons/Layers";
+import AssignmentIcon from "@material-ui/icons/Assignment";
+import LocalHospitalOutlinedIcon from "@material-ui/icons/LocalHospitalOutlined";
+
+function ListItemLink(props: ListItemProps<'a', { button?: true }>) {
+  return <ListItem button component="a" {...props} />;
+}
 
 export const mainListItems = (
   <div>
     <ListItem button>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <ListItemLink href="/dashboard">
+        <ListItemIcon>
+          <DashboardIcon />
+        </ListItemIcon>
+        <ListItemText primary="Dashboard" />
+      </ListItemLink>
     </ListItem>
     <ListItem button>
-      <ListItemIcon>
-        <TodayIcon />
-      </ListItemIcon>
-      <ListItemText primary="Bookings" />
+      <ListItemLink href="/dashboard/booking">
+        <ListItemIcon>
+          <TodayIcon />
+        </ListItemIcon>
+        <ListItemText primary="Bookings" />
+      </ListItemLink>
     </ListItem>
     <ListItem button>
+    <ListItemLink href="/dashboard/patients">
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
       <ListItemText primary="Patients" />
+      </ListItemLink>
     </ListItem>
     <ListItem button>
+    <ListItemLink href="/dashboard/doctors">
       <ListItemIcon>
         <LocalHospitalOutlinedIcon />
       </ListItemIcon>
       <ListItemText primary="Doctors" />
+      </ListItemLink>
     </ListItem>
     <ListItem button>
+    <ListItemLink href="/dashboard/presctiptions">
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
       <ListItemText primary="Prescriptions" />
+      </ListItemLink>
     </ListItem>
   </div>
 );

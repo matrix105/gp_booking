@@ -12,6 +12,9 @@ import Appointments from './components/Appointments'
 import Edit from './components/Edit'
 import Prescription from './components/Prescription'
 import Dashboard from './components/Dashboard/Dashboard'
+import Bookings from './components/Dashboard/Bookings'
+import Doctors from './components/Dashboard/Doctors'
+import Patients from './components/Dashboard/Patients'
 
 
 
@@ -33,6 +36,9 @@ const Routes = () => {
         <ProtectedRoute path='/edit' component={Edit} />
         <ProtectedRoute path='/prescription' component={Prescription} />
         <ProtectedRoute path="/dashboard" component={Dashboard} />
+        <ProtectedRoute path="/dashboard/bookings" component={Bookings} />
+        <ProtectedRoute path="/dashboard/doctors" component={Doctors} />
+        <ProtectedRoute path="/dashboard/patients" component={Patients} />
       </Switch>
     </BrowserRouter>
   );
