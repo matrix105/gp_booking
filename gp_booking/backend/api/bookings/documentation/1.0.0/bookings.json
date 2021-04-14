@@ -522,106 +522,6 @@
           "id": {
             "type": "string"
           },
-          "doctor": {
-            "required": [
-              "id",
-              "fname",
-              "lname"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fname": {
-                "type": "string"
-              },
-              "lname": {
-                "type": "string"
-              },
-              "dob": {
-                "type": "string"
-              },
-              "phone": {
-                "type": "integer"
-              },
-              "address": {
-                "type": "string"
-              },
-              "user": {
-                "type": "string"
-              },
-              "bookings": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "shift": {
-                "type": "component"
-              },
-              "mname": {
-                "type": "string"
-              },
-              "published_at": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
-          "patient": {
-            "required": [
-              "id",
-              "fname",
-              "lname",
-              "address"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "fname": {
-                "type": "string"
-              },
-              "lname": {
-                "type": "string"
-              },
-              "mname": {
-                "type": "string"
-              },
-              "phone": {
-                "type": "integer"
-              },
-              "dob": {
-                "type": "string"
-              },
-              "address": {
-                "type": "string"
-              },
-              "user": {
-                "type": "string"
-              },
-              "bookings": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "published_at": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
           "Time": {
             "type": "string"
           },
@@ -637,12 +537,6 @@
       },
       "NewBookings": {
         "properties": {
-          "doctor": {
-            "type": "string"
-          },
-          "patient": {
-            "type": "string"
-          },
           "Time": {
             "type": "string"
           },

@@ -59,13 +59,20 @@
       "plugin": "users-permissions",
       "configurable": false
     },
-    "doctor": {
-      "via": "user",
-      "model": "doctor"
+    "fname": {
+      "type": "string"
     },
-    "patient": {
-      "via": "user",
-      "model": "patient"
+    "lname": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "integer"
+    },
+    "dob": {
+      "type": "date"
+    },
+    "address": {
+      "type": "text"
     }
   }
 }

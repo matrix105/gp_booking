@@ -561,10 +561,19 @@
                 "role": {
                   "type": "string"
                 },
-                "doctor": {
+                "fname": {
                   "type": "string"
                 },
-                "patient": {
+                "lname": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "integer"
+                },
+                "dob": {
+                  "type": "string"
+                },
+                "address": {
                   "type": "string"
                 },
                 "created_by": {

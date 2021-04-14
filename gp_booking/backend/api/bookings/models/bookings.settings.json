@@ -11,14 +11,6 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "doctor": {
-      "model": "doctor",
-      "via": "bookings"
-    },
-    "patient": {
-      "via": "bookings",
-      "model": "patient"
-    },
     "Time": {
       "type": "time"
     },
