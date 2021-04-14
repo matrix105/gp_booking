@@ -121,7 +121,6 @@ function Book(props) {
                     tempArray.push(response.data[index])
                 }
                 setdoctors(tempArray)
-
             })
             .catch(err => {
                 console.log(err.message);
@@ -134,6 +133,7 @@ function Book(props) {
 
     // get all bookings to compare 
     const getBookings = () => {
+        getDoctor()
         axios.get(`http://localhost:1337/bookings`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -198,7 +198,7 @@ function Book(props) {
     useEffect(() => {
 
         getBookings()
-        getDoctor()
+
 
     }, [])
 
@@ -210,12 +210,13 @@ function Book(props) {
             },
         }).then(res => {
             var patientId = res.data[0].id
+            console.log(res);
             axios.post(`http://localhost:1337/bookings`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
                 date: getCurrentDate(),
-                doctor: doctor.id,
+                doctor: doctor,
                 patient: patientId,
                 time: selectedTime,
 
@@ -313,9 +314,6 @@ function Book(props) {
     }
 
 
-
-    console.log(localStorage.getItem('role'));
-
     return (
         <div className={classes.root}>
             <h1>{userSelectedDate}</h1>
@@ -354,10 +352,7 @@ function Book(props) {
                     </div>
                 )}
             </div>
-            <SnackBar
-                type='warning'
-                message='Not verified or no doctors available'
-            />
+
         </div>
     );
 }

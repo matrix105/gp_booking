@@ -31,13 +31,13 @@ function Login() {
 
   function login(response) {
     //handleLogin()
-    console.log(response.data);
+    console.log(response.data.user.role);
     setCookie(response.data.jwt)
     localStorage.setItem('username', response.data.user.id)
     localStorage.setItem('identifier', response.data.user.username)
     localStorage.setItem('role', response.data.user.role.description)
     localStorage.setItem('password', input.password)
-    history.push('/booking')
+    history.push('/dashboard')
   }
 
   const handleForm = (e) => {
@@ -57,6 +57,7 @@ function Login() {
         setUserInformation(response.data)
         handleClick()
         login(response)
+        console.log(response);
       })
       .catch(err => {
         // setmessage('Invalid nhs number or password')

@@ -3,6 +3,7 @@ import { UserContext } from '../context/Context'
 import { makeStyles, TextField, InputLabel } from '@material-ui/core';
 import Buttons from './mini Compnents/Buttons'
 import axios from 'axios'
+import SnackBar from './mini Compnents/SnackBar';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -39,7 +40,10 @@ function Edit(props) {
 
     const [editable, seteditable] = useState(false)
 
+    const { handleClick } = useContext(UserContext)
+
     const initialState = () => {
+        console.log(localStorage.getItem('role'));
         var path
         const role = localStorage.getItem('role')
         if (role === 'Patient') {
@@ -59,7 +63,7 @@ function Edit(props) {
         }).then((res) => {
             var startTime, endTime
             console.log(res.data);
-            if (localStorage.getItem('role') === 'doctor') {
+            if (localStorage.getItem('role') === 'Doctor') {
                 if (res.data[0].shift.length != 0) {
                     startTime = res.data[0].shift[0].start;
                     endTime = res.data[0].shift[0].end;
@@ -78,6 +82,7 @@ function Edit(props) {
             })
         }).catch(err => {
             console.log(err);
+            handleClick()
         })
     }
 
@@ -153,10 +158,10 @@ function Edit(props) {
 
                         )
                     case 'startTime':
-                        return localStorage.getItem('role') === 'doctor' ? shiftTime(state.startTime, input, onTextChange(input), "Start Time") : null
+                        return localStorage.getItem('role') === 'Doctor' ? shiftTime(state.startTime, input, onTextChange(input), "Start Time") : null
 
                     case 'endTime':
-                        return localStorage.getItem('role') === 'doctor' ? shiftTime(state.endTime, input, onTextChange(input), "End Time") : null
+                        return localStorage.getItem('role') === 'Doctor' ? shiftTime(state.endTime, input, onTextChange(input), "End Time") : null
 
                     default:
                         return
@@ -165,7 +170,7 @@ function Edit(props) {
         )
     }
 
-    const handleClick = (e) => {
+    const handleEdit = (e) => {
         seteditable(!editable)
     }
     const handleSubmit = (e) => {
@@ -210,7 +215,7 @@ function Edit(props) {
                             name="Edit"
                             color="primary"
                             type="button"
-                            onClick={handleClick}
+                            onClick={handleEdit}
                         />
                     </div>
                     <div style={{ width: '45%' }}>
@@ -224,6 +229,10 @@ function Edit(props) {
                     </div>
                 </div>
             </form>
+            <SnackBar
+                type="warning"
+                message="Verifiaction in process. please wait"
+            />
         </div>
     );
 }

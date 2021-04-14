@@ -26,14 +26,23 @@ const Navigation = (props) => {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
+            {localStorage.getItem('token') != null ?
+              <NavItem>
+                <NavLink className="nav-link" href="/dashboard">Dashboard</NavLink>
+              </NavItem>
+              : null}
+
             <NavItem>
               {
-                localStorage.getItem('role') === 'doctor' ? null :
+                localStorage.getItem('role') === 'Doctor' ? null :
                   <NavLink className="nav-link" href="/booking" >Book Appointment</NavLink>
               }
             </NavItem>
             <NavItem>
               <NavLink className="nav-link" href="/appointments">Appointments</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink className="nav-link" href="/prescription">Prescription</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="/about">About</NavLink>

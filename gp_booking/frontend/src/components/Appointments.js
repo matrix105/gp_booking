@@ -19,19 +19,30 @@ const useStyles = makeStyles((theme) => ({
 
 function Appointments(props) {
     const [state, setstate] = useState([])
+    const [type, settype] = useState('')
+    const [message, setmessage] = useState('')
     const { handleClick } = useContext(UserContext)
     const classes = useStyles();
     const size = useMediaQuery('(max-width:425px)');
 
+    const setSnackBarMessage = (type, message) => {
+        settype(type)
+        setmessage(message)
+    }
+
     const getBookings = () => {
         var userId = localStorage.getItem('username')
         var path, doctorOrPatient
-        if (localStorage.getItem('role') === 'doctor') {
+        if (localStorage.getItem('role') === 'Patient') {
+            path = "patients"
+            doctorOrPatient = 'patient'
+        } else if (localStorage.getItem('role') === 'Doctor') {
             path = "doctors"
             doctorOrPatient = 'doctor'
         } else {
-            path = "patients"
-            doctorOrPatient = 'patient'
+            setSnackBarMessage('warning', 'Account not verified yet, please wait')
+            handleClick()
+            return null
         }
         axios.get(`http://localhost:1337/${path}?user=${userId}`, {
             headers: {
@@ -47,6 +58,7 @@ function Appointments(props) {
             }).then(res => {
                 console.log(res);
                 if (res.data.length === 0) {
+                    setSnackBarMessage('warning', 'No bookings yet')
                     handleClick()
                     return
                 }
@@ -54,8 +66,11 @@ function Appointments(props) {
                 setstate(datas)
             }).catch(err => {
                 console.log(err);
+                setSnackBarMessage('error', 'No Bookings yet')
                 handleClick()
             })
+        }).catch(err => {
+            console.log(err);
         })
     }
 
@@ -75,10 +90,11 @@ function Appointments(props) {
     }
 
     useEffect(() => {
-        if (localStorage.getItem('role') === 'doctor' || 'Patient') {
+        if (localStorage.getItem('role') === 'Doctor' || 'Patient') {
             getBookings()
 
         } else {
+            setSnackBarMessage('warning', 'Not verified yet')
             handleClick()
         }
 
@@ -95,10 +111,9 @@ function Appointments(props) {
             </div>
 
             <SnackBar
-                type="warning"
-                message="Not verified or no appointments "
+                type={type}
+                message={message}
             />
-
         </div>
     );
 }

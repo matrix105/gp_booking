@@ -8,11 +8,12 @@ import SnackBar from './mini Compnents/SnackBar'
 
 function Booking(props) {
   const { handleClick } = useContext(UserContext)
+  console.log(localStorage.getItem('role'));
   return (
     <center>
       <Container>
         <Jumbotron></Jumbotron>
-        {localStorage.getItem('role') === 'doctor' || 'Patient' ?
+        {localStorage.getItem('role') === 'Patient' ?
           <Book />
           :
           <>

@@ -1,17 +1,17 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, } from "react";
 import "./css/login.css";
 import Image from "./mini Compnents/Image";
 import Title from "./mini Compnents/Title";
 import { registerInput } from "./mini Compnents/inputs";
 import Messages from "./mini Compnents/Messages";
 import { Container, makeStyles, Snackbar, Checkbox } from "@material-ui/core";
-import MuiAlert from '@material-ui/lab/Alert';
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import Button from '@material-ui/core/Button';
 import { UserContext } from '../context/Context'
 import SnackBar from './mini Compnents/SnackBar'
+import Webcam from "react-webcam";
 
 function getImage(props) {
 
@@ -29,6 +29,7 @@ const useStyles = makeStyles({
 
 const Register = () => {
   const { handleClick, setCookie } = useContext(UserContext)
+
   let history = useHistory();
 
   const [input, setInput] = useState({
@@ -88,7 +89,7 @@ const Register = () => {
     }).then(res => {
       if (localStorage.getItem('token')) {
         setSnackBar('success', 'Registered Sucessfully')
-        history.push('/home')
+        history.push('/dashboard')
       }
     }).catch(err => {
       console.log(err);
@@ -120,10 +121,6 @@ const Register = () => {
             //localStorage.setItem('role', response.data.user.role.description)
             localStorage.setItem('password', input.password)
             console.log(path);
-            // localStorage.setItem('username', response.data.user.id)
-            // localStorage.setItem('identifier', response.data.user.username)
-            // //localStorage.setItem('role', response.data.user.role.description)
-            // localStorage.setItem('password', input.password)
             createDetail(jwt, userId, input.firstname, input.lastname, input.dob, input.phone, input.address, path)
           })
           .catch(err => {

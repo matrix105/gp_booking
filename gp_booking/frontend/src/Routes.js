@@ -31,8 +31,8 @@ const Routes = () => {
         <ProtectedRoute path='/appointments' component={Appointments} />
         <ProtectedRoute path='/about' component={About} />
         <ProtectedRoute path='/edit' component={Edit} />
-        <Route path='/prescription' component={Prescription} />
-        <Route path="/dashboard" component={Dashboard} />
+        <ProtectedRoute path='/prescription' component={Prescription} />
+        <ProtectedRoute path="/dashboard" component={Dashboard} />
       </Switch>
     </BrowserRouter>
   );
