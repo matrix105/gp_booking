@@ -73,6 +73,14 @@
     },
     "address": {
       "type": "text"
+    },
+    "DoctorBookings": {
+      "via": "doctor",
+      "collection": "bookings"
+    },
+    "PatientBooking": {
+      "via": "patient",
+      "collection": "bookings"
     }
   }
 }

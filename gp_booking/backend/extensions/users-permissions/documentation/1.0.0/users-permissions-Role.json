@@ -576,6 +576,18 @@
                 "address": {
                   "type": "string"
                 },
+                "DoctorBookings": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "PatientBooking": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "created_by": {
                   "type": "string"
                 },

@@ -19,7 +19,6 @@ function App() {
         <Footer />
       </Layout>
     </UserContextProvider>
-
   )
 }
 

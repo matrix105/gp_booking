@@ -13,18 +13,7 @@ function Booking(props) {
     <center>
       <Container>
         <Jumbotron></Jumbotron>
-        {localStorage.getItem('role') === 'Patient' ?
-          <Book />
-          :
-          <>
-            <h1>Please wait...</h1>
-            {handleClick()}
-          </>
-        }
-        <SnackBar
-          type="warning"
-          message="Verification in process, please wait"
-        />
+        <Book />
       </Container>
     </center>
   )
