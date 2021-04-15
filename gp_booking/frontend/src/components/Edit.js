@@ -135,6 +135,7 @@ function Edit(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        console.log(localStorage.getItem('token'));
         const userId = localStorage.getItem('id')
         axios.put(`http://localhost:1337/users/${userId}`, {
             headers: {
@@ -150,7 +151,7 @@ function Edit(props) {
             console.log(res);
         }).catch(err => {
             setSnackBar('error', "Something wrong with the values")
-            console.log(err.message);
+            console.log(err);
         })
     }
 

@@ -14,11 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-<<<<<<< HEAD
-    "x-generation-date": "04/15/2021 12:22:14 AM"
-=======
     "x-generation-date": "04/15/2021 1:52:02 AM"
->>>>>>> 979010b0c150f22c23b6d99fbe9939dbc4937cd7
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -3712,10 +3708,6 @@
                 "address": {
                   "type": "string"
                 },
-<<<<<<< HEAD
-                "notes": {
-                  "type": "string"
-=======
                 "DoctorBookings": {
                   "type": "array",
                   "items": {
@@ -3727,7 +3719,6 @@
                   "items": {
                     "type": "string"
                   }
->>>>>>> 979010b0c150f22c23b6d99fbe9939dbc4937cd7
                 },
                 "created_by": {
                   "type": "string"
@@ -3858,10 +3849,6 @@
           "address": {
             "type": "string"
           },
-<<<<<<< HEAD
-          "notes": {
-            "type": "string"
-=======
           "DoctorBookings": {
             "type": "array",
             "items": {
@@ -3929,7 +3916,6 @@
                 }
               }
             }
->>>>>>> 979010b0c150f22c23b6d99fbe9939dbc4937cd7
           }
         }
       },
@@ -3988,10 +3974,6 @@
           "address": {
             "type": "string"
           },
-<<<<<<< HEAD
-          "notes": {
-            "type": "string"
-=======
           "DoctorBookings": {
             "type": "array",
             "items": {
@@ -4003,7 +3985,6 @@
             "items": {
               "type": "string"
             }
->>>>>>> 979010b0c150f22c23b6d99fbe9939dbc4937cd7
           },
           "created_by": {
             "type": "string"

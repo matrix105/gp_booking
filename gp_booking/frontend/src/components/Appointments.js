@@ -32,10 +32,10 @@ function Appointments(props) {
 
     const getBookings = () => {
         var patientOrDoctor
-        if (localStorage.getItem('role') === "3") {
-            patientOrDoctor = "Patient"
-        } else {
+        if (localStorage.getItem('role') === "4") {
             patientOrDoctor = "Doctor"
+        } else {
+            patientOrDoctor = "Patient"
         }
         console.log(patientOrDoctor);
         axios.get(`http://localhost:1337/bookings/${patientOrDoctor}=${localStorage.getItem('id')}`, {

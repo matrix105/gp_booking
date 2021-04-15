@@ -1,6 +1,5 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
 import PropTypes, { func } from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
@@ -27,24 +26,24 @@ const useRowStyles = makeStyles({
 });
 
 const fetchApi = () => {
-  const [prescriptions, setPrescriptions] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  // const [prescriptions, setPrescriptions] = useState("");
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [error, setError] = useState(null);
 
-  useEffect(async () => {
-    setIsLoading(true);
-    setError(false);
+  // useEffect(async () => {
+  //   setIsLoading(true);
+  //   setError(false);
 
-    try {
-      const result = await axios("http://localhost:1337/prescriptions");
-      setPrescriptions(result.data);
-    } catch (error) {
-      setError(true);
-    }
+  //   try {
+  //     const result = await axios("http://localhost:1337/prescriptions");
+  //     setPrescriptions(result.data);
+  //   } catch (error) {
+  //     setError(true);
+  //   }
 
-    setIsLoading(false);
-  });
-  return { prescriptions, isLoading, error };
+  //   setIsLoading(false);
+  // });
+  // return { prescriptions, isLoading, error };
 }
 
 function createData(fname, lname, email, dob, notes) {
@@ -148,7 +147,7 @@ Row.propTypes = {
 
 
 const rows = [
-    
+
 ];
 
 export default function CollapsibleTable() {

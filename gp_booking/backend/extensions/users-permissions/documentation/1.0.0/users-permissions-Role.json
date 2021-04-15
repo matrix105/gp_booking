@@ -576,10 +576,6 @@
                 "address": {
                   "type": "string"
                 },
-<<<<<<< HEAD
-                "notes": {
-                  "type": "string"
-=======
                 "DoctorBookings": {
                   "type": "array",
                   "items": {
@@ -591,7 +587,6 @@
                   "items": {
                     "type": "string"
                   }
->>>>>>> 979010b0c150f22c23b6d99fbe9939dbc4937cd7
                 },
                 "created_by": {
                   "type": "string"

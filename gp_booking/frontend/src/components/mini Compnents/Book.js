@@ -118,7 +118,6 @@ function Book(props) {
             },
         })
             .then(response => {
-                console.log(response.data);
                 let tempArray = []
                 for (let index = 0; index < response.data.length; index++) {
                     tempArray.push(response.data[index])
@@ -150,16 +149,17 @@ function Book(props) {
         }).catch(err => {
             console.log(err.message);
         })
+
     }
 
     const checkAvailability = () => {
-
+        console.log(allBookings);
         var availability = false
         if (allBookings.length < 1) {
             availability = true
         } else {
             for (let index = 0; index < allBookings.length; index++) {
-                if (doctor.id === allBookings[index].doctor) {
+                if (doctor.id === allBookings[index].doctor.id) {
                     availability = false
                 } else {
                     availability = true
@@ -198,7 +198,7 @@ function Book(props) {
     };
 
     const book = () => {
-        console.log(localStorage.getItem('id'));
+
         axios.post(`http://localhost:1337/bookings`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -294,8 +294,7 @@ function Book(props) {
                         book()
                         //setSnackBar('success', 'Doctor available')
                     } else {
-                        alert('Sorry, The Doctor is not available in that selected time and date')
-                        handleReset()
+                        alert('Doctor is booked')
                         setdoctor("")
                         setselectedTime("")
                     }

@@ -53,11 +53,10 @@ function Login() {
       password: input.password
     })
       .then(response => {
-        console.log(response.data);
+        console.log(response.data.user);
         const jwt = response.data.jwt
         const id = response.data.user.id
         const role = response.data.user.role.id
-        console.log(role)
         setCookie(jwt, id, role)
         history.push('/dashboard')
       })

@@ -74,10 +74,6 @@
     "address": {
       "type": "text"
     },
-<<<<<<< HEAD
-    "notes": {
-      "type": "richtext"
-=======
     "DoctorBookings": {
       "via": "doctor",
       "collection": "bookings"
@@ -85,7 +81,6 @@
     "PatientBooking": {
       "via": "patient",
       "collection": "bookings"
->>>>>>> 979010b0c150f22c23b6d99fbe9939dbc4937cd7
     }
   }
 }
