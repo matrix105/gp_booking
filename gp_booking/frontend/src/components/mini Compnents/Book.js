@@ -42,10 +42,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const times = [
-    "8:00",
-    "8:30",
-    "9:00",
-    "9:30",
+    "08:00",
+    "08:30",
+    "09:00",
+    "09:30",
     "10:00",
     "10:30",
     "11:00",
@@ -289,8 +289,8 @@ function Book(props) {
                 if (doctor === "" || selectedTime === "") {
                     alert('Please select Date, time and doctor')
                     handleReset()
-                    setdoctor("")
-                    setselectedTime("")
+                    // setdoctor("")
+                    // setselectedTime("")
                 } else {
                     if (checkAvailability()) {
                         //alert('Booking sucessfull')
@@ -345,10 +345,6 @@ function Book(props) {
                     </div>
                 )}
             </div>
-            <SnackBar
-                type={type}
-                message={message}
-            />
         </div>
     );
 }
