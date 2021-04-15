@@ -197,19 +197,21 @@ function Book(props) {
     };
 
     const book = () => {
-
         var patientId = localStorage.getItem('id')
+        console.log(patientId);
+        console.log(doctor.id);
         axios.post(`http://localhost:1337/bookings`, {
             // headers: {
             //     Authorization: `Bearer ${localStorage.getItem('token')}`,
             // },
             Time: selectedTime,
             Date: userSelectedDate,
-            doctor: null,
-            patient: null,
+            doctor: doctor.id,
+            patient: patientId,
 
         })
             .then((res) => {
+                console.log(res.data);
                 console.log('Booking successfull');
                 return null
             })
