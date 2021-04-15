@@ -29,17 +29,6 @@ function Login() {
     })
   }
 
-  function login(response) {
-    //handleLogin()
-    console.log(response.data.user.role);
-    setCookie(response.data.jwt)
-    localStorage.setItem('username', response.data.user.id)
-    localStorage.setItem('identifier', response.data.user.username)
-    localStorage.setItem('role', response.data.user.role.description)
-    localStorage.setItem('password', input.password)
-    history.push('/dashboard')
-  }
-
   const handleForm = (e) => {
     e.preventDefault();
     axios.post('http://localhost:1337/auth/local', {

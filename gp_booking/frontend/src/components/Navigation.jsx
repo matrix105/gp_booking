@@ -19,7 +19,7 @@ const Navigation = (props) => {
   const { handleLogout } = useContext(UserContext)
 
   const toggle = () => setIsOpen(!isOpen);
-  console.log(localStorage.getItem('role'));
+
   return (
     <div>
       <Navbar className="gp-header" color="light" expand="md">
@@ -33,7 +33,7 @@ const Navigation = (props) => {
               </NavItem>
               : null}
             {
-              localStorage.getItem('role') === "4" ?
+              localStorage.getItem('role') === '4' ?
                 <NavItem>
                   <NavLink className="nav-link" href="/booking" >Book Appointment</NavLink>
                 </NavItem>

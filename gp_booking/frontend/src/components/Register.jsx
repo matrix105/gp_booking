@@ -100,17 +100,22 @@ const Register = () => {
     e.preventDefault()
     var roleId
     if (path === 'patients') {
-      roleId = 3
-    } else if (path === 'doctors') {
       roleId = 4
+    } else if (path === 'doctors') {
+      roleId = 3
     }
     axios.post('http://localhost:1337/users', {
       username: input.nhs_num,
       email: input.email,
       password: input.password,
-      // role: {
-      //   id: roleId
-      // }
+      fname: input.firstname,
+      lname: input.lastname,
+      dob: input.dob,
+      phone: input.phone,
+      address: input.address,
+      role: {
+        id: roleId
+      }
     })
       .then((res) => {
         console.log(res.data);
@@ -125,10 +130,9 @@ const Register = () => {
             const jwt = response.data.jwt
             const id = response.data.user.id
             const role = response.data.user.role.id
-            console.log(role);
             setCookie(jwt, id, role)
             setSnackBar('success', 'Successfully registered')
-            history.push('/dashboard')
+            //history.push('/dashboard')
           })
           .catch(err => {
             console.log(err.message);

@@ -76,6 +76,14 @@
     },
     "notes": {
       "type": "richtext"
+    },
+    "patientBooking": {
+      "via": "patient",
+      "collection": "bookings"
+    },
+    "doctorBooking": {
+      "via": "doctor",
+      "collection": "bookings"
     }
   }
 }

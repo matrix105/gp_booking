@@ -199,18 +199,17 @@ function Book(props) {
     const book = () => {
 
         var patientId = localStorage.getItem('id')
-
         axios.post(`http://localhost:1337/bookings`, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-            Date: userSelectedDate,
-            doctor: doctor,
-            patient: patientId,
+            // headers: {
+            //     Authorization: `Bearer ${localStorage.getItem('token')}`,
+            // },
             Time: selectedTime,
+            Date: userSelectedDate,
+            doctor: null,
+            patient: null,
 
         })
-            .then(() => {
+            .then((res) => {
                 console.log('Booking successfull');
                 return null
             })
@@ -289,7 +288,6 @@ function Book(props) {
                     setselectedTime("")
                 } else {
                     if (checkAvailability()) {
-                        console.log(checkAvailability());
                         //alert('Booking sucessfull')
                         book()
                         //setSnackBar('success', 'Doctor available')

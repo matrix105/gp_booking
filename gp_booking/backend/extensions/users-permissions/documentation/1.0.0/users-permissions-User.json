@@ -1269,6 +1269,74 @@
           },
           "notes": {
             "type": "string"
+          },
+          "patientBooking": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "Time": {
+                  "type": "string"
+                },
+                "Date": {
+                  "type": "string"
+                },
+                "patient": {
+                  "type": "string"
+                },
+                "doctor": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "doctorBooking": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "Time": {
+                  "type": "string"
+                },
+                "Date": {
+                  "type": "string"
+                },
+                "patient": {
+                  "type": "string"
+                },
+                "doctor": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -1329,6 +1397,18 @@
           },
           "notes": {
             "type": "string"
+          },
+          "patientBooking": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "doctorBooking": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "created_by": {
             "type": "string"

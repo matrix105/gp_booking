@@ -8,7 +8,7 @@ import SnackBar from './mini Compnents/SnackBar'
 
 function Booking(props) {
   const { handleClick } = useContext(UserContext)
-
+  console.log(localStorage.getItem('role'));
   return (
     <center>
       <Container>
