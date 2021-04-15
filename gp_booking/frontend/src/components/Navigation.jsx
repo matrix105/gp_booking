@@ -16,9 +16,10 @@ import { UserContext } from '../context/Context'
 
 const Navigation = (props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuth, handleLogout } = useContext(UserContext)
+  const { handleLogout } = useContext(UserContext)
 
   const toggle = () => setIsOpen(!isOpen);
+  console.log(localStorage.getItem('role'));
   return (
     <div>
       <Navbar className="gp-header" color="light" expand="md">
@@ -31,13 +32,13 @@ const Navigation = (props) => {
                 <NavLink className="nav-link" href="/dashboard">Dashboard</NavLink>
               </NavItem>
               : null}
-
-            <NavItem>
-              {
-                localStorage.getItem('role') === 3 ? null :
+            {
+              localStorage.getItem('role') === "3" ?
+                <NavItem>
                   <NavLink className="nav-link" href="/booking" >Book Appointment</NavLink>
-              }
-            </NavItem>
+                </NavItem>
+                : null
+            }
             <NavItem>
               <NavLink className="nav-link" href="/appointments">Appointments</NavLink>
             </NavItem>

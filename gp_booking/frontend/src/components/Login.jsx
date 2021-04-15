@@ -57,6 +57,7 @@ function Login() {
         const jwt = response.data.jwt
         const id = response.data.user.id
         const role = response.data.user.role.id
+        console.log(role)
         setCookie(jwt, id, role)
         history.push('/dashboard')
       })

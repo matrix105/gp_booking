@@ -31,46 +31,30 @@ function Appointments(props) {
     }
 
     const getBookings = () => {
-        var userId = localStorage.getItem('username')
-        var path, doctorOrPatient
-        if (localStorage.getItem('role') === 'Patient') {
-            path = "patients"
-            doctorOrPatient = 'patient'
-        } else if (localStorage.getItem('role') === 'Doctor') {
-            path = "doctors"
-            doctorOrPatient = 'doctor'
+        var patientOrDoctor
+        if (localStorage.getItem('role') === "3") {
+            patientOrDoctor = "Patient"
         } else {
-            setSnackBarMessage('warning', 'Account not verified yet, please wait')
-            handleClick()
-            return null
+            patientOrDoctor = "Doctor"
         }
-        axios.get(`http://localhost:1337/${path}?user=${userId}`, {
+        console.log(patientOrDoctor);
+        axios.get(`http://localhost:1337/bookings/${patientOrDoctor}=${localStorage.getItem('id')}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
         }).then(res => {
-            console.log(localStorage.getItem('username'));
-
-            axios.get(`http://localhost:1337/bookings?${doctorOrPatient}=${res.data[0].id}`, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`,
-                },
-            }).then(res => {
-                console.log(res);
-                if (res.data.length === 0) {
-                    setSnackBarMessage('warning', 'No bookings yet')
-                    handleClick()
-                    return
-                }
-                const datas = res.data
-                setstate(datas)
-            }).catch(err => {
-                console.log(err);
-                setSnackBarMessage('error', 'No Bookings yet')
+            console.log(res.data);
+            if (res.data.length === 0) {
+                setSnackBarMessage('warning', 'No bookings yet')
                 handleClick()
-            })
+                return
+            }
+            const datas = res.data
+            setstate(datas)
         }).catch(err => {
             console.log(err);
+            setSnackBarMessage('error', 'No Bookings yet')
+            handleClick()
         })
     }
 

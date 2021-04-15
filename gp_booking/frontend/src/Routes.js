@@ -30,6 +30,7 @@ const Routes = () => {
         <Route path="/" exact><Home /></Route>
         <ProtectedLogin path="/register" component={Register} />
         <ProtectedLogin path='/login' component={Login} />
+        {localStorage.getItem('role') === "3" ? <ProtectedRoute path='/booking' component={Booking} /> : <ProtectedRoute path="/dashboard" component={Dashboard} />}
         <ProtectedRoute path='/booking' component={Booking} />
         <ProtectedRoute path='/appointments' component={Appointments} />
         <ProtectedRoute path='/about' component={About} />

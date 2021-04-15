@@ -68,9 +68,9 @@ const Register = () => {
     e.preventDefault()
     var roleId
     if (path === 'patients') {
-      roleId = 4
-    } else if (path === 'doctors') {
       roleId = 3
+    } else if (path === 'doctors') {
+      roleId = 4
     }
     axios.post('http://localhost:1337/users', {
       username: input.nhs_num,
@@ -94,6 +94,7 @@ const Register = () => {
             const jwt = response.data.jwt
             const id = response.data.user.id
             const role = response.data.user.role.id
+            console.log(role);
             setCookie(jwt, id, role)
             setSnackBar('success', 'Successfully registered')
             history.push('/dashboard')

@@ -34,8 +34,6 @@ function Edit(props) {
             dob: '',
             phone: '',
             address: '',
-            startTime: '',
-            endTime: ''
         })
 
     const [editable, seteditable] = useState(false)
@@ -43,43 +41,24 @@ function Edit(props) {
     const { handleClick } = useContext(UserContext)
 
     const initialState = () => {
-        console.log(localStorage.getItem('role'));
-        var path
-        const role = localStorage.getItem('role')
-        if (role === 'Patient') {
-            path = 'patients'
-        } else {
-            path = 'doctors'
-        }
-
-        const userId = localStorage.getItem('username')
-        console.log(userId);
-        console.log(path);
-        console.log(localStorage.getItem('token'));
-        axios.get(`http://localhost:1337/${path}?user=${userId}`, {
+        axios.get(`http://localhost:1337/users/me`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
         }).then((res) => {
             var startTime, endTime
             console.log(res.data);
-            if (localStorage.getItem('role') === 'Doctor') {
-                if (res.data[0].shift.length != 0) {
-                    startTime = res.data[0].shift[0].start;
-                    endTime = res.data[0].shift[0].end;
-                }
-            }
-            res.data.map(infos => {
-                setstate({
-                    fname: infos.fname,
-                    lname: infos.lname,
-                    dob: infos.dob,
-                    phone: infos.phone,
-                    address: infos.address,
-                    startTime: startTime,
-                    endTime: endTime
-                })
+
+            const data = res.data
+
+            setstate({
+                fname: data.fname,
+                lname: data.lname,
+                dob: data.dob,
+                phone: data.phone,
+                address: data.address,
             })
+
         }).catch(err => {
             console.log(err);
             handleClick()
@@ -90,31 +69,9 @@ function Edit(props) {
         setstate({ ...state, [name]: e.target.value })
     }
 
-    const shiftTime = (value, input, onchange, label) => {
-        return (!editable ?
-            <TextField
-                id="outlined-basic"
-                label={label} variant="outlined"
-                value={value} key={input}
-                InputLabelProps={{ style: { fontSize: labelsize } }}
-                inputProps={{ style: { fontSize: fontsize } }} disabled
-                type="time"
-            />
-            :
-            <TextField
-                id="outlined-basic"
-                label={label} variant="outlined"
-                value={value} key={input} onchange={onchange}
-                InputLabelProps={{ style: { fontSize: labelsize } }}
-                inputProps={{ style: { fontSize: fontsize } }}
-                type="time"
-            />
-        )
-
-    }
-
     const createInput = () => {
         const tempArray = []
+        console.log(state);
         for (const input in state) {
             tempArray.push(input)
         }
@@ -157,11 +114,6 @@ function Edit(props) {
                                 <TextField id="outlined-basic" label="Address" variant="outlined" onChange={onTextChange(input)} value={state.address} key={input} InputLabelProps={{ style: { fontSize: labelsize } }} inputProps={{ style: { fontSize: fontsize } }} />
 
                         )
-                    case 'startTime':
-                        return localStorage.getItem('role') === 'Doctor' ? shiftTime(state.startTime, input, onTextChange(input), "Start Time") : null
-
-                    case 'endTime':
-                        return localStorage.getItem('role') === 'Doctor' ? shiftTime(state.endTime, input, onTextChange(input), "End Time") : null
 
                     default:
                         return
@@ -173,17 +125,18 @@ function Edit(props) {
     const handleEdit = (e) => {
         seteditable(!editable)
     }
+
+    const [type, settype] = useState('')
+    const [message, setmessage] = useState('')
+    const setSnackBar = (type, message) => {
+        settype(type)
+        setmessage(message)
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        var path
-        const role = localStorage.getItem('role')
-        if (role === 'Patient') {
-            path = 'patients'
-        } else {
-            path = 'doctors'
-        }
-        const userId = localStorage.getItem('username')
-        axios.put(`http://localhost:1337/${path}?user=${userId}`, {
+        const userId = localStorage.getItem('id')
+        axios.put(`http://localhost:1337/users/${userId}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
@@ -193,8 +146,10 @@ function Edit(props) {
             dob: state.dob,
             address: state.address
         }).then(res => {
+            setSnackBar('success', "Changes have been updated")
             console.log(res);
         }).catch(err => {
+            setSnackBar('error', "Something wrong with the values")
             console.log(err.message);
         })
     }
@@ -230,8 +185,8 @@ function Edit(props) {
                 </div>
             </form>
             <SnackBar
-                type="warning"
-                message="Verifiaction in process. please wait"
+                type={type}
+                message={message}
             />
         </div>
     );
