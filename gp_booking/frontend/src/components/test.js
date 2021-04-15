@@ -139,12 +139,15 @@ export default function CollapsibleTable() {
 
 
   const fetchApi = async () => {
-    var tempArrap = []
+    var tempArray = []
     setIsLoading(true);
     setError(false);
     try {
       const result = await axios("http://localhost:1337/prescriptions");
-      console.log(result.data);
+      for (let index = 0; index < result.data.length; index++) {
+        tempArray.push(result.data[index]);
+      }
+      setPrescriptions(tempArray)
     } catch (error) {
       setError(true);
     }
