@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/prescriptions",
+      "handler": "prescriptions.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/prescriptions/count",
+      "handler": "prescriptions.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/prescriptions/:id",
+      "handler": "prescriptions.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/prescriptions",
+      "handler": "prescriptions.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/prescriptions/:id",
+      "handler": "prescriptions.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/prescriptions/:id",
+      "handler": "prescriptions.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
