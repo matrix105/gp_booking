@@ -171,7 +171,7 @@ export default function CollapsibleTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {prescriptions.map((row) => (
             <Row key={row.name} row={row} />
           ))}
         </TableBody>
