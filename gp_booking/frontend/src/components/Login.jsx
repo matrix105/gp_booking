@@ -47,17 +47,12 @@ function Login() {
       password: input.password
     })
       .then(response => {
-        if (response.data.user.role.name = null) {
-          console.log('its null');
-        } else {
-          setpath(response.data.user.role.name)
-        }
-        setType('success')
-        setmessage('Successfully logged in')
-        setUserInformation(response.data)
-        handleClick()
-        login(response)
-        console.log(response);
+        console.log(response.data.user);
+        const jwt = response.data.jwt
+        const id = response.data.user.id
+        const role = response.data.user.role.id
+        setCookie(jwt, id, role)
+        history.push('/dashboard')
       })
       .catch(err => {
         // setmessage('Invalid nhs number or password')

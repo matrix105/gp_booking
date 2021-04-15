@@ -147,10 +147,11 @@ function Book(props) {
         }).catch(err => {
             console.log(err.message);
         })
+
     }
 
     const checkAvailability = () => {
-
+        console.log(allBookings);
         var availability = false
         console.log(allBookings);
         if (allBookings.length < 1) {
@@ -196,8 +197,13 @@ function Book(props) {
     };
 
     const book = () => {
+<<<<<<< HEAD
         const userId = localStorage.getItem('username')
         axios.get(`http://localhost:1337/patients?user=${userId}`, {
+=======
+
+        axios.post(`http://localhost:1337/bookings`, {
+>>>>>>> 2850bdc2013a6f8b5948b09173644556aa73fc06
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
@@ -300,8 +306,7 @@ function Book(props) {
                         book()
                         //setSnackBar('success', 'Doctor available')
                     } else {
-                        alert('Sorry, The Doctor is not available in that selected time and date')
-                        handleReset()
+                        alert('Doctor is booked')
                         setdoctor("")
                         setselectedTime("")
                     }
