@@ -34,28 +34,28 @@ class Prescription extends React.Component {
       },
     ];
 
-    const rows = [
-      { id: 1, lastName: "Snow", firstName: "Jon", email: 35 },
-      { id: 2, lastName: "Lannister", firstName: "Cersei", email: 42 },
-      { id: 3, lastName: "Lannister", firstName: "Jaime", email: 45 },
-      { id: 4, lastName: "Stark", firstName: "Arya", email: 16 },
-      { id: 5, lastName: "Targaryen", firstName: "Daenerys", email: null },
-      { id: 6, lastName: "Melisandre", firstName: null, email: 150 },
-      { id: 7, lastName: "Clifford", firstName: "Ferrara", email: 44 },
-      { id: 8, lastName: "Frances", firstName: "Rossini", email: 36 },
-      { id: 9, lastName: "Roxie", firstName: "Harvey", email: 65 },
-    ];
+    // const rows = [
+    //   { id: 1, lastName: "Snow", firstName: "Jon", email: 35 },
+    //   { id: 2, lastName: "Lannister", firstName: "Cersei", email: 42 },
+    //   { id: 3, lastName: "Lannister", firstName: "Jaime", email: 45 },
+    //   { id: 4, lastName: "Stark", firstName: "Arya", email: 16 },
+    //   { id: 5, lastName: "Targaryen", firstName: "Daenerys", email: null },
+    //   { id: 6, lastName: "Melisandre", firstName: null, email: 150 },
+    //   { id: 7, lastName: "Clifford", firstName: "Ferrara", email: 44 },
+    //   { id: 8, lastName: "Frances", firstName: "Rossini", email: 36 },
+    //   { id: 9, lastName: "Roxie", firstName: "Harvey", email: 65 },
+    // ];
 
     return (
       <React.Fragment>
-        <div style={{ height: 400, width: "100%" }}>
+        {/* <div style={{ height: 400, width: "100%" }}>
           <DataGrid
             rows={rows}
             columns={columns}
             pageSize={5}
             checkboxSelection
           />
-        </div>
+        </div> */}
         <RequestPrescriptionForm />
 
         {/* <h2>Prescriptions</h2>
