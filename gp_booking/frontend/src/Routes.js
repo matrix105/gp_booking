@@ -21,10 +21,6 @@ import Patients from './components/Dashboard/Patients'
 
 const Routes = () => {
 
-  if (localStorage.getItem('token') != null) {
-    console.log('logged in');
-  }
-  console.log(localStorage.getItem('role'));
   return (
     <BrowserRouter>
       <Switch>

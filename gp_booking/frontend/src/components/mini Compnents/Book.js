@@ -109,13 +109,14 @@ function Book(props) {
     }
 
     // Get available doctors
-    const getDoctor = (date) => {
-        axios.get(`http://localhost:1337/doctors`, {
+    const getDoctor = () => {
+        axios.get(`http://localhost:1337/users/?role=3`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
         })
             .then(response => {
+                console.log((response.data));
                 let tempArray = []
                 for (let index = 0; index < response.data.length; index++) {
                     tempArray.push(response.data[index])
@@ -151,7 +152,6 @@ function Book(props) {
     }
 
     const checkAvailability = () => {
-        console.log(allBookings);
         var availability = false
         console.log(allBookings);
         if (allBookings.length < 1) {
