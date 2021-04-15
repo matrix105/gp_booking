@@ -22,6 +22,11 @@ function Login() {
     password: '',
   })
 
+  const setSnackBar = (type, message) => {
+    setType(type)
+    setmessage(message)
+    handleClick()
+  }
 
   const handleTextChange = (e) => {
     setinput({
@@ -32,11 +37,12 @@ function Login() {
   function login(response) {
     //handleLogin()
     console.log(response.data.user.role);
-    setCookie(response.data.jwt)
+
     localStorage.setItem('username', response.data.user.id)
     localStorage.setItem('identifier', response.data.user.username)
     localStorage.setItem('role', response.data.user.role.description)
     localStorage.setItem('password', input.password)
+    setCookie(response.data.jwt)
     history.push('/dashboard')
   }
 
@@ -47,24 +53,15 @@ function Login() {
       password: input.password
     })
       .then(response => {
-        if (response.data.user.role.name = null) {
-          console.log('its null');
-        } else {
-          setpath(response.data.user.role.name)
-        }
-        setType('success')
-        setmessage('Successfully logged in')
-        setUserInformation(response.data)
-        handleClick()
-        login(response)
-        console.log(response);
+        console.log(response.data);
+        const jwt = response.data.jwt
+        const id = response.data.user.id
+        const role = response.data.user.role.id
+        setCookie(jwt, id, role)
+        history.push('/dashboard')
       })
       .catch(err => {
-        // setmessage('Invalid nhs number or password')
-        // setsnackColour('warning')
-        setType('error')
-        setmessage('Invalid email or password')
-        handleClick()
+        setSnackBar('error', 'Invalid username or password')
         console.log(err.message);
       })
   }

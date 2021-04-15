@@ -34,7 +34,7 @@ const Navigation = (props) => {
 
             <NavItem>
               {
-                localStorage.getItem('role') === 'Doctor' ? null :
+                localStorage.getItem('role') === 3 ? null :
                   <NavLink className="nav-link" href="/booking" >Book Appointment</NavLink>
               }
             </NavItem>

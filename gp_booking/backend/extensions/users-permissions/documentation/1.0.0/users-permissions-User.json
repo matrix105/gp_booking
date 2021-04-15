@@ -1267,8 +1267,78 @@
           "address": {
             "type": "string"
           },
+<<<<<<< HEAD
           "notes": {
             "type": "string"
+=======
+          "DoctorBookings": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "Time": {
+                  "type": "string"
+                },
+                "Date": {
+                  "type": "string"
+                },
+                "patient": {
+                  "type": "string"
+                },
+                "doctor": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "PatientBooking": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "Time": {
+                  "type": "string"
+                },
+                "Date": {
+                  "type": "string"
+                },
+                "patient": {
+                  "type": "string"
+                },
+                "doctor": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+>>>>>>> 979010b0c150f22c23b6d99fbe9939dbc4937cd7
           }
         }
       },
@@ -1327,8 +1397,22 @@
           "address": {
             "type": "string"
           },
+<<<<<<< HEAD
           "notes": {
             "type": "string"
+=======
+          "DoctorBookings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "PatientBooking": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+>>>>>>> 979010b0c150f22c23b6d99fbe9939dbc4937cd7
           },
           "created_by": {
             "type": "string"
