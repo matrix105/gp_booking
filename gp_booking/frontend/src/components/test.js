@@ -25,28 +25,10 @@ const useRowStyles = makeStyles({
   },
 });
 
-const fetchApi = () => {
-  // const [prescriptions, setPrescriptions] = useState("");
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [error, setError] = useState(null);
 
-  // useEffect(async () => {
-  //   setIsLoading(true);
-  //   setError(false);
-
-  //   try {
-  //     const result = await axios("http://localhost:1337/prescriptions");
-  //     setPrescriptions(result.data);
-  //   } catch (error) {
-  //     setError(true);
-  //   }
-
-  //   setIsLoading(false);
-  // });
-  // return { prescriptions, isLoading, error };
-}
 
 function createData(fname, lname, email, dob, notes) {
+
   return {
     fname,
     lname,
@@ -151,6 +133,28 @@ const rows = [
 ];
 
 export default function CollapsibleTable() {
+  const [prescriptions, setPrescriptions] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+
+  const fetchApi = async () => {
+    var tempArrap = []
+    setIsLoading(true);
+    setError(false);
+    try {
+      const result = await axios("http://localhost:1337/prescriptions");
+      console.log(result.data);
+    } catch (error) {
+      setError(true);
+    }
+    setIsLoading(false);
+    return { prescriptions, isLoading, error };
+  }
+
+  useEffect(() => {
+    fetchApi()
+  }, [])
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">

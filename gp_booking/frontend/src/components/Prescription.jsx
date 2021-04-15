@@ -1,6 +1,7 @@
 import * as React from "react";
 import axios from "axios";
 import { DataGrid } from "@material-ui/data-grid";
+import RequestPrescriptionForm from './mini Compnents/RequestPrescriptionForm'
 
 class Prescription extends React.Component {
   state = {
@@ -55,6 +56,7 @@ class Prescription extends React.Component {
             checkboxSelection
           />
         </div>
+        <RequestPrescriptionForm />
 
         {/* <h2>Prescriptions</h2>
         <ul>

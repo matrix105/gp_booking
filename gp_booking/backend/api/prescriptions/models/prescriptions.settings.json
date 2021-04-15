@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "prescriptions",
   "info": {
-    "name": "prescriptions"
+    "name": "prescriptions",
+    "description": ""
   },
   "options": {
     "increments": true,
