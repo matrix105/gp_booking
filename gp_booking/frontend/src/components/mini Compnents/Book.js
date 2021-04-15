@@ -198,16 +198,19 @@ function Book(props) {
 
     const book = () => {
         var patientId = localStorage.getItem('id')
-        console.log(patientId);
-        console.log(doctor.id);
+        var doctorId = doctor.id
+        console.log("Time:", selectedTime);
+        console.log("Date:", userSelectedDate);
+        console.log("patientId:", patientId);
+        console.log("DoctorId:", doctorId);
         axios.post(`http://localhost:1337/bookings`, {
             // headers: {
             //     Authorization: `Bearer ${localStorage.getItem('token')}`,
             // },
             Time: selectedTime,
             Date: userSelectedDate,
-            doctor: doctor.id,
             patient: patientId,
+            doctor: doctorId,
 
         })
             .then((res) => {
