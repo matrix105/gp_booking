@@ -4,7 +4,7 @@ import Image from "./mini Compnents/Image";
 import Title from "./mini Compnents/Title";
 import { registerInput } from "./mini Compnents/inputs";
 import Messages from "./mini Compnents/Messages";
-import { Container, makeStyles, Checkbox } from "@material-ui/core";
+import { Container, makeStyles, Snackbar, Checkbox } from "@material-ui/core";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
@@ -19,6 +19,12 @@ function getImage(props) {
 function getMessage(message) {
   return <Messages message={message} />;
 }
+
+const useStyles = makeStyles({
+  snackBar: {
+    width: '100%'
+  }
+})
 
 const Register = () => {
   const { handleClick, setCookie } = useContext(UserContext)
@@ -43,6 +49,7 @@ const Register = () => {
   const [checked, setChecked] = React.useState(false);
 
   const [username, setusername] = useState('NHS Number')
+  //const [login, setlogin] = useState(initialState)
 
   // set username type
   const [usernameType, setusernameType] = useState('number')
@@ -64,6 +71,31 @@ const Register = () => {
     handleClick()
   }
 
+  const createDetail = (jwt, userId, fname, lname, dob, phone, address, path) => {
+    console.log(jwt);
+    axios.post(`http://localhost:1337/${path}`, {
+      headers: {
+        Authorization:
+          `Bearer ${jwt}`,
+      },
+      user: userId,
+      fname: fname,
+      lname: lname,
+      dob: dob,
+      phone: phone,
+      address: address,
+
+    }).then(res => {
+      if (localStorage.getItem('token')) {
+        setSnackBar('success', 'Registered Sucessfully')
+        history.push('/dashboard')
+      }
+    }).catch(err => {
+      console.log(err);
+    })
+    console.log(path);
+  }
+
   const handleForm = (e) => {
     e.preventDefault()
     var roleId
@@ -76,12 +108,9 @@ const Register = () => {
       username: input.nhs_num,
       email: input.email,
       password: input.password,
-      fname: input.firstname,
-      lname: input.lastname,
-      dob: input.dob,
-      phone: input.phone,
-      address: input.address,
-      role: { id: roleId }
+      // role: {
+      //   id: roleId
+      // }
     })
       .then((res) => {
         console.log(res.data);
@@ -91,12 +120,15 @@ const Register = () => {
           password: input.password,
         })
           .then((response) => {
+            console.log(response.data);
+            const userId = response.data.user.id;
             const jwt = response.data.jwt
-            const id = response.data.user.id
-            const role = response.data.user.role.id
-            setCookie(jwt, id, role)
-            setSnackBar('success', 'Successfully registered')
-            history.push('/dashboard')
+            setCookie(jwt)
+            localStorage.setItem('username', response.data.user.id)
+            localStorage.setItem('identifier', response.data.user.username)
+            //localStorage.setItem('role', response.data.user.role.description)
+            localStorage.setItem('password', input.password)
+            createDetail(jwt, userId, input.firstname, input.lastname, input.dob, input.phone, input.address, path)
           })
           .catch(err => {
             console.log(err.message);

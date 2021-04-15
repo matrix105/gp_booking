@@ -98,32 +98,29 @@ function Book(props) {
         return currentTime
     }
 
-
+    // get All doctors name in list
+    const [doctors, setdoctors] = useState([])
 
 
     // handle clicked doctor
     const handleDoctorListItemClick = (event, index) => {
-        const doctor = doctorsList[index]
+        const doctor = doctors[index]
         setdoctor(doctor)
     }
 
-
     // Get available doctors
-
-    const [doctorsList, setdoctorsList] = useState([])
-    const getDoctor = () => {
-        axios.get(`http://localhost:1337/users?role=3`, {
+    const getDoctor = (date) => {
+        axios.get(`http://localhost:1337/doctors`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
         })
             .then(response => {
-                console.log(response.data);
                 let tempArray = []
                 for (let index = 0; index < response.data.length; index++) {
                     tempArray.push(response.data[index])
                 }
-                setdoctorsList(tempArray)
+                setdoctors(tempArray)
             })
             .catch(err => {
                 console.log(err.message);
@@ -155,11 +152,12 @@ function Book(props) {
     const checkAvailability = () => {
 
         var availability = false
+        console.log(allBookings);
         if (allBookings.length < 1) {
             availability = true
         } else {
             for (let index = 0; index < allBookings.length; index++) {
-                if (doctor.id === allBookings[index].doctor) {
+                if (doctor.id === allBookings[index].doctor.id) {
                     availability = false
                 } else {
                     availability = true
@@ -198,25 +196,34 @@ function Book(props) {
     };
 
     const book = () => {
-        console.log(localStorage.getItem('id'));
-        axios.post(`http://localhost:1337/bookings`, {
+        const userId = localStorage.getItem('username')
+        axios.get(`http://localhost:1337/patients?user=${userId}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
-            date: userSelectedDate,
-            patient: localStorage.getItem('id'),
-            doctor: doctor.id,
-            time: selectedTime,
+        }).then(res => {
+            var patientId = res.data[0].id
+            console.log(res);
+            axios.post(`http://localhost:1337/bookings`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+                date: getCurrentDate(),
+                doctor: doctor,
+                patient: patientId,
+                time: selectedTime,
 
+            })
+                .then(() => {
+                    console.log('Booking successfull');
+                    return null
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }).catch(err => {
+            console.log(err);
         })
-            .then(() => {
-                console.log('Booking successfull');
-                return null
-            })
-            .catch(err => {
-                console.log(err);
-            })
-
     }
     useEffect(() => {
         getBookings()
@@ -261,16 +268,15 @@ function Book(props) {
                     })
                 )
             case 2:
-                { console.log(doctorsList) }
                 return (
                     <form>
-                        {doctorsList.map(doctor => {
+                        {doctors.map(doctor => {
                             return (
                                 <List component="nav" aria-label="secondary mailbox folder" className={classes.time} style={{ maxHeight: '50%', overflow: 'scroll' }}>
                                     <ListItem
                                         button
                                         selected={selectedIndex === 0}
-                                        onClick={(event) => handleDoctorListItemClick(event, doctorsList.indexOf(doctor))}
+                                        onClick={(event) => handleDoctorListItemClick(event, doctors.indexOf(doctor))}
                                         key={doctor.id}
                                     >
                                         <ListItemText primary={doctor.fname} />
@@ -283,7 +289,7 @@ function Book(props) {
                 )
             default:
                 if (doctor === "" || selectedTime === "") {
-                    setSnackBar('warning', 'Please select time and doctor')
+                    alert('Please select Date, time and doctor')
                     handleReset()
                     setdoctor("")
                     setselectedTime("")
@@ -343,10 +349,6 @@ function Book(props) {
                     </div>
                 )}
             </div>
-            <SnackBar
-                type={type}
-                message={message}
-            />
 
         </div>
     );

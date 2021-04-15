@@ -24,10 +24,9 @@ const UserContextProvider = (props) => {
         //setisAuth(false);
     }
 
-    const setCookie = (jwt, id, role) => {
+    const setCookie = (jwt) => {
         localStorage.setItem('token', jwt);
-        localStorage.setItem('id', id)
-        localStorage.setItem('role', role)
+
     }
 
     return (
