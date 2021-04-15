@@ -16,16 +16,6 @@
     },
     "Date": {
       "type": "date"
-    },
-    "Patient": {
-      "plugin": "users-permissions",
-      "model": "user",
-      "via": "PatientBooking"
-    },
-    "Doctor": {
-      "plugin": "users-permissions",
-      "model": "user",
-      "via": "DoctorBooking"
     }
   }
 }
