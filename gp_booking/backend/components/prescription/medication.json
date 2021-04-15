@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_prescription_medications",
+  "info": {
+    "name": "medication",
+    "icon": "ambulance"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "strength": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "integer"
+    }
+  }
+}

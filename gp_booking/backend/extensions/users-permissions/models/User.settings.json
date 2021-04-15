@@ -73,6 +73,9 @@
     },
     "address": {
       "type": "text"
+    },
+    "notes": {
+      "type": "richtext"
     }
   }
 }

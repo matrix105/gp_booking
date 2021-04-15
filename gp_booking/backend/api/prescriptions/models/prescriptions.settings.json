@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "prescriptions",
+  "info": {
+    "name": "prescriptions"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "fname": {
+      "type": "string"
+    },
+    "lname": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "dob": {
+      "type": "date"
+    },
+    "medication": {
+      "type": "component",
+      "repeatable": true,
+      "component": "prescription.medication"
+    },
+    "note": {
+      "type": "richtext"
+    }
+  }
+}
