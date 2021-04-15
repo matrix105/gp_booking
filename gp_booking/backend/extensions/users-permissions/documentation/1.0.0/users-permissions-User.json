@@ -1267,73 +1267,8 @@
           "address": {
             "type": "string"
           },
-          "DoctorBookings": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "Time": {
-                  "type": "string"
-                },
-                "Date": {
-                  "type": "string"
-                },
-                "patient": {
-                  "type": "string"
-                },
-                "doctor": {
-                  "type": "string"
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "PatientBooking": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "Time": {
-                  "type": "string"
-                },
-                "Date": {
-                  "type": "string"
-                },
-                "patient": {
-                  "type": "string"
-                },
-                "doctor": {
-                  "type": "string"
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
+          "notes": {
+            "type": "string"
           }
         }
       },
@@ -1392,17 +1327,8 @@
           "address": {
             "type": "string"
           },
-          "DoctorBookings": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "PatientBooking": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "notes": {
+            "type": "string"
           },
           "created_by": {
             "type": "string"
