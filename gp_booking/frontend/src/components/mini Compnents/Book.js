@@ -197,13 +197,8 @@ function Book(props) {
     };
 
     const book = () => {
-<<<<<<< HEAD
-        const userId = localStorage.getItem('username')
-        axios.get(`http://localhost:1337/patients?user=${userId}`, {
-=======
 
         axios.post(`http://localhost:1337/bookings`, {
->>>>>>> 2850bdc2013a6f8b5948b09173644556aa73fc06
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
