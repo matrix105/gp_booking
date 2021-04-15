@@ -198,15 +198,16 @@ function Book(props) {
     };
 
     const book = () => {
-
+        console.log(selectedTime);
+        console.log(userSelectedDate);
         axios.post(`http://localhost:1337/bookings`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
-            date: userSelectedDate,
+            Date: userSelectedDate,
+            Time: selectedTime,
             patient: localStorage.getItem('id'),
             doctor: doctor.id,
-            time: selectedTime,
 
         })
             .then(() => {
@@ -346,7 +347,6 @@ function Book(props) {
                 type={type}
                 message={message}
             />
-
         </div>
     );
 }
