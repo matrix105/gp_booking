@@ -1,14 +1,27 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import axios from "axios";
 import { DataGrid } from "@material-ui/data-grid";
 import RequestPrescriptionForm from './mini Compnents/RequestPrescriptionForm'
+import { UserContext } from "../context/Context";
+import SnackBar from "./mini Compnents/SnackBar";
 
 class Prescription extends React.Component {
   state = {
     prescriptions: [],
     isLoading: true,
     errors: null,
+    type: '',
+    message: ''
   };
+
+  static contextType = UserContext
+
+  // setSnackBar = (type, message) => {
+  //   setsnackbar({
+  //     type: type, message: message
+  //   })
+  // }
+
 
   componentDidMount() {
     axios
@@ -34,6 +47,15 @@ class Prescription extends React.Component {
       },
     ];
 
+    const { handleClick } = this.context
+    const setSnackBar = (type, message) => {
+      this.setState({
+        type: type,
+        message: message
+      })
+      handleClick()
+    }
+
     // const rows = [
     //   { id: 1, lastName: "Snow", firstName: "Jon", email: 35 },
     //   { id: 2, lastName: "Lannister", firstName: "Cersei", email: 42 },
@@ -56,8 +78,13 @@ class Prescription extends React.Component {
             checkboxSelection
           />
         </div> */}
-        <RequestPrescriptionForm />
-
+        <RequestPrescriptionForm
+          setSnackBar={setSnackBar}
+        />
+        <SnackBar
+          type={this.state.type}
+          message={this.state.message}
+        />
         {/* <h2>Prescriptions</h2>
         <ul>
           {!isLoading ? (

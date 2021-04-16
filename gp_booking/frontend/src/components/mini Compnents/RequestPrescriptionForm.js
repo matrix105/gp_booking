@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { makeStyles, TextField, Button } from '@material-ui/core'
 import axios from 'axios'
+import { UserContext } from '../../context/Context'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,21 +32,25 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+const initialState = {
+    fname: '',
+    lname: '',
+    email: '',
+    dob: '',
+    note: ''
+}
+const medicationInitialState = [{
+    name: '',
+    strength: '',
+    quantity: 0,
+}]
+
 function RequestPrescriptionForm(props) {
     const classes = useStyles();
-    const [textFields, settextFields] = useState([])
-    const [inputs, setinputs] = useState({
-        fname: '',
-        lname: '',
-        email: '',
-        dob: '',
-        note: ''
-    })
-    const [medication, setmedication] = useState([{
-        name: '',
-        strength: '',
-        quantity: 0,
-    }])
+    const [inputs, setinputs] = useState(initialState)
+    const [medication, setmedication] = useState(medicationInitialState)
+
+
 
     const handleText = (e) => {
         setinputs({
@@ -91,6 +96,8 @@ function RequestPrescriptionForm(props) {
         //     }).catch(err => {
         //         console.log(err);
         //     })
+        console.log(inputs.fname);
+        console.log(medication);
         axios.post('http://localhost:1337/prescriptions', {
             fname: inputs.fname,
             lname: inputs.fname,
@@ -100,8 +107,13 @@ function RequestPrescriptionForm(props) {
             medication: medication,
         }).then(res => {
             console.log(res.data);
+            props.setSnackBar('success', 'Prescription request successfull')
+            setinputs(initialState)
+            setmedication(medicationInitialState)
+
         }).catch(err => {
             console.log(err);
+            props.setSnackBar('warning', 'Please fill all the form')
         })
     }
 
