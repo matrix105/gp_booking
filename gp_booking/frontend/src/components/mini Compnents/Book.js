@@ -5,7 +5,6 @@ import Step from '@material-ui/core/Step';
 import { UserContext } from '../../context/Context'
 import StepLabel from '@material-ui/core/StepLabel';
 import axios from 'axios'
-import SnackBar from './SnackBar'
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { List, ListItem, ListItemText, TextField } from '@material-ui/core';
@@ -67,7 +66,6 @@ function getSteps() {
 
 
 function Book(props) {
-    const { handleClick, userInformation } = useContext(UserContext)
 
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
@@ -116,7 +114,6 @@ function Book(props) {
             },
         })
             .then(response => {
-                console.log((response.data));
                 let tempArray = []
                 for (let index = 0; index < response.data.length; index++) {
                     tempArray.push(response.data[index])
@@ -125,7 +122,7 @@ function Book(props) {
             })
             .catch(err => {
                 console.log(err.message);
-                setSnackBar('warning', 'Sorry, no doctors at the moment')
+                props.setSnackBar('warning', 'Sorry, no doctors at the moment')
             })
     }
 
@@ -172,16 +169,18 @@ function Book(props) {
     const [type, setType] = useState("")
     const [message, setmessage] = useState("")
 
-    const setSnackBar = (type, message) => {
-        setType(type)
-        setmessage(message)
-        handleClick()
-    }
-
     // for the stepper
     const steps = getSteps();
 
-    const handleNext = () => {
+    const handleNext = (e) => {
+        if (e.target.innerText === 'FINISH') {
+            if (checkAvailability()) {
+                book()
+            } else {
+                props.setSnackBar('warning', `${doctor.fname} is not available at requested time and date`)
+                console.log('doctor not available');
+            }
+        }
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
 
@@ -190,10 +189,12 @@ function Book(props) {
     };
 
     const handleReset = () => {
+        setallBookings([])
         setActiveStep(0);
         setselectedTime('')
         setdoctor('')
         setuserSelectedDate(getCurrentDate())
+        getBookings()
     };
 
     const book = () => {
@@ -215,6 +216,7 @@ function Book(props) {
         })
             .then((res) => {
                 console.log(res.data);
+                props.setSnackBar('success', 'Booking added')
                 console.log('Booking successfull');
                 return null
             })
@@ -282,27 +284,16 @@ function Book(props) {
                                 </List>
                             )
                         })}
-
                     </form>
                 )
-            default:
+            case 3:
                 if (doctor === "" || selectedTime === "") {
                     alert('Please select Date, time and doctor')
                     handleReset()
                     // setdoctor("")
                     // setselectedTime("")
-                } else {
-                    if (checkAvailability()) {
-                        //alert('Booking sucessfull')
-                        book()
-                        //setSnackBar('success', 'Doctor available')
-                    } else {
-                        alert('Doctor is booked')
-                        setdoctor("")
-                        setselectedTime("")
-                    }
                 }
-                return null
+                return "Confirm booking ?"
         }
     }
 
