@@ -8,7 +8,19 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
-        justifyItems: 'center'
+        alignItems: 'center',
+    },
+    container: {
+        display: 'flex',
+        flexDirection: 'column'
+    },
+    miniContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+    },
+    containerTextField: {
+        margin: theme.spacing(1),
+        width: '100%'
     },
     medicationContainer: {
         display: 'flex',
@@ -96,64 +108,56 @@ function RequestPrescriptionForm(props) {
     return (
 
         <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
-            <h2>{JSON.stringify(medication)}</h2>
-            <div className={classes.textField}>
-                <TextField
-                    id="filled-secondary"
-                    label="First Name"
-                    variant="outlined"
-                    color="secondary"
-                    value={inputs.fname}
-                    name='fname'
-
-                    onChange={handleText}
-                    required
-                />
-            </div>
-
-            <div className={classes.textField}>
-                <TextField
-                    id="filled-secondary"
-                    label="Last Name"
-                    variant="outlined"
-                    color="secondary"
-                    name='lname'
-                    value={inputs.lname}
-
-                    onChange={handleText}
-                    required
-                />
-            </div>
-
-            <div className={classes.textField}>
-                <TextField
-                    id="filled-secondary"
-                    label="Email"
-                    variant="outlined"
-                    color="secondary"
-                    name='email'
-                    value={inputs.email}
-
-                    onChange={handleText}
-                    required
-                />
-            </div>
-
-            <div className={classes.textField}>
-                <TextField
-                    id="filled-secondary"
-                    label="Date of Birth"
-                    variant="outlined"
-                    color="secondary"
-                    value={inputs.dob}
-                    name='dob'
-
-                    type="date"
-                    onChange={handleText}
-                    required
-                />
-            </div>
-            <div className={classes.textField}>
+            <div className={classes.container}>
+                <div className={classes.miniContainer}>
+                    <TextField
+                        id="filled-secondary"
+                        label="First Name"
+                        variant="outlined"
+                        color="secondary"
+                        value={inputs.fname}
+                        name='fname'
+                        className={classes.containerTextField}
+                        onChange={handleText}
+                        required
+                    />
+                    <TextField
+                        id="filled-secondary"
+                        label="Last Name"
+                        variant="outlined"
+                        color="secondary"
+                        name='lname'
+                        value={inputs.lname}
+                        className={classes.containerTextField}
+                        onChange={handleText}
+                        required
+                    />
+                </div>
+                <div className={classes.miniContainer}>
+                    <TextField
+                        id="filled-secondary"
+                        label="Email"
+                        variant="outlined"
+                        color="secondary"
+                        name='email'
+                        value={inputs.email}
+                        className={classes.containerTextField}
+                        onChange={handleText}
+                        required
+                    />
+                    <TextField
+                        id="filled-secondary"
+                        label="Date of Birth"
+                        variant="outlined"
+                        color="secondary"
+                        value={inputs.dob}
+                        name='dob'
+                        className={classes.containerTextField}
+                        type="date"
+                        onChange={handleText}
+                        required
+                    />
+                </div>
                 <TextField
                     id="filled-secondary"
                     label="Note"
@@ -161,16 +165,16 @@ function RequestPrescriptionForm(props) {
                     color="secondary"
                     value={inputs.note}
                     name='note'
-
+                    className={classes.textField}
                     type="text"
                     onChange={handleText}
                     required
                 />
-            </div>
-            {medication.map((x, i) => {
-                return (
-                    <div className={classes.medicationContainer}>
-                        <div className={classes.textField}>
+
+                {medication.map((x, i) => {
+                    return (
+                        <div className={classes.medicationContainer}>
+
                             <TextField
                                 id="filled-secondary"
                                 label="Medicine Name"
@@ -178,13 +182,10 @@ function RequestPrescriptionForm(props) {
                                 color="secondary"
                                 value={x.name}
                                 name='name'
-
+                                className={classes.textField}
                                 onChange={e => handleMedicationText(e, i)}
                                 required
                             />
-                        </div>
-
-                        <div className={classes.textField}>
                             <TextField
                                 id="filled-secondary"
                                 label="Strength"
@@ -192,13 +193,11 @@ function RequestPrescriptionForm(props) {
                                 color="secondary"
                                 value={x.strength}
                                 name='strength'
-
+                                className={classes.textField}
                                 onChange={e => handleMedicationText(e, i)}
                                 required
                             />
-                        </div>
 
-                        <div className={classes.textField}>
                             <TextField
                                 id="filled-secondary"
                                 label="Quantity"
@@ -206,25 +205,26 @@ function RequestPrescriptionForm(props) {
                                 color="secondary"
                                 value={x.quantity}
                                 name='quantity'
-
+                                className={classes.textField}
                                 type="number"
                                 onChange={e => handleMedicationText(e, i)}
                                 required
                             />
+
+                            <div className={classes.textField}>
+                                {medication.length !== 1 && <Button variant="contained" color="secondary" onClick={removeMedicationForm} style={{ padding: 0 }}>
+                                    <h1>-</h1>
+                                </Button>}
+                                {medication.length - 1 === i &&
+                                    <Button variant="contained" color="secondary" onClick={addMedicationForm} style={{ padding: 0 }}>
+                                        <h1>+</h1>
+                                    </Button>
+                                }
+                            </div>
                         </div>
-                        <div className={classes.textField}>
-                            {medication.length !== 1 && <Button variant="contained" color="secondary" onClick={removeMedicationForm} style={{ padding: 0 }}>
-                                <h1>-</h1>
-                            </Button>}
-                            {medication.length - 1 === i &&
-                                <Button variant="contained" color="secondary" onClick={addMedicationForm} style={{ padding: 0 }}>
-                                    <h1>+</h1>
-                                </Button>
-                            }
-                        </div>
-                    </div>
-                )
-            })}
+                    )
+                })}
+            </div>
 
             <div className={classes.textField}>
                 <Button variant="contained" color="secondary" type='submit'>
