@@ -7,16 +7,21 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(1),
         width: '100%',
         display: 'flex',
-        justifyContent: "end",
-        flexDirection: 'column'
+        flexDirection: 'column',
+        justifyItems: 'center'
+    },
+    medicationContainer: {
+        display: 'flex',
     },
     textField: {
-        marginTop: 10
-    }
+        margin: theme.spacing(1),
+    },
+
 }));
 
 function RequestPrescriptionForm(props) {
     const classes = useStyles();
+    const [textFields, settextFields] = useState([])
     const [inputs, setinputs] = useState({
         fname: '',
         lname: '',
@@ -24,21 +29,30 @@ function RequestPrescriptionForm(props) {
         dob: '',
         note: ''
     })
-    const [medication, setmedication] = useState({
+    const [medication, setmedication] = useState([{
         name: '',
         strength: '',
         quantity: 0,
-    })
+    }])
 
     const handleText = (e) => {
         setinputs({
             ...inputs, [e.target.name]: e.target.value
         })
     }
-    const handleMedicationText = (e) => {
-        setmedication({
-            ...medication, [e.target.name]: e.target.value
-        })
+    const handleMedicationText = (e, index) => {
+        const list = [...medication]
+        list[index][e.target.name] = e.target.value
+        setmedication(list)
+    }
+
+    const addMedicationForm = (e) => {
+        setmedication([...medication, { name: '', strength: '', quantity: 0 }])
+    }
+    const removeMedicationForm = (index) => {
+        const list = [...medication]
+        list.splice(index, 1)
+        setmedication(list)
     }
 
     const handleSubmit = (e) => {
@@ -71,7 +85,7 @@ function RequestPrescriptionForm(props) {
             dob: inputs.dob,
             email: inputs.email,
             note: inputs.note,
-            medication: [medication],
+            medication: medication,
         }).then(res => {
             console.log(res.data);
         }).catch(err => {
@@ -82,98 +96,137 @@ function RequestPrescriptionForm(props) {
     return (
 
         <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
-            <TextField
-                id="filled-secondary"
-                label="First Name"
-                variant="outlined"
-                color="secondary"
-                value={inputs.fname}
-                name='fname'
-                className={classes.textField}
-                onChange={handleText}
-                required
-            />
-            <TextField
-                id="filled-secondary"
-                label="Last Name"
-                variant="outlined"
-                color="secondary"
-                name='lname'
-                value={inputs.lname}
-                className={classes.textField}
-                onChange={handleText}
-                required
-            />
-            <TextField
-                id="filled-secondary"
-                label="Email"
-                variant="outlined"
-                color="secondary"
-                name='email'
-                value={inputs.email}
-                className={classes.textField}
-                onChange={handleText}
-                required
-            />
-            <TextField
-                id="filled-secondary"
-                label="Date of Birth"
-                variant="outlined"
-                color="secondary"
-                value={inputs.dob}
-                name='dob'
-                className={classes.textField}
-                type="date"
-                onChange={handleText}
-                required
-            />
-            <TextField
-                id="filled-secondary"
-                label="Medicine Name"
-                variant="outlined"
-                color="secondary"
-                value={medication.name}
-                name='name'
-                className={classes.textField}
-                onChange={handleMedicationText}
-                required
-            />
-            <TextField
-                id="filled-secondary"
-                label="Strength"
-                variant="outlined"
-                color="secondary"
-                value={medication.strength}
-                name='strength'
-                className={classes.textField}
-                onChange={handleMedicationText}
-                required
-            />
-            <TextField
-                id="filled-secondary"
-                label="Quantity"
-                variant="outlined"
-                color="secondary"
-                value={medication.quantity}
-                name='quantity'
-                className={classes.textField}
-                type="number"
-                onChange={handleMedicationText}
-                required
-            />
-            <TextField
-                id="filled-secondary"
-                label="Note"
-                variant="outlined"
-                color="secondary"
-                value={inputs.note}
-                name='note'
-                className={classes.textField}
-                type="text"
-                onChange={handleText}
-                required
-            />
-            <div>
+            <h2>{JSON.stringify(medication)}</h2>
+            <div className={classes.textField}>
+                <TextField
+                    id="filled-secondary"
+                    label="First Name"
+                    variant="outlined"
+                    color="secondary"
+                    value={inputs.fname}
+                    name='fname'
+
+                    onChange={handleText}
+                    required
+                />
+            </div>
+
+            <div className={classes.textField}>
+                <TextField
+                    id="filled-secondary"
+                    label="Last Name"
+                    variant="outlined"
+                    color="secondary"
+                    name='lname'
+                    value={inputs.lname}
+
+                    onChange={handleText}
+                    required
+                />
+            </div>
+
+            <div className={classes.textField}>
+                <TextField
+                    id="filled-secondary"
+                    label="Email"
+                    variant="outlined"
+                    color="secondary"
+                    name='email'
+                    value={inputs.email}
+
+                    onChange={handleText}
+                    required
+                />
+            </div>
+
+            <div className={classes.textField}>
+                <TextField
+                    id="filled-secondary"
+                    label="Date of Birth"
+                    variant="outlined"
+                    color="secondary"
+                    value={inputs.dob}
+                    name='dob'
+
+                    type="date"
+                    onChange={handleText}
+                    required
+                />
+            </div>
+            <div className={classes.textField}>
+                <TextField
+                    id="filled-secondary"
+                    label="Note"
+                    variant="outlined"
+                    color="secondary"
+                    value={inputs.note}
+                    name='note'
+
+                    type="text"
+                    onChange={handleText}
+                    required
+                />
+            </div>
+            {medication.map((x, i) => {
+                return (
+                    <div className={classes.medicationContainer}>
+                        <div className={classes.textField}>
+                            <TextField
+                                id="filled-secondary"
+                                label="Medicine Name"
+                                variant="outlined"
+                                color="secondary"
+                                value={x.name}
+                                name='name'
+
+                                onChange={e => handleMedicationText(e, i)}
+                                required
+                            />
+                        </div>
+
+                        <div className={classes.textField}>
+                            <TextField
+                                id="filled-secondary"
+                                label="Strength"
+                                variant="outlined"
+                                color="secondary"
+                                value={x.strength}
+                                name='strength'
+
+                                onChange={e => handleMedicationText(e, i)}
+                                required
+                            />
+                        </div>
+
+                        <div className={classes.textField}>
+                            <TextField
+                                id="filled-secondary"
+                                label="Quantity"
+                                variant="outlined"
+                                color="secondary"
+                                value={x.quantity}
+                                name='quantity'
+
+                                type="number"
+                                onChange={e => handleMedicationText(e, i)}
+                                required
+                            />
+                        </div>
+                        <div className={classes.textField}>
+                            {medication.length !== 1 && <Button variant="contained" color="secondary" onClick={removeMedicationForm} style={{ padding: 0 }}>
+                                <h1>-</h1>
+                            </Button>}
+                            {medication.length - 1 === i &&
+                                <Button variant="contained" color="secondary" onClick={addMedicationForm} style={{ padding: 0 }}>
+                                    <h1>+</h1>
+                                </Button>
+                            }
+                        </div>
+                    </div>
+                )
+            })}
+
+            <div className={classes.textField}>
                 <Button variant="contained" color="secondary" type='submit'>
                     Request
                 </Button>
