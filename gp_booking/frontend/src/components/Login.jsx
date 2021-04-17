@@ -110,7 +110,7 @@ function Login() {
               message={message}
             />
           </Container>
-          <Link to='forgotPassword'></Link>
+          <Link to='forgotPassword'>Forgot your password?</Link>
         </form>
       </div>
     </Container>
