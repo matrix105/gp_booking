@@ -25,6 +25,9 @@ const Routes = () => {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact><Home /></Route>
+        <Route path='/prescription' component={Prescription} />
+        <Route path='/test' component={Test} />
+
         <ProtectedLogin path="/register" component={Register} />
         <ProtectedLogin path='/login' component={Login} />
         {localStorage.getItem('role') === "3" ? <ProtectedRoute path='/booking' component={Booking} /> : <ProtectedRoute path="/dashboard" component={Dashboard} />}
@@ -32,8 +35,6 @@ const Routes = () => {
         <ProtectedRoute path='/appointments' component={Appointments} />
         <ProtectedRoute path='/about' component={About} />
         <ProtectedRoute path='/edit' component={Edit} />
-        <Route path='/prescription' component={Prescription} />
-        <Route path='/test' component={Test} />
         <ProtectedRoute path="/dashboard" component={Dashboard} />
         <ProtectedRoute path="/dashboard/bookings" component={Bookings} />
         <ProtectedRoute path="/dashboard/doctors" component={Doctors} />

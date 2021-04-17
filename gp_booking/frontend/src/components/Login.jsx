@@ -8,9 +8,9 @@ import Messages from "./mini Compnents/Messages";
 import { useHistory } from "react-router-dom";
 import { Container } from "@material-ui/core";
 import { Box, Button, TextField } from '@material-ui/core';
-import MuiAlert from '@material-ui/lab/Alert';
 import SnackBar from './mini Compnents/SnackBar'
 import axios from "axios";
+import { Link } from 'react-router-dom'
 
 function Login() {
   const { setCookie, setUserInformation, handleClick, setpath } = useContext(UserContext)
@@ -110,8 +110,8 @@ function Login() {
               message={message}
             />
           </Container>
+          <Link to='forgotPassword'></Link>
         </form>
-
       </div>
     </Container>
   );
