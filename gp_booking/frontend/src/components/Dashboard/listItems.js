@@ -1,5 +1,6 @@
 import React from "react";
 import ListItem, { ListItemProps } from "@material-ui/core/ListItem";
+import { Link } from "react-router-dom";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
@@ -11,14 +12,18 @@ import LayersIcon from "@material-ui/icons/Layers";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import LocalHospitalOutlinedIcon from "@material-ui/icons/LocalHospitalOutlined";
 
-function ListItemLink(props: ListItemProps<'a', { button?: true }>) {
-  return <ListItem button component="a" {...props} />;
+function ListItemLink(props) {
+  const { to } = props;
+
+  const CustomLink = (props) => <Link to={to} {...props} />;
+
+  return <ListItem button component="a" component={CustomLink} {...props} />;
 }
 
 export const mainListItems = (
   <div>
     <ListItem button>
-      <ListItemLink href="/dashboard">
+      <ListItemLink to="/dashboard">
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
@@ -26,7 +31,7 @@ export const mainListItems = (
       </ListItemLink>
     </ListItem>
     <ListItem button>
-      <ListItemLink href="/dashboard/booking">
+      <ListItemLink to="/dashboard/booking">
         <ListItemIcon>
           <TodayIcon />
         </ListItemIcon>
@@ -34,27 +39,27 @@ export const mainListItems = (
       </ListItemLink>
     </ListItem>
     <ListItem button>
-    <ListItemLink href="/dashboard/patients">
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Patients" />
+      <ListItemLink to="/dashboard/patients">
+        <ListItemIcon>
+          <PeopleIcon />
+        </ListItemIcon>
+        <ListItemText primary="Patients" />
       </ListItemLink>
     </ListItem>
     <ListItem button>
-    <ListItemLink href="/dashboard/doctors">
-      <ListItemIcon>
-        <LocalHospitalOutlinedIcon />
-      </ListItemIcon>
-      <ListItemText primary="Doctors" />
+      <ListItemLink to="/dashboard/doctors">
+        <ListItemIcon>
+          <LocalHospitalOutlinedIcon />
+        </ListItemIcon>
+        <ListItemText primary="Doctors" />
       </ListItemLink>
     </ListItem>
     <ListItem button>
-    <ListItemLink href="/dashboard/presctiptions">
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Prescriptions" />
+      <ListItemLink to="/dashboard/presctiptions">
+        <ListItemIcon>
+          <LayersIcon />
+        </ListItemIcon>
+        <ListItemText primary="Prescriptions" />
       </ListItemLink>
     </ListItem>
   </div>

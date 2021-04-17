@@ -21,7 +21,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import { mainListItems } from "./listItems";
 import Chart from "./Chart";
 import Snip from "./Snip";
-import Orders from "./Orders";
+import DataPatients from "./Patients";
 import PrescriptiosTable from './PrescriptiosTable'
 
 const drawerWidth = 240;
@@ -199,11 +199,18 @@ export default function Dashboard() {
                 <Snip title="Total Users" type="patients" />
               </Paper>
             </Grid>
-            {/* Recent Orders */}
+            {/* Recent Prescriptions */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <h3>Prescriptions</h3>
                 <PrescriptiosTable />
+              </Paper>
+            </Grid>
+            {/* Recent Users */}
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <h3>Users</h3>
+                <DataPatients />
               </Paper>
             </Grid>
           </Grid>
