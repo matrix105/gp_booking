@@ -64,7 +64,7 @@ function Row(props) {
         </TableCell>
         <TableCell align="right">{row.lname}</TableCell>
         <TableCell align="right">{row.email}</TableCell>
-        <TableCell align="right">{row.notes}</TableCell>
+        <TableCell align="right">{row.note}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -126,11 +126,6 @@ Row.propTypes = {
 //   createData("Cupcake", 305, 3.7, 67, 4.3, 2.5),
 //   createData("Gingerbread", 356, 16.0, 49, 3.9, 1.5),
 // ];
-
-
-const rows = [
-
-];
 
 export default function PrescriptiosTable() {
   const [prescriptions, setPrescriptions] = useState([]);

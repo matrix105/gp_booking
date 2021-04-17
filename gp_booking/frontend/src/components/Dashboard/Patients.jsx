@@ -1,46 +1,48 @@
-import * as React from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import { DataGrid } from "@material-ui/data-grid";
 
-class Patients extends React.Component {
-  state = {
-    bookings: [],
-    isLoading: true,
-    errors: null,
+const columns = [
+  { field: "id", headerName: "ID", width: 80 },
+  { field: "fname", headerName: "First name", width: 160 },
+  { field: "lname", headerName: "Last name", width: 160 },
+  { field: "email", headerName: "Email", width: 200 },
+  {
+    field: "dob",
+    headerName: "Date of Birth",
+    width: 200,
+  },
+  { field: "role.name", headerName: "Role", width: 200 },
+];
+
+export default function DataPatients() {
+  const [users, setPrescriptions] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const fetchApi = async () => {
+    var tempArray = [];
+    setIsLoading(true);
+    setError(false);
+    try {
+      const result = await axios("http://localhost:1337/users");
+      for (let index = 0; index < result.data.length; index++) {
+        tempArray.push(result.data[index]);
+      }
+      setPrescriptions(tempArray);
+    } catch (error) {
+      setError(true);
+    }
+    setIsLoading(false);
+    return { users, isLoading, error };
   };
 
-getBookings() {
-    axios
-      .get("http://localhost:1337/bookings")
-      .then(response =>  this.setState({ bookings: response.data ,isLoading: false  }))
-      .catch(error => this.setState({ error, isLoading: false }));
-  }
-  componentDidMount() {
-    this.getBookings();
-  }
-
-  render() {
-    const { isLoading, bookings } = this.state;
-    return (
-      <React.Fragment>
-        <h2>Bookings</h2>
-        <div>
-          {!isLoading ? (
-            bookings.map((booking) => {
-              return (
-                <div key={booking.id}>
-                  <p>{booking.patient.fname}</p>
-                  <p>{booking.doctor.fname}</p>
-                  <hr />
-                </div>
-              );
-            })
-          ) : (
-            <p>Loading...</p>
-          )}
-        </div>
-      </React.Fragment>
-    );
-  }
+  useEffect(() => {
+    fetchApi();
+  }, []);
+  return (
+    <div style={{ height: 400, width: "100%" }}>
+      <DataGrid rows={users} columns={columns} pageSize={10} />
+    </div>
+  );
 }
-
-export default Patients;
