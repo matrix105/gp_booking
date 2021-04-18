@@ -44,15 +44,20 @@ function Resetpassword(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:1337/auth/forgot-password', {
-            email: 'jubeennp@gmail.com'
-        }).then(res => {
-            console.log(res.data);
-            //createSnackbar('success', 'Your user received an email')
-        }).catch(err => {
-            console.log(err);
-            //createSnackbar('error', 'Something went wrong')
-        })
+        axios
+  .post('http://localhost:1337/auth/forgot-password', {
+    email: 'matrix105.mt@gmail.com',
+    url:
+      'http:/localhost:1337/admin/plugins/users-permissions/auth/reset-password',
+  })
+  .then(response => {
+    // Handle success.
+    console.log('Your user received an email');
+  })
+  .catch(error => {
+    // Handle error.
+    console.log('An error occurred:', error.response);
+  });
     }
 
     return (
