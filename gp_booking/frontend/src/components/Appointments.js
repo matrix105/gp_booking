@@ -1,10 +1,14 @@
 import axios from 'axios';
 import React, { useEffect, useState, useContext } from 'react';
-import { List, ListItem, ListItemText, Divider, makeStyles, useMediaQuery } from '@material-ui/core';
+import { List, makeStyles, useMediaQuery } from '@material-ui/core';
 import { UserContext } from '../context/Context'
 import SnackBar from './mini Compnents/SnackBar';
+import TableComponent from './mini Compnents/TableComponent';
 
 const useStyles = makeStyles((theme) => ({
+    table: {
+        minWidth: 650,
+    },
     root: {
         width: '100%',
         maxWidth: '100%',
@@ -16,6 +20,10 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.paper,
     }
 }));
+
+const tableHeading = [
+    "Doctor", "Patient", "Date", "Time"
+]
 
 function Appointments(props) {
     const [state, setstate] = useState([])
@@ -59,18 +67,22 @@ function Appointments(props) {
     }
 
     const createList = () => {
-        return state.map(data => {
+        return (<TableComponent
+            datas={state}
+            headings={tableHeading}
+        />)
+        // return state.map(data => {
 
-            return (
-                <ListItem button>
-                    <p>{data.id}</p>
-                    <p>{data.doctor.fname}</p>
-                    <p>{data.patient.fname}</p>
-                    <p>{data.Time}</p>
-                    <p>{data.Date}</p>
-                </ListItem>
-            )
-        })
+        //     return (
+        //         <ListItem button>
+        //             <p>{data.id}</p>
+        //             <p>{data.doctor.fname}</p>
+        //             <p>{data.patient.fname}</p>
+        //             <p>{data.Time}</p>
+        //             <p>{data.Date}</p>
+        //         </ListItem>
+        //     )
+        // })
     }
 
     useEffect(() => {

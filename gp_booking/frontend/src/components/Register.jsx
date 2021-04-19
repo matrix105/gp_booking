@@ -71,31 +71,6 @@ const Register = () => {
     handleClick()
   }
 
-  const createDetail = (jwt, userId, fname, lname, dob, phone, address, path) => {
-    console.log(jwt);
-    axios.post(`http://139.59.188.122/${path}`, {
-      headers: {
-        Authorization:
-          `Bearer ${jwt}`,
-      },
-      user: userId,
-      fname: fname,
-      lname: lname,
-      dob: dob,
-      phone: phone,
-      address: address,
-
-    }).then(res => {
-      if (localStorage.getItem('token')) {
-        setSnackBar('success', 'Registered Sucessfully')
-        history.push('/dashboard')
-      }
-    }).catch(err => {
-      console.log(err);
-    })
-    console.log(path);
-  }
-
   const handleForm = (e) => {
     e.preventDefault()
     var roleId
@@ -132,7 +107,7 @@ const Register = () => {
             const role = response.data.user.role.id
             setCookie(jwt, id, role)
             setSnackBar('success', 'Successfully registered')
-            //history.push('/dashboard')
+            history.push('/dashboard')
           })
           .catch(err => {
             console.log(err.message);
