@@ -25,7 +25,7 @@ export default function DataPatients() {
     setIsLoading(true);
     setError(false);
     try {
-      const result = await axios("http://localhost:1337/users");
+      const result = await axios("http://139.59.188.122/users");
       for (let index = 0; index < result.data.length; index++) {
         tempArray.push(result.data[index]);
       }

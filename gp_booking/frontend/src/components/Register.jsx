@@ -73,7 +73,7 @@ const Register = () => {
 
   const createDetail = (jwt, userId, fname, lname, dob, phone, address, path) => {
     console.log(jwt);
-    axios.post(`http://localhost:1337/${path}`, {
+    axios.post(`http://139.59.188.122/${path}`, {
       headers: {
         Authorization:
           `Bearer ${jwt}`,
@@ -104,7 +104,7 @@ const Register = () => {
     } else if (path === 'doctors') {
       roleId = 3
     }
-    axios.post('http://localhost:1337/users', {
+    axios.post('http://139.59.188.122/users', {
       username: input.nhs_num,
       email: input.email,
       password: input.password,
@@ -120,7 +120,7 @@ const Register = () => {
       .then((res) => {
         console.log(res.data);
 
-        axios.post(`http://localhost:1337/auth/local`, {
+        axios.post(`http://139.59.188.122/auth/local`, {
           identifier: input.email,
           password: input.password,
         })

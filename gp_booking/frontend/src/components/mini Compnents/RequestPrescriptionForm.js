@@ -77,11 +77,11 @@ function RequestPrescriptionForm(props) {
         // console.log(inputs);
         // console.log(medication);
 
-        // axios.(`http://localhost:1337/prescriptions/?email=${inputs.email}`)
+        // axios.(`http://139.59.188.122/prescriptions/?email=${inputs.email}`)
         //     .then((res) => {
         //         console.log(res);
         //         if (res.data.length != 0) {
-        //             axios.put(`http://localhost:1337/prescriptions/email=${inputs.email}`, {
+        //             axios.put(`http://139.59.188.122/prescriptions/email=${inputs.email}`, {
         //                 medication: [medication],
         //             }).then((res) => {
         //                 console.log(res);
@@ -98,7 +98,7 @@ function RequestPrescriptionForm(props) {
         //     })
         console.log(inputs.fname);
         console.log(medication);
-        axios.post('http://localhost:1337/prescriptions', {
+        axios.post('http://139.59.188.122/prescriptions', {
             fname: inputs.fname,
             lname: inputs.fname,
             dob: inputs.dob,

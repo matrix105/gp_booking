@@ -25,7 +25,7 @@ class Prescription extends React.Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:1337/prescriptions")
+      .get("http://139.59.188.122/prescriptions")
       .then((response) =>
         this.setState({ prescriptions: response.data, isLoading: false })
       )

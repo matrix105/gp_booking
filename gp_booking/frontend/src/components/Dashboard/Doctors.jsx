@@ -9,7 +9,7 @@ class Doctors extends React.Component {
   };
   componentDidMount() {
     axios
-      .get("http://localhost:1337/bookings")
+      .get("http://139.59.188.122/bookings")
       .then(response =>  this.setState({ bookings: response.data ,isLoading: false  }))
       .catch(error => this.setState({ error, isLoading: false }));
   }

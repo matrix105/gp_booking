@@ -45,10 +45,10 @@ function Resetpassword(props) {
     const handleSubmit = (e) => {
         e.preventDefault()
         axios
-  .post('http://localhost:1337/auth/forgot-password', {
+  .post('http://139.59.188.122/auth/forgot-password', {
     email: 'matrix105.mt@gmail.com',
     url:
-      'http:/localhost:1337/admin/plugins/users-permissions/auth/reset-password',
+      'http:/139.59.188.122/admin/plugins/users-permissions/auth/reset-password',
   })
   .then(response => {
     // Handle success.

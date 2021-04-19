@@ -14,7 +14,7 @@
 //     let data;
 
 //     axios
-//       .get("http://localhost:1337/")
+//       .get("http://139.59.188.122/")
 //       .then((res) => {
 //         data = res.data;
 //         this.setState({
@@ -53,7 +53,7 @@
 //     e.preventDefault();
 
 //     axios
-//       .post("http://localhost:1337/", {
+//       .post("http://139.59.188.122/", {
 //         nhs_num: this.state.nhs_num,
 //         firstname: this.state.firstname,
 //       })
@@ -160,7 +160,7 @@ class About extends React.Component {
   // Fetch your events immediately after the component is mounted
   componentDidMount = async () => {
     try {
-      const response = await axios.get('http://localhost:1337/tests');
+      const response = await axios.get('http://139.59.188.122/tests');
       this.setState({ events: response.data });
     } catch (error) {
       this.setState({ error });

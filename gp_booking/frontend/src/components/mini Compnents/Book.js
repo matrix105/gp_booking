@@ -108,7 +108,7 @@ function Book(props) {
 
     // Get available doctors
     const getDoctor = () => {
-        axios.get(`http://localhost:1337/users/?role=3`, {
+        axios.get(`http://139.59.188.122/users/?role=3`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
@@ -132,7 +132,7 @@ function Book(props) {
     // get all bookings to compare 
     const getBookings = () => {
         getDoctor()
-        axios.get(`http://localhost:1337/bookings`, {
+        axios.get(`http://139.59.188.122/bookings`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
@@ -204,7 +204,7 @@ function Book(props) {
         console.log("Date:", userSelectedDate);
         console.log("patientId:", patientId);
         console.log("DoctorId:", doctorId);
-        axios.post(`http://localhost:1337/bookings`, {
+        axios.post(`http://139.59.188.122/bookings`, {
             // headers: {
             //     Authorization: `Bearer ${localStorage.getItem('token')}`,
             // },
