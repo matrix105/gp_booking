@@ -31,7 +31,7 @@ function Login() {
 
   const handleForm = (e) => {
     e.preventDefault();
-    axios.post('http://139.59.188.122/auth/local', {
+    axios.post('http://139.59.188.122:1337/auth/local', {
       identifier: input.username,
       password: input.password
     })

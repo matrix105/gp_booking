@@ -10,7 +10,7 @@ class Bookings extends React.Component {
 
 getBookings() {
     axios
-      .get("http://139.59.188.122/bookings")
+      .get("http://139.59.188.122:1337/bookings")
       .then(response =>  this.setState({ bookings: response.data ,isLoading: false  }))
       .catch(error => this.setState({ error, isLoading: false }));
   }
