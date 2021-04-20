@@ -41,7 +41,12 @@ function Login() {
         const id = response.data.user.id
         const role = response.data.user.role.id
         setCookie(jwt, id, role)
-        history.push('/dashboard')
+        if (localStorage.getItem('4')) {
+          history.push('/home')
+        } else {
+          history.push('/dashboard')
+        }
+
       })
       .catch(err => {
         // setmessage('Invalid nhs number or password')
