@@ -68,7 +68,7 @@ function RequestPrescriptionForm(props) {
     }
     const removeMedicationForm = (index) => {
         const list = [...medication]
-        list.splice(index, 1)
+        list.pop()
         setmedication(list)
     }
 
@@ -159,6 +159,20 @@ function RequestPrescriptionForm(props) {
                     />
                     <TextField
                         id="filled-secondary"
+                        label="NHS"
+                        variant="outlined"
+                        color="secondary"
+                        name='nhs'
+                        value={inputs.email}
+                        className={classes.containerTextField}
+                        onChange={handleText}
+                        required
+                    />
+
+                </div>
+                <div className={classes.miniContainer}>
+                    <TextField
+                        id="filled-secondary"
                         label="Date of Birth"
                         variant="outlined"
                         color="secondary"
@@ -169,19 +183,20 @@ function RequestPrescriptionForm(props) {
                         onChange={handleText}
                         required
                     />
+                    <TextField
+                        id="filled-secondary"
+                        label="Note"
+                        variant="outlined"
+                        color="secondary"
+                        value={inputs.note}
+                        name='note'
+                        className={classes.containerTextField}
+                        type="text"
+                        onChange={handleText}
+                        required
+                    />
                 </div>
-                <TextField
-                    id="filled-secondary"
-                    label="Note"
-                    variant="outlined"
-                    color="secondary"
-                    value={inputs.note}
-                    name='note'
-                    className={classes.textField}
-                    type="text"
-                    onChange={handleText}
-                    required
-                />
+
 
                 {medication.map((x, i) => {
                     return (

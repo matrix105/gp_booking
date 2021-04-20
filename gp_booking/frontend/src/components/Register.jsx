@@ -95,24 +95,25 @@ const Register = () => {
       .then((res) => {
         console.log(res.data);
 
-        axios.post(`http://139.59.188.122/auth/local`, {
-          identifier: input.email,
-          password: input.password,
-        })
-          .then((response) => {
-            console.log(response.data);
-            const userId = response.data.user.id;
-            const jwt = response.data.jwt
-            const id = response.data.user.id
-            const role = response.data.user.role.id
-            setCookie(jwt, id, role)
-            setSnackBar('success', 'Successfully registered')
-            history.push('/dashboard')
-          })
-          .catch(err => {
-            console.log(err.message);
-            setSnackBar('error', 'Something wrong!')
-          })
+        // axios.post(`http://139.59.188.122/auth/local`, {
+        //   identifier: input.email,
+        //   password: input.password,
+        // })
+        //   .then((response) => {
+        //     console.log(response.data);
+        //     const userId = response.data.user.id;
+        //     const jwt = response.data.jwt
+        //     const id = response.data.user.id
+        //     const role = response.data.user.role.id
+        //     setCookie(jwt, id, role)
+        //     setSnackBar('success', 'Successfully registered')
+        //     history.push('/dashboard')
+        //   })
+        //   .catch(err => {
+        //     console.log(err.message);
+        //     setSnackBar('error', 'Something wrong!')
+        //   })
+        setSnackBar('success', 'Successfully registered, wait for admin to confirm ')
       })
       .catch(error => {
         console.log(error.message);
@@ -153,13 +154,7 @@ const Register = () => {
           className="form"
           onSubmit={handleForm}
         >
-          <Checkbox
-            checked={checked}
-            onChange={handleChange}
-            label="Are you a doctor"
-            inputProps={{ 'aria-label': 'primary checkbox' }}
-          />
-          <span>Are you a Doctor?</span>
+
           <Title title={registerInput.title} />
           <TextField
             id="nhs"

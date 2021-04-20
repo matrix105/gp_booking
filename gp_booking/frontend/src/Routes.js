@@ -20,7 +20,7 @@ import Resetpassword from './components/Resetpassword'
 import CreatenewPassword from "./components/CreatenewPassword";
 
 const Routes = () => {
-
+  console.log(localStorage.getItem('role'))
   return (
     <BrowserRouter>
       <Switch>
@@ -31,11 +31,16 @@ const Routes = () => {
         <Route path='/resetPassword' component={CreatenewPassword} />
         <ProtectedLogin path="/register" component={Register} />
         <ProtectedLogin path='/login' component={Login} />
-        {localStorage.getItem('role') === "3" ? <ProtectedRoute path='/booking' component={Booking} /> : <ProtectedRoute path="/dashboard" component={Dashboard} />}
+        <ProtectedRoute path='/booking' component={
+          localStorage.getItem('role') === "4" ? Booking : Home
+        } />
         <ProtectedRoute path='/booking' component={Booking} />
         <ProtectedRoute path='/appointments' component={Appointments} />
         <ProtectedRoute path='/about' component={About} />
         <ProtectedRoute path='/edit' component={Edit} />
+        <ProtectedRoute path="/dashboard" component={
+          localStorage.getItem('role') != '4' ? Dashboard : Home
+        } />
         <ProtectedRoute path="/dashboard" component={Dashboard} />
         <ProtectedRoute path="/dashboard/bookings" component={Bookings} />
         <ProtectedRoute path="/dashboard/doctors" component={Doctors} />

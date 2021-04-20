@@ -8,6 +8,7 @@ import axios from 'axios'
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { List, ListItem, ListItemText, TextField } from '@material-ui/core';
+import date from 'date-and-time'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -92,8 +93,19 @@ function Book(props) {
 
     // For current Date
     function getCurrentDate() {
-        var currentTime = new Date().toISOString().slice(0, 10);
-        return currentTime
+        var current = new Date()
+        var currentDate
+        var nextDay = new Date(current)
+        if (current.getHours() >= 17) {
+            // var todayDate = new Date().toISOString().slice(0, 10);
+
+            currentDate = date.format(nextDay, 'YYYY-MM-DD')
+
+        } else {
+            currentDate = current.toISOString().slice(0, 10);
+        }
+
+        return currentDate
     }
 
     // get All doctors name in list
@@ -150,12 +162,12 @@ function Book(props) {
 
     const checkAvailability = () => {
         var availability = false
-        console.log(allBookings);
         if (allBookings.length < 1) {
             availability = true
         } else {
             for (let index = 0; index < allBookings.length; index++) {
-                if (doctor.id === allBookings[index].doctor.id) {
+                console.log(allBookings[index]);
+                if (doctor.id === allBookings[index].doctor.id && userSelectedDate === allBookings[index].Date && selectedTime === allBookings[index].Time) {
                     availability = false
                 } else {
                     availability = true
@@ -164,10 +176,6 @@ function Book(props) {
         }
         return availability
     }
-
-    // For Snack Bar
-    const [type, setType] = useState("")
-    const [message, setmessage] = useState("")
 
     // for the stepper
     const steps = getSteps();
@@ -252,19 +260,24 @@ function Book(props) {
             case 1:
                 return (
                     times.map(time => {
-                        return (
+                        const currentHour = new Date().getHours()
+                        const currentMinute = new Date().getMinutes()
+                        var currentTime = `${currentHour}:${currentMinute}`
+                        if (time > currentTime) {
+                            return (
 
-                            <List component="nav" aria-label="secondary mailbox folder" className={classes.time} style={{ maxHeight: '50%', overflow: 'scroll' }}>
-                                <ListItem
-                                    button
-                                    selected={selectedIndex === 0}
-                                    onClick={(event) => handleListItemClick(event, times.indexOf(time))}
-                                    key={time}
-                                >
-                                    <ListItemText primary={time} />
-                                </ListItem>
-                            </List>
-                        )
+                                <List component="nav" aria-label="secondary mailbox folder" className={classes.time} style={{ maxHeight: '50%', overflow: 'scroll' }}>
+                                    <ListItem
+                                        button
+                                        selected={selectedIndex === 0}
+                                        onClick={(event) => handleListItemClick(event, times.indexOf(time))}
+                                        key={time}
+                                    >
+                                        <ListItemText primary={time} />
+                                    </ListItem>
+                                </List>
+                            )
+                        }
                     })
                 )
             case 2:
