@@ -74,8 +74,10 @@ const Register = () => {
   const handleForm = (e) => {
     e.preventDefault()
     var roleId
+    var conf
     if (path === 'patients') {
       roleId = 4
+      conf= false
     } else if (path === 'doctors') {
       roleId = 3
     }
@@ -90,7 +92,8 @@ const Register = () => {
       address: input.address,
       role: {
         id: roleId
-      }
+      },
+      confirmed: conf
     })
       .then((res) => {
         console.log(res.data);
