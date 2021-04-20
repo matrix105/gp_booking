@@ -41,7 +41,8 @@ function Login() {
         const id = response.data.user.id
         const role = response.data.user.role.id
         setCookie(jwt, id, role)
-        if (localStorage.getItem('4')) {
+
+        if (localStorage.getItem('role') === "4") {
           history.push('/home')
         } else {
           history.push('/dashboard')

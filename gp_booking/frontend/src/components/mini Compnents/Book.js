@@ -213,9 +213,6 @@ function Book(props) {
         console.log("patientId:", patientId);
         console.log("DoctorId:", doctorId);
         axios.post(`http://139.59.188.122:1337/bookings`, {
-            // headers: {
-            //     Authorization: `Bearer ${localStorage.getItem('token')}`,
-            // },
             Time: selectedTime,
             Date: userSelectedDate,
             patient: patientId,
@@ -224,8 +221,7 @@ function Book(props) {
         })
             .then((res) => {
                 console.log(res.data);
-                props.setSnackBar('success', 'Booking added')
-                console.log('Booking successfull');
+                props.setSnackBar('success', 'Booking Successfull')
                 return null
             })
             .catch(err => {
@@ -282,7 +278,6 @@ function Book(props) {
                             }
                         } else {
                             return (
-
                                 <List component="nav" aria-label="secondary mailbox folder" className={classes.time} style={{ maxHeight: '50%', overflow: 'scroll' }}>
                                     <ListItem
                                         button
