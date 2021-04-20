@@ -36,18 +36,22 @@ function Login() {
       password: input.password
     })
       .then(response => {
-        console.log(response.data.user);
-        const jwt = response.data.jwt
-        const id = response.data.user.id
-        const role = response.data.user.role.id
-        setCookie(jwt, id, role)
-
-        if (localStorage.getItem('role') === "4") {
-          history.push('/home')
+        console.log();
+        if (response.data.user.confirmed === true) {
+          const jwt = response.data.jwt
+          const id = response.data.user.id
+          const role = response.data.user.role.id
+          setCookie(jwt, id, role)
+          if (localStorage.getItem('role') === "4") {
+            history.push('/home')
+          } else {
+            history.push('/dashboard')
+          }
         } else {
-          history.push('/dashboard')
+          setType('warning')
+          setmessage('You have not been confirmed. Please wait till you get confirmed')
+          handleClick()
         }
-
       })
       .catch(err => {
         // setmessage('Invalid nhs number or password')
