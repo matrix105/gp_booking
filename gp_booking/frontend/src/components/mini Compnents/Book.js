@@ -263,7 +263,24 @@ function Book(props) {
                         const currentHour = new Date().getHours()
                         const currentMinute = new Date().getMinutes()
                         var currentTime = `${currentHour}:${currentMinute}`
-                        if (time > currentTime) {
+                        console.log(getCurrentDate());
+                        if (userSelectedDate === getCurrentDate()) {
+                            if (time > currentTime) {
+                                return (
+
+                                    <List component="nav" aria-label="secondary mailbox folder" className={classes.time} style={{ maxHeight: '50%', overflow: 'scroll' }}>
+                                        <ListItem
+                                            button
+                                            selected={selectedIndex === 0}
+                                            onClick={(event) => handleListItemClick(event, times.indexOf(time))}
+                                            key={time}
+                                        >
+                                            <ListItemText primary={time} />
+                                        </ListItem>
+                                    </List>
+                                )
+                            }
+                        } else {
                             return (
 
                                 <List component="nav" aria-label="secondary mailbox folder" className={classes.time} style={{ maxHeight: '50%', overflow: 'scroll' }}>
@@ -278,6 +295,7 @@ function Book(props) {
                                 </List>
                             )
                         }
+
                     })
                 )
             case 2:
@@ -314,7 +332,7 @@ function Book(props) {
     return (
         <div className={classes.root}>
             <h1>{userSelectedDate}</h1>
-            <h1>{selectedTime}</h1>
+            <h1>{selectedTime.slice(0, 5)}</h1>
             <h1>{doctor.fname}</h1>
             <Stepper activeStep={activeStep} alternativeLabel>
                 {steps.map((label) => (
