@@ -41,7 +41,7 @@ function Edit(props) {
     const { handleClick } = useContext(UserContext)
 
     const initialState = () => {
-        axios.get(`http://139.59.188.122/users/me`, {
+        axios.get(`http://139.59.188.122:1337/users/me`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
@@ -137,7 +137,7 @@ function Edit(props) {
         e.preventDefault()
         console.log(localStorage.getItem('token'));
         const userId = localStorage.getItem('id')
-        axios.put(`http://139.59.188.122/users/${userId}`, {
+        axios.put(`http://139.59.188.122:1337/users/${userId}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },

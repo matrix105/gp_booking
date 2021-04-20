@@ -138,7 +138,7 @@ export default function PrescriptiosTable() {
     setIsLoading(true);
     setError(false);
     try {
-      const result = await axios("http://139.59.188.122/prescriptions");
+      const result = await axios("http://139.59.188.122:1337/prescriptions");
       for (let index = 0; index < result.data.length; index++) {
         tempArray.push(result.data[index]);
       }

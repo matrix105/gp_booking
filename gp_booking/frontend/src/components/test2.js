@@ -214,7 +214,7 @@ export default function EnhancedTable() {
     setIsLoading(true);
     setError(false);
     try {
-      const result = await axios("http://139.59.188.122/users");
+      const result = await axios("http://139.59.188.122:1337/users");
       for (let index = 0; index < result.data.length; index++) {
         tempArray.push(result.data[index]);
       }

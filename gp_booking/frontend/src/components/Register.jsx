@@ -79,7 +79,7 @@ const Register = () => {
     } else if (path === 'doctors') {
       roleId = 3
     }
-    axios.post('http://139.59.188.122/users', {
+    axios.post('http://139.59.188.122:1337/users', {
       username: input.nhs_num,
       email: input.email,
       password: input.password,
@@ -95,7 +95,7 @@ const Register = () => {
       .then((res) => {
         console.log(res.data);
 
-        // axios.post(`http://139.59.188.122/auth/local`, {
+        // axios.post(`http://139.59.188.122:1337/auth/local`, {
         //   identifier: input.email,
         //   password: input.password,
         // })

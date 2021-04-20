@@ -28,16 +28,16 @@ export default function Snip(props, title, type) {
     setIsLoading(true);
     setError(false);
     try {
-      const result = await axios("http://139.59.188.122/prescriptions/count");
+      const result = await axios("http://139.59.188.122:1337/prescriptions/count");
       setPrepNum(result.data);
       console.log(result.data)
-      const result1 = await axios("http://139.59.188.122/bookings/count");
+      const result1 = await axios("http://139.59.188.122:1337/bookings/count");
       setBookNum(result1.data);
       console.log(result1.data)
-      const result2 = await axios("http://139.59.188.122/users/count");
+      const result2 = await axios("http://139.59.188.122:1337/users/count");
       setPatNum(result2.data);
       console.log(result2.data)
-    //   const result = await axios("http://139.59.188.122/prescriptions/count");
+    //   const result = await axios("http://139.59.188.122:1337/prescriptions/count");
     //   setDocNum(result.data);
     } catch (error) {
       setError(true);

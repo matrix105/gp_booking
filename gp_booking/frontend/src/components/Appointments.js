@@ -46,7 +46,7 @@ function Appointments(props) {
             patientOrDoctor = "doctor"
         }
         console.log(patientOrDoctor);
-        axios.get(`http://139.59.188.122/bookings/?${patientOrDoctor}=${localStorage.getItem('id')}`, {
+        axios.get(`http://139.59.188.122:1337/bookings/?${patientOrDoctor}=${localStorage.getItem('id')}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
