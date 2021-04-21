@@ -12,9 +12,6 @@ import Edit from "./components/Edit";
 import Test from "./components/test";
 import Prescription from "./components/Prescription";
 import Dashboard from "./components/Dashboard/Dashboard";
-import Bookings from "./components/Dashboard/Bookings";
-import Doctors from "./components/Dashboard/Doctors";
-import Patients from "./components/Dashboard/Patients";
 import Resetpassword from "./components/Resetpassword";
 import CreatenewPassword from "./components/CreatenewPassword";
 import Team from "./components/Team";
@@ -40,7 +37,7 @@ const Routes = () => {
         />
         <ProtectedRoute path="/booking" component={Booking} />
         <ProtectedRoute path="/appointments" component={Appointments} />
-        <ProtectedRoute path="/about" component={About} />
+        <Route path="/about" component={About} />
         <ProtectedRoute path="/edit" component={Edit} />
         <ProtectedRoute
           path="/dashboard"
