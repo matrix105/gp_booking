@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { DataGrid } from "@material-ui/data-grid";
 import RequestPrescriptionForm from './mini Compnents/RequestPrescriptionForm'
 import { UserContext } from "../context/Context";
 import SnackBar from "./mini Compnents/SnackBar";
+import PrescriptionHistory from "./mini Compnents/PrescriptionHistory";
 
 class Prescription extends React.Component {
   state = {
@@ -24,16 +25,38 @@ class Prescription extends React.Component {
 
 
   componentDidMount() {
-    axios
-      .get("http://139.59.188.122:1337/prescriptions")
-      .then((response) =>
-        this.setState({ prescriptions: response.data, isLoading: false })
-      )
-      .catch((error) => this.setState({ error, isLoading: false }));
+    if (localStorage.getItem('token') === null) {
+      axios
+        .get("http://139.59.188.122:1337/prescriptions")
+        .then((response) =>
+          //this.setState({ prescriptions: response.data, isLoading: false })
+          console.log(response.data)
+        )
+        .catch((error) => this.setState({ error, isLoading: false }));
+    } else {
+      axios.get(`http://139.59.188.122:1337/users/me`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+        .then(res => {
+          axios
+            .get(`http://139.59.188.122:1337/prescriptions/?email=${res.data.email}`)
+            .then((response) =>
+              this.setState({ prescriptions: response.data, isLoading: false })
+            )
+            .catch((error) => this.setState({ error, isLoading: false }));
+        }).catch(e => {
+          console.log(e);
+        })
+
+    }
   }
 
   render() {
     const { isLoading, prescriptions } = this.state;
+
+    const headings = ["Medicine", "Strength", "Quantity", "Date of request", "Status"]
 
     const columns = [
       { field: "id", headerName: "ID", width: 70 },
@@ -115,6 +138,12 @@ class Prescription extends React.Component {
             <p>Loading...</p>
           )}
         </ul> */}
+
+        <PrescriptionHistory
+          titles={headings}
+          datas={prescriptions}
+        />
+
       </React.Fragment>
     );
   }

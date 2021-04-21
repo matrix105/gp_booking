@@ -72,12 +72,11 @@ const Register = () => {
   }
 
   const handleForm = (e) => {
-    e.preventDefault()
     var roleId
     var conf
     if (path === 'patients') {
       roleId = 4
-      conf= false
+      conf = false
     } else if (path === 'doctors') {
       roleId = 3
     }
