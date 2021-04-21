@@ -56,7 +56,7 @@ class Prescription extends React.Component {
   render() {
     const { isLoading, prescriptions } = this.state;
 
-    const headings = ["Medicine", "Strength", "Quantity", "Date of request", "Status"]
+    const headings = ["Medicine", "Strength", "Quantity", "Date of request", "Status", ""]
 
     const columns = [
       { field: "id", headerName: "ID", width: 70 },

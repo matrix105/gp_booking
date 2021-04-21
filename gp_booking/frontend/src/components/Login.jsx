@@ -43,7 +43,7 @@ function Login() {
           const role = response.data.user.role.id
           setCookie(jwt, id, role)
           if (localStorage.getItem('role') === "4") {
-            history.push('/home')
+            history.push('/')
           } else {
             history.push('/dashboard')
           }
@@ -54,8 +54,6 @@ function Login() {
         }
       })
       .catch(err => {
-        // setmessage('Invalid nhs number or password')
-        // setsnackColour('warning')
         setType('error')
         setmessage('Invalid email or password')
         handleClick()

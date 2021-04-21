@@ -64,7 +64,7 @@ function RequestPrescriptionForm(props) {
     }
 
     const addMedicationForm = (e) => {
-        setmedication([...medication, { name: '', strength: '', quantity: 0 }])
+        setmedication([...medication, { name: '', strength: '', quantity: 0, status: false }])
     }
     const removeMedicationForm = (index) => {
         const list = [...medication]
