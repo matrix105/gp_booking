@@ -59,6 +59,13 @@ function Row(props) {
                 <TableCell align="left">{row.email}</TableCell>
                 <TableCell align="left">{row.note}</TableCell>
                 <TableCell align="left">{row.published_at.slice(0, 10)}</TableCell>
+                <TableCell>{row.file === null ? "Pending..." : "Completed"}</TableCell>
+                <TableCell align="left">
+                    {row.file === [] ? null :
+                        <a target="_blank" href={`http://139.59.188.122:1337${row.file[0].formats.large.url}`}>View</a>
+                    }
+
+                </TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -74,10 +81,6 @@ function Row(props) {
                                         <TableCell>Name</TableCell>
                                         <TableCell align="right">Strength</TableCell>
                                         <TableCell align="right">Quantity</TableCell>
-                                        <TableCell align="right">Status</TableCell>
-                                        <TableCell align="right">
-
-                                        </TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -91,19 +94,6 @@ function Row(props) {
                                             </TableCell>
                                             <TableCell align="right">{historyRow.strength}</TableCell>
                                             <TableCell align="right">{historyRow.quantity}</TableCell>
-                                            <TableCell align="right">
-                                                {historyRow.picture === null ? "Pending..." : "Completed"}
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                {historyRow.picture === null ? null :
-                                                    <form onSubmit>
-                                                        <Button type="submit" variant="contained" color="primary" className="btn btn-primary">
-                                                            View
-                                                    </Button>
-                                                    </form>
-                                                }
-
-                                            </TableCell>
                                         </TableRow>
                                     ))}
                                 </TableBody>
@@ -152,6 +142,8 @@ export default function PrescriptionHistory(props) {
                         <TableCell align="left">Email</TableCell>
                         <TableCell align="left">Notes</TableCell>
                         <TableCell align="left">Date</TableCell>
+                        <TableCell align='left'>Status</TableCell>
+                        <TableCell alignt='left'></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
