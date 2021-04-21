@@ -36,6 +36,7 @@ const initialState = {
     fname: '',
     lname: '',
     email: '',
+    nhs: '',
     dob: '',
     note: ''
 }
@@ -101,6 +102,7 @@ function RequestPrescriptionForm(props) {
         axios.post('http://139.59.188.122:1337/prescriptions', {
             fname: inputs.fname,
             lname: inputs.fname,
+            nhs: inputs.nhs,
             dob: inputs.dob,
             email: inputs.email,
             note: inputs.note,
@@ -152,6 +154,7 @@ function RequestPrescriptionForm(props) {
                         variant="outlined"
                         color="secondary"
                         name='email'
+                        type='email'
                         value={inputs.email}
                         className={classes.containerTextField}
                         onChange={handleText}
@@ -161,9 +164,10 @@ function RequestPrescriptionForm(props) {
                         id="filled-secondary"
                         label="NHS"
                         variant="outlined"
+                        type="number"
                         color="secondary"
                         name='nhs'
-                        value={inputs.email}
+                        value={inputs.nhs}
                         className={classes.containerTextField}
                         onChange={handleText}
                         required

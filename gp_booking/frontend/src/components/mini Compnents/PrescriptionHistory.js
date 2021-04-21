@@ -40,10 +40,10 @@ function createData(name, calories, fat, carbs, protein, price) {
 }
 
 function Row(props) {
-    console.log(props)
     const { row } = props;
     const [open, setOpen] = React.useState(false);
     const classes = useRowStyles();
+    console.log(row.file);
 
     return (
         <React.Fragment>
@@ -59,9 +59,9 @@ function Row(props) {
                 <TableCell align="left">{row.email}</TableCell>
                 <TableCell align="left">{row.note}</TableCell>
                 <TableCell align="left">{row.published_at.slice(0, 10)}</TableCell>
-                <TableCell>{row.file === null ? "Pending..." : "Completed"}</TableCell>
+                <TableCell>{row.file.length === 0 ? "Pending..." : <span style={{ color: 'green', fontWeight: 'bold' }}>Approved</span>}</TableCell>
                 <TableCell align="left">
-                    {row.file === [] ? null :
+                    {row.file.length === 0 ? <a style={{ color: 'grey' }}>Cannot View</a> :
                         <a target="_blank" href={`http://139.59.188.122:1337${row.file[0].formats.large.url}`}>View</a>
                     }
 
