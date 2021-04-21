@@ -34,7 +34,7 @@ function Home(props) {
         <Grid container spacing={2}>
           <Grid item xs={3}><MediaCard title="Reception and Enquiries" link="/about" /></Grid>
           <Grid item xs={3}><MediaCard title="Book an Appointment" link="/booking" /></Grid>
-          <Grid item xs={3}><MediaCard title="Covid-19 Support" link="/covid-19" /></Grid>
+          <Grid item xs={3}><MediaCard title="Covid-19 Support" link="https://www.nhs.uk/conditions/coronavirus-covid-19/" /></Grid>
           <Grid item xs={3}><MediaCard title="Request Prescriptions" link="/prescription" /></Grid>
         </Grid>
       </Container>

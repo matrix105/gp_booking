@@ -17,6 +17,7 @@ import Doctors from "./components/Dashboard/Doctors";
 import Patients from "./components/Dashboard/Patients";
 import Resetpassword from "./components/Resetpassword";
 import CreatenewPassword from "./components/CreatenewPassword";
+import Team from "./components/Team";
 
 const Routes = () => {
   console.log(localStorage.getItem("role"));
@@ -30,6 +31,7 @@ const Routes = () => {
         <Route path="/test" component={Test} />
         <Route path="/forgotPassword" component={Resetpassword} />
         <Route path="/resetPassword" component={CreatenewPassword} />
+        <Route path="/Team" component={Team} />
         <ProtectedLogin path="/register" component={Register} />
         <ProtectedLogin path="/login" component={Login} />
         <ProtectedRoute
@@ -45,9 +47,6 @@ const Routes = () => {
           component={localStorage.getItem("role") != "4" ? Dashboard : Home}
         />
         <ProtectedRoute path="/dashboard" component={Dashboard} />
-        <ProtectedRoute path="/dashboard/bookings" component={Bookings} />
-        <ProtectedRoute path="/dashboard/doctors" component={Doctors} />
-        <ProtectedRoute path="/dashboard/patients" component={Patients} />
       </Switch>
     </BrowserRouter>
   );

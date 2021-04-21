@@ -1,190 +1,128 @@
-// import * as React from "react";
-// import { Container } from "@material-ui/core";
-// import { Jumbotron } from "reactstrap";
-// import axios from "axios";
+import React, { useContext } from "react";
+import { Jumbotron } from "reactstrap";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
+import MediaCard from "./mini Compnents/MediaCard";
+import { withRouter } from "react-router-dom";
+import "./css/style.css";
+import Card from "@material-ui/core/Card";
 
-// export default class About extends React.Component {
-//   state = {
-//     details: [],
-//     nhs_num: "",
-//     firstname: "",
-//   };
+function About(props) {
+  if (window.innerHeight < 1024) console.log(window.innerHeight);
+  return (
+    <>
+      <section class="section-bg" data-scroll-index="7">
+        <div class="overlay pt-100 pb-100">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6 d-flex align-items-center">
+                <div class="contact-info">
+                  <h2 class="contact-title">Have Any Questions?</h2>
+                  <p>
+                    Please do not use this service for any urgent medical
+                    queries as this service is only monitored during practice
+                    working hours.
+                    <br />
+                    <br />
+                    Your question will be passed to an appropriate member of
+                    staff for a response. We aim to respond to all questions
+                    within two working days.
+                    <br />
+                    <br />
+                    If you do have an urgent medical query you should telephone
+                    the surgery or contact the out of hours service by calling <strong>111</strong>
+                    . In an emergency please contact <strong>999</strong>.
+                    
+                  </p>
+                  <ul class="contact-info">
+                    <li>
+                      <div class="info-left">
+                        <i class="fas fa-mobile-alt"></i>
+                      </div>
+                      <div class="info-right">
+                        <h4>+11223344550</h4>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="info-left">
+                        <i class="fas fa-at"></i>
+                      </div>
+                      <div class="info-right">
+                        <h4>info@example.com</h4>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="info-left">
+                        <i class="fas fa-map-marker-alt"></i>
+                      </div>
+                      <div class="info-right">
+                        <h4>Vicarage St, Luton LU1 3JU</h4>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-lg-6 d-flex align-items-center">
+                <div class="contact-form">
+                  <form id="contact-form" method="POST">
+                    <input type="hidden" name="form-name" value="contactForm" />
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            name="name"
+                            class="form-control"
+                            id="first-name"
+                            placeholder="Enter Your Name *"
+                            required="required"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <input
+                            type="email"
+                            name="email"
+                            class="form-control"
+                            id="email"
+                            placeholder="Enter Your Email *"
+                            required="required"
+                          />
+                        </div>
+                      </div>
 
-//   componentDidMount() {
-//     let data;
-
-//     axios
-//       .get("http://139.59.188.122:1337/")
-//       .then((res) => {
-//         data = res.data;
-//         this.setState({
-//           details: data,
-//         });
-//       })
-//       .catch((err) => {});
-//   }
-
-//   renderSwitch = (param) => {
-//     switch (param + 1) {
-//       case 1:
-//         return "primary ";
-//       case 2:
-//         return "secondary";
-//       case 3:
-//         return "success";
-//       case 4:
-//         return "danger";
-//       case 5:
-//         return "warning";
-//       case 6:
-//         return "info";
-//       default:
-//         return "yellow";
-//     }
-//   };
-
-//   handleInput = (e) => {
-//     this.setState({
-//       [e.target.name]: e.target.value,
-//     });
-//   };
-
-//   handleSubmit = (e) => {
-//     e.preventDefault();
-
-//     axios
-//       .post("http://139.59.188.122:1337/", {
-//         nhs_num: this.state.nhs_num,
-//         firstname: this.state.firstname,
-//       })
-//       .then((res) => {
-//         this.setState({
-//           nhs_num: "",
-//           firstname: "",
-//         });
-//       })
-//       .catch((err) => {});
-//   };
-
-//   render() {
-//     return (
-//       <div className="container jumbotron ">
-//         <form onSubmit={this.handleSubmit}>
-//           <div className="input-group mb-3">
-//             <div className="input-group-prepend">
-//               <span className="input-group-text" id="basic-addon1">
-//                 {" "}
-//                 NHs Number{" "}
-//               </span>
-//             </div>
-//             <input
-//               type="text"
-//               className="form-control"
-//               placeholder="Name of the Poet/Author"
-//               aria-label="Username"
-//               aria-describedby="basic-addon1"
-//               value={this.state.nhs_num}
-//               name="nhs_num"
-//               onChange={this.handleInput}
-//             />
-//           </div>
-
-//           <div className="input-group mb-3">
-//             <div className="input-group-prepend">
-//               <span className="input-group-text">Fistname</span>
-//             </div>
-//             <textarea
-//               className="form-control "
-//               aria-label="With textarea"
-//               placeholder="Tell us what you think of ....."
-//               value={this.state.firstname}
-//               name="firstname"
-//               onChange={this.handleInput}
-//             ></textarea>
-//           </div>
-
-//           <button type="submit" className="btn btn-primary mb-5">
-//             Submit
-//           </button>
-//         </form>
-
-//         <hr
-//           style={{
-//             color: "#000000",
-//             backgroundColor: "#000000",
-//             height: 0.5,
-//             borderColor: "#000000",
-//           }}
-//         />
-
-//         {this.state.details.map((detail, id) => (
-//           <div key={id}>
-//             <div className="card shadow-lg">
-//               <div
-//                 className={"bg-" + this.renderSwitch(id % 6) + " card-header"}
-//               >
-//                 Quote {id + 1}
-//               </div>
-//               <div className="card-body">
-//                 <blockquote
-//                   className={
-//                     "text-" + this.renderSwitch(id % 6) + " blockquote mb-0"
-//                   }
-//                 >
-//                   <h1> {detail.firstname} </h1>
-//                   <footer className="blockquote-footer">
-//                     {" "}
-//                     <cite title="Source Title">{detail.nhs_num}</cite>
-//                   </footer>
-//                 </blockquote>
-//               </div>
-//             </div>
-//             <span className="border border-primary "></span>
-//           </div>
-//         ))}
-//       </div>
-//     );
-//   }
-// }
-
-import React from 'react';
-import axios from 'axios';
-
-class About extends React.Component {
-  // State of your application
-  state = {
-    events: [],
-    error: null,
-  };
-
-  // Fetch your events immediately after the component is mounted
-  componentDidMount = async () => {
-    try {
-      const response = await axios.get('http://139.59.188.122:1337/tests');
-      this.setState({ events: response.data });
-    } catch (error) {
-      this.setState({ error });
-    }
-  };
-
-  render() {
-    const { error, event } = this.state;
-
-    // Print errors if any
-    if (error) {
-      return <div>An error occured: {error.message}</div>;
-    }
-
-    return (
-      <div className="App">
-        <ul>
-          {this.state.events.map(event => (
-            <li key={event.id}>{event.name}<br/> {event.Description}</li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <textarea
+                            rows="4"
+                            name="message"
+                            class="form-control"
+                            id="description"
+                            placeholder="Enter Your Message *"
+                            required="required"
+                          ></textarea>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <button class="btn-big btn btn-bg">
+                          Send Us <i class="fas fa-arrow-right"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }
 
-export default About;
+const styles = {
+  card: {},
+};
+
+export default withRouter(About);
