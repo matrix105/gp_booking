@@ -22,10 +22,10 @@ import { mainListItems } from "./listItems";
 import Chart from "./Chart";
 import Snip from "./Snip";
 import DataPatients from "./Patients";
-import PrescriptiosTable from './PrescriptiosTable'
+import PrescriptiosTable from "./PrescriptiosTable";
+import Title from "./Title";
 
 const drawerWidth = 240;
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -121,77 +121,28 @@ export default function Dashboard() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar
-        position="absolute"
-        className={clsx(
-          classes.appBar,
-          open && classes.appBarShift
-        )}
-      >
-        <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(
-              classes.menuButton,
-              open && classes.menuButtonHidden
-            )}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
-            Dashboard
-          </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-        open={open}
-      >
-        <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <List>{mainListItems}</List>
-        <Divider />
-      </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
+        <Typography
+          component="h1"
+          variant="h3"
+          color="primary"
+          gutterBottom
+          align="center"
+        >
+          Dashboard
+        </Typography>
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            {/* Chart */}
-            {/* <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
-              </Paper>
-            </Grid> */}
             {/* Snip Counters */}
             <Grid item xs={12} md={4} lg={4}>
-              <Paper className={fixedHeightPaper} >
+              <Paper className={fixedHeightPaper}>
                 <Snip title="Total Prescriptions" type="prescriptions" />
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={4}>
               <Paper className={fixedHeightPaper}>
-                <Snip title="Total Bookings" type="bookings"/>
+                <Snip title="Total Bookings" type="bookings" />
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={4}>
