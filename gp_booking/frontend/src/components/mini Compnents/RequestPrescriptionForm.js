@@ -86,6 +86,7 @@ function RequestPrescriptionForm(props) {
             email: inputs.email,
             note: inputs.note,
             medication: medication,
+            submitted: 'false'
         }).then(res => {
             console.log(res.data);
             props.setSnackBar('success', 'Prescription request successfull')

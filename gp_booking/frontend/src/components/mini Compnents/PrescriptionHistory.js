@@ -43,13 +43,13 @@ function Row(props) {
                 <TableCell align="left">{row.email}</TableCell>
                 <TableCell align="left">{row.note}</TableCell>
                 <TableCell align="left">{row.published_at.slice(0, 10)}</TableCell>
-                <TableCell>{row.file.length === 0 ? "Pending..." : <span style={{ color: 'green', fontWeight: 'bold' }}>Approved</span>}</TableCell>
-                <TableCell align="left">
+                <TableCell>{row.submitted === false ? "Pending..." : <span style={{ color: 'green', fontWeight: 'bold' }}>Sent to pharmacy</span>}</TableCell>
+                {/* <TableCell align="left">
                     {row.file.length === 0 ? <a style={{ color: 'grey' }}>Cannot View</a> :
                         <a target="_blank" href={`http://139.59.188.122:1337${row.file[0].formats.large.url}`}>View</a>
                     }
 
-                </TableCell>
+                </TableCell> */}
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -119,7 +119,6 @@ export default function PrescriptionHistory(props) {
                         <TableCell align="left">Notes</TableCell>
                         <TableCell align="left">Date</TableCell>
                         <TableCell align='left'>Status</TableCell>
-                        <TableCell alignt='left'></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
