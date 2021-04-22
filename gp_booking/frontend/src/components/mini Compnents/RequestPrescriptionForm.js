@@ -75,28 +75,7 @@ function RequestPrescriptionForm(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // console.log(inputs);
-        // console.log(medication);
 
-        // axios.(`http://139.59.188.122:1337/prescriptions/?email=${inputs.email}`)
-        //     .then((res) => {
-        //         console.log(res);
-        //         if (res.data.length != 0) {
-        //             axios.put(`http://139.59.188.122:1337/prescriptions/email=${inputs.email}`, {
-        //                 medication: [medication],
-        //             }).then((res) => {
-        //                 console.log(res);
-        //                 console.log(`precription added to ${inputs.email}`);
-        //             }).catch(err => {
-        //                 console.log(err);
-        //             })
-        //         } else {
-
-        //         }
-
-        //     }).catch(err => {
-        //         console.log(err);
-        //     })
         console.log(inputs.fname);
         console.log(medication);
         axios.post('http://139.59.188.122:1337/prescriptions', {

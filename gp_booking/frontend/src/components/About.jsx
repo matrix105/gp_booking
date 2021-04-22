@@ -1,14 +1,74 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
+import { makeStyles, TextField, Button } from "@material-ui/core";
 import { Jumbotron } from "reactstrap";
+import axios from "axios";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import MediaCard from "./mini Compnents/MediaCard";
 import { withRouter } from "react-router-dom";
 import "./css/style.css";
 import Card from "@material-ui/core/Card";
+import SnackBar from "./mini Compnents/SnackBar";
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+
+const initialState = {
+  name: "",
+  email: "",
+  phone: "",
+  msg: "",
+};
+
 
 function About(props) {
   if (window.innerHeight < 1024) console.log(window.innerHeight);
+
+  const [inputs, setinputs] = useState(initialState);
+  const [type, setType] = useState('');
+  const [messege, setMessege] = useState('');
+
+  
+  const handleText = (e) => {
+    setinputs({
+      ...inputs,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const [snackBar, setSnackBar] = React.useState(false);
+
+  const handleClick = () => {
+    setSnackBar(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setSnackBar(false);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    axios
+      .post("http://139.59.188.122:1337/contacts", {
+        name: inputs.name,
+        email: inputs.email,
+        msg: inputs.msg,
+        phone: inputs.phone,
+      })
+      .then((res) => {
+        console.log(res.data);
+        setSnackBar("success", "Prescription request successfull");
+        setinputs(initialState);
+      })
+      .catch((err) => {
+        console.log(err);
+        setSnackBar("warning", "Please fill all the form");
+      });
+  };
   return (
     <>
       <section class="section-bg" data-scroll-index="7">
@@ -30,9 +90,9 @@ function About(props) {
                     <br />
                     <br />
                     If you do have an urgent medical query you should telephone
-                    the surgery or contact the out of hours service by calling <strong>111</strong>
-                    . In an emergency please contact <strong>999</strong>.
-                    
+                    the surgery or contact the out of hours service by calling{" "}
+                    <strong>111</strong>. In an emergency please contact{" "}
+                    <strong>999</strong>.
                   </p>
                   <ul class="contact-info">
                     <li>
@@ -64,7 +124,12 @@ function About(props) {
               </div>
               <div class="col-lg-6 d-flex align-items-center">
                 <div class="contact-form">
-                  <form id="contact-form" method="POST">
+                  <form
+                    id="contact-form"
+                    noValidate
+                    autoComplete="off"
+                    onSubmit={handleSubmit}
+                  >
                     <input type="hidden" name="form-name" value="contactForm" />
                     <div class="row">
                       <div class="col-md-12">
@@ -76,6 +141,7 @@ function About(props) {
                             id="first-name"
                             placeholder="Enter Your Name *"
                             required="required"
+                            onChange={handleText}
                           />
                         </div>
                       </div>
@@ -88,6 +154,20 @@ function About(props) {
                             id="email"
                             placeholder="Enter Your Email *"
                             required="required"
+                            onChange={handleText}
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <input
+                            type="tel"
+                            name="phone"
+                            class="form-control"
+                            id="phone"
+                            placeholder="Enter Your Phone Number *"
+                            required="required"
+                            onChange={handleText}
                           />
                         </div>
                       </div>
@@ -96,18 +176,24 @@ function About(props) {
                         <div class="form-group">
                           <textarea
                             rows="4"
-                            name="message"
+                            name="msg"
                             class="form-control"
-                            id="description"
+                            id="msg"
                             placeholder="Enter Your Message *"
                             required="required"
+                            onChange={handleText}
                           ></textarea>
                         </div>
                       </div>
                       <div class="col-md-12">
-                        <button class="btn-big btn btn-bg">
-                          Send Us <i class="fas fa-arrow-right"></i>
-                        </button>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          type="submit"
+                          onClick={handleClick}
+                        >
+                          Send
+                        </Button>
                       </div>
                     </div>
                   </form>
@@ -116,6 +202,10 @@ function About(props) {
             </div>
           </div>
         </div>
+        <SnackBar
+          type={type}
+          message={messege}
+        />
       </section>
     </>
   );

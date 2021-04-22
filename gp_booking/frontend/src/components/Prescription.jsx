@@ -17,13 +17,6 @@ class Prescription extends React.Component {
 
   static contextType = UserContext
 
-  // setSnackBar = (type, message) => {
-  //   setsnackbar({
-  //     type: type, message: message
-  //   })
-  // }
-
-
   componentDidMount() {
     if (localStorage.getItem('token') === null) {
       axios
@@ -79,28 +72,10 @@ class Prescription extends React.Component {
       handleClick()
     }
 
-    // const rows = [
-    //   { id: 1, lastName: "Snow", firstName: "Jon", email: 35 },
-    //   { id: 2, lastName: "Lannister", firstName: "Cersei", email: 42 },
-    //   { id: 3, lastName: "Lannister", firstName: "Jaime", email: 45 },
-    //   { id: 4, lastName: "Stark", firstName: "Arya", email: 16 },
-    //   { id: 5, lastName: "Targaryen", firstName: "Daenerys", email: null },
-    //   { id: 6, lastName: "Melisandre", firstName: null, email: 150 },
-    //   { id: 7, lastName: "Clifford", firstName: "Ferrara", email: 44 },
-    //   { id: 8, lastName: "Frances", firstName: "Rossini", email: 36 },
-    //   { id: 9, lastName: "Roxie", firstName: "Harvey", email: 65 },
-    // ];
 
     return (
       <React.Fragment>
-        {/* <div style={{ height: 400, width: "100%" }}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            pageSize={5}
-            checkboxSelection
-          />
-        </div> */}
+
         <RequestPrescriptionForm
           setSnackBar={setSnackBar}
         />
@@ -108,37 +83,7 @@ class Prescription extends React.Component {
           type={this.state.type}
           message={this.state.message}
         />
-        {/* <h2>Prescriptions</h2>
-        <ul>
-          {!isLoading ? (
-            prescriptions.map((prescription) => {
-              return (
-                <li key={prescription.id}>
-                  <p>
-                    {prescription.fname} {prescription.lname}
-                  </p>
-                  <p>
-                    <ul>
-                      {prescription.medication.map((med) => {
-                        return (
-                          <li key={med.id}>
-                            {console.log(med)}
-                            name: {med.name} - strenght: {med.strength} -
-                            quantity: {med.quantity}
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </p>
-                  <hr />
-                </li>
-              );
-            })
-          ) : (
-            <p>Loading...</p>
-          )}
-        </ul> */}
-
+        
         <PrescriptionHistory
           titles={headings}
           datas={prescriptions}
