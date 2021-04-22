@@ -94,7 +94,7 @@ function RequestPrescriptionForm(props) {
 
         }).catch(err => {
             console.log(err);
-            props.setSnackBar('warning', 'Please fill all the form')
+            props.setSnackBar('warning', 'Something is not working')
         })
     }
 

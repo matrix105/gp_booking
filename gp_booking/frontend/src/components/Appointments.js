@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState, useContext } from 'react';
-import { List, makeStyles, useMediaQuery } from '@material-ui/core';
+import { List, makeStyles, useMediaQuery, Button } from '@material-ui/core';
 import { UserContext } from '../context/Context'
 import SnackBar from './mini Compnents/SnackBar';
 import TableComponent from './mini Compnents/TableComponent';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -32,6 +33,7 @@ function Appointments(props) {
     const { handleClick } = useContext(UserContext)
     const classes = useStyles();
     const size = useMediaQuery('(max-width:425px)');
+    let history = useHistory();
 
     const setSnackBarMessage = (type, message) => {
         settype(type)
@@ -71,18 +73,6 @@ function Appointments(props) {
             datas={state}
             headings={tableHeading}
         />)
-        // return state.map(data => {
-
-        //     return (
-        //         <ListItem button>
-        //             <p>{data.id}</p>
-        //             <p>{data.doctor.fname}</p>
-        //             <p>{data.patient.fname}</p>
-        //             <p>{data.Time}</p>
-        //             <p>{data.Date}</p>
-        //         </ListItem>
-        //     )
-        // })
     }
 
     useEffect(() => {
@@ -100,6 +90,10 @@ function Appointments(props) {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
             <h1>Appointments</h1>
+            {localStorage.getItem('role') === '4' ?
+                <Button onClick={e => { history.push('/booking') }} variant="contained" color="secondary" className="btn btn-primary mt-5 mb-5">Book Appointment</Button>
+                : null}
+            <h3>Booking History</h3>
             <div className={size ? classes.root : classes.rootMobile}>
                 <List component="nav" aria-label="secondary mailbox folders">
                     {createList()}

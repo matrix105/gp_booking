@@ -18,6 +18,7 @@ class Prescription extends React.Component {
   static contextType = UserContext
 
   componentDidMount() {
+
     if (localStorage.getItem('token') === null) {
       axios
         .get("http://139.59.188.122:1337/prescriptions")
@@ -83,11 +84,13 @@ class Prescription extends React.Component {
           type={this.state.type}
           message={this.state.message}
         />
-        
-        <PrescriptionHistory
-          titles={headings}
-          datas={prescriptions}
-        />
+        {localStorage.getItem('token') != null ?
+          <PrescriptionHistory
+            titles={headings}
+            datas={prescriptions}
+          />
+          : null
+        }
 
       </React.Fragment>
     );
