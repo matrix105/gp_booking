@@ -15,18 +15,6 @@ function Home(props) {
   return (
     <>
       <Jumbotron className="jhome">
-        <Card className="fly-content">
-          <CardContent>
-            <Typography color="initial" gutterBottom>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam id
-              mauris eget nulla eleifend condimentum at a elit.
-                <br /> Maecenas eu libero tempor, convallis felis ac, imperdiet
-                magna. Vestibulum at nunc in dolor cursus tempus.
-                <br /> Proin pharetra augue ex, eget bibendum elit commodo in.
-                In id facilisis magna. Etiam ut lobortis nibh.
-              </Typography>
-          </CardContent>
-        </Card>
       </Jumbotron>
 
       <Container className="buts">

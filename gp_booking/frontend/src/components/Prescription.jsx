@@ -4,6 +4,7 @@ import { DataGrid } from "@material-ui/data-grid";
 import RequestPrescriptionForm from './mini Compnents/RequestPrescriptionForm'
 import { UserContext } from "../context/Context";
 import SnackBar from "./mini Compnents/SnackBar";
+import { Typography } from '@material-ui/core'
 import PrescriptionHistory from "./mini Compnents/PrescriptionHistory";
 
 class Prescription extends React.Component {
@@ -76,7 +77,15 @@ class Prescription extends React.Component {
 
     return (
       <React.Fragment>
-
+        <Typography
+          component="h1"
+          variant="h3"
+          color="primary"
+          gutterBottom
+          align="center"
+        >
+          Request Prescription
+        </Typography>
         <RequestPrescriptionForm
           setSnackBar={setSnackBar}
         />
@@ -85,10 +94,13 @@ class Prescription extends React.Component {
           message={this.state.message}
         />
         {localStorage.getItem('token') != null ?
-          <PrescriptionHistory
-            titles={headings}
-            datas={prescriptions}
-          />
+          <>
+            <h3 style={{ marginLeft: "80px" }}>Prescription History</h3>
+            <PrescriptionHistory
+              titles={headings}
+              datas={prescriptions}
+            />
+          </>
           : null
         }
 
