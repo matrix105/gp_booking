@@ -50,9 +50,22 @@ function Row(props) {
   const classes = useRowStyles();
   const [file, setfile] = useState({ file: null })
 
+  const [submitted, setsubmitted] = useState()
+
+  var initialState
+  if (row.submitted) {
+    initialState = true
+  } else {
+    initialState = false
+  }
+
   const [state, setState] = React.useState({
-    checkedA: false
+    checkedA: initialState
   });
+
+  useEffect(() => {
+    setsubmitted(row.submitted)
+  }, [])
 
   const handleChange = (event, id) => {
     setState({ ...state, [event.target.name]: event.target.checked });
@@ -116,8 +129,8 @@ function Row(props) {
               <Table size="small" aria-label="purchases">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Name</TableCell>s
-                    <TableCell>Strenght</TableCell>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Strength</TableCell>
                     <TableCell align="right">Amount</TableCell>
                   </TableRow>
                 </TableHead>
