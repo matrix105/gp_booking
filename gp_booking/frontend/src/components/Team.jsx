@@ -17,7 +17,7 @@ export default function Team() {
         <div class="column">
           <div class="card">
             <img
-              src="http://139.59.188.122:1337/uploads/phonepicutres_TA_56a1a705f2.jpg"
+              src="http://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
               alt="Deepesh"
             />
             <div class="container">
@@ -31,8 +31,8 @@ export default function Team() {
         <div class="column">
           <div class="card">
             <img
-              src="http://139.59.188.122:1337/uploads/phonepicutres_TA_56a1a705f2.jpg"
-              alt="John"
+              src="http://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
+              alt="Kathan"
             />
             <div class="container">
               <h2>Kathan Sheth</h2>
@@ -45,7 +45,7 @@ export default function Team() {
         <div class="column">
           <div class="card">
             <img
-              src="http://139.59.188.122:1337/uploads/phonepicutres_TA_56a1a705f2.jpg"
+              src="http://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
               alt="Jubeen"
             />
             <div class="container">
@@ -61,7 +61,7 @@ export default function Team() {
         <div class="column">
           <div class="card">
             <img
-              src="http://139.59.188.122:1337/uploads/phonepicutres_TA_56a1a705f2.jpg"
+              src="http://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
               alt="Umar"
             />
             <div class="container">
@@ -74,7 +74,7 @@ export default function Team() {
         <div class="column">
           <div class="card">
             <img
-              src="http://139.59.188.122:1337/uploads/phonepicutres_TA_56a1a705f2.jpg"
+              src="http://www.pavilionweb.com/wp-content/uploads/2017/03/man-300x300.png"
               alt="Marwan"
             />
             <div class="container">
