@@ -58,7 +58,7 @@ const cards = [
   },
   {
     key: 2,
-    url: "/contact",
+    url: "/about",
     title: "Contact the GP",
     description: "You can find our contact form",
     pic: "http://ipage.com/blog/wp-content/uploads/contact-us.png",
