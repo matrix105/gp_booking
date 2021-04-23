@@ -23,7 +23,7 @@ const Navigation = (props) => {
   return (
     <div>
       <Navbar className="gp-header" color="light" expand="md">
-        <NavbarBrand className="nav-link" href="/">GP Booking</NavbarBrand>
+        <NavbarBrand className="nav-link" href="/">GP Clinic</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
