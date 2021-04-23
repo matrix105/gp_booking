@@ -108,13 +108,10 @@ function Home(props) {
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
-                  <Button variant="contained" color="primary" href="/login">
-                    Login
-                  </Button>
                 </Grid>
                 <Grid item>
                   <Button
-                    variant="outlined"
+                    variant="contained"
                     color="primary"
                     href="/prescription"
                   >
