@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(8),
   },
   card: {
-    height: "40vh",
+    height: "30vh",
     display: "flex",
     flexDirection: "column",
   },
