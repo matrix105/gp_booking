@@ -405,7 +405,7 @@ html, body {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: url(https://freefrontend.com/assets/img/html-funny-404-pages/404-Page.gif) no-repeat center center fixed;
+  background: url(http://freefrontend.com/assets/img/html-funny-404-pages/404-Page.gif) no-repeat center center fixed;
   background-size: cover;
   background-color: #000;
   opacity: 0.5;
