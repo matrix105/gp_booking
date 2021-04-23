@@ -69,25 +69,27 @@ function Row(props) {
 
   const handleChange = (event, id) => {
     setState({ ...state, [event.target.name]: event.target.checked });
-    if (!state.checkedA) {
-      console.log('true');
-      axios.put(`http://139.59.188.122:1337/prescriptions/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-        submitted: true
-      }).then(res => {
-        console.log(res);
-      }).catch(e => { console.log(e) })
-    } else {
-      axios.put(`http://139.59.188.122:1337/prescriptions/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-        submitted: false
-      }).then(res => {
-        console.log(res);
-      }).catch(e => { console.log(e) })
+    if (submitted === false) {
+      if (!state.checkedA) {
+        console.log('true');
+        axios.put(`http://139.59.188.122:1337/prescriptions/${id}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+          submitted: true
+        }).then(res => {
+          console.log(res);
+        }).catch(e => { console.log(e) })
+      } else {
+        axios.put(`http://139.59.188.122:1337/prescriptions/${id}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+          submitted: false
+        }).then(res => {
+          console.log(res);
+        }).catch(e => { console.log(e) })
+      }
     }
   };
 
@@ -113,7 +115,9 @@ function Row(props) {
         <TableCell align="right">
           <Switch
             checked={state.checkedA}
-            onChange={e => { handleChange(e, row.id) }}
+            onChange={row.submitted ? null :
+              e => { handleChange(e, row.id) }
+            }
             name="checkedA"
             inputProps={{ 'aria-label': 'secondary checkbox' }}
           />
