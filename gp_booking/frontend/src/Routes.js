@@ -15,6 +15,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Resetpassword from "./components/Resetpassword";
 import CreatenewPassword from "./components/CreatenewPassword";
 import Team from "./components/Team";
+import FourOFour from "./components/FourOFour";
 
 const Routes = () => {
   console.log(localStorage.getItem("role"));
@@ -44,6 +45,7 @@ const Routes = () => {
           component={localStorage.getItem("role") != "4" ? Dashboard : Home}
         />
         <ProtectedRoute path="/dashboard" component={Dashboard} />
+        <Route component={FourOFour} />
       </Switch>
     </BrowserRouter>
   );
